@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 
 const LINKS = [
   { href: "/", label: "Check" },
+  { href: "/spot-the-fakes", label: "Spot fakes" },
+  { href: "/quiz", label: "Play" },
   { href: "/history", label: "History" },
   { href: "/how-it-works", label: "How it works" },
 ];
@@ -17,7 +19,7 @@ export function NavLinks() {
         {LINKS.map((link) => {
           const active = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
           return (
-            <li key={link.href}>
+            <li key={link.href} className={link.href === "/" ? "hidden sm:block" : undefined}>
               <Link
                 href={link.href}
                 aria-current={active ? "page" : undefined}

@@ -28,7 +28,7 @@ export default function HowItWorksPage() {
   return (
     <div className="space-y-10">
       <header className="space-y-3">
-        <h1 className="text-3xl font-bold tracking-tight">How it works</h1>
+        <h1 className="h-display fade-up text-4xl font-semibold tracking-tight sm:text-5xl">How it works</h1>
         <p className="text-lg text-zinc-700 dark:text-zinc-300">
           TruthLens uses an AI model with live web search to help you judge factual claims quickly,
           and shows its sources so you can check its work.
@@ -37,7 +37,7 @@ export default function HowItWorksPage() {
 
       <section
         aria-labelledby="disclaimer-heading"
-        className="rounded-xl border-2 border-amber-400 bg-amber-50 p-5 text-amber-950 dark:border-amber-500/60 dark:bg-amber-950/40 dark:text-amber-50"
+        className="reveal rounded-xl border-2 border-amber-400 bg-amber-50 p-5 text-amber-950 dark:border-amber-500/60 dark:bg-amber-950/40 dark:text-amber-50"
       >
         <h2 id="disclaimer-heading" className="text-lg font-semibold">
           Important: AI fact-checks can be wrong
@@ -59,7 +59,7 @@ export default function HowItWorksPage() {
         </h2>
         <ol className="space-y-4">
           {STEPS.map((s) => (
-            <li key={s.title} className="rounded-xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
+            <li key={s.title} className="reveal lift rounded-xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
               <h3 className="font-semibold">{s.title}</h3>
               <p className="mt-1 text-zinc-700 dark:text-zinc-300">{s.body}</p>
             </li>
@@ -71,7 +71,7 @@ export default function HowItWorksPage() {
         <h2 id="verdicts-heading" className="text-xl font-semibold">
           What the verdicts mean
         </h2>
-        <dl className="divide-y divide-zinc-200 rounded-xl border border-zinc-200 bg-white dark:divide-zinc-800 dark:border-zinc-800 dark:bg-zinc-900">
+        <dl className="reveal divide-y divide-zinc-200 rounded-xl border border-zinc-200 bg-white dark:divide-zinc-800 dark:border-zinc-800 dark:bg-zinc-900">
           {VERDICTS.map((v) => (
             <div key={v} className="flex flex-col gap-2 p-4 sm:flex-row sm:items-center">
               <dt className="sm:w-40">

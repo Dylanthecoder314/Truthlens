@@ -45,7 +45,7 @@ export default async function CheckPage({ params }: PageProps<"/check/[id]">) {
         </p>
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Fact-check result</h1>
+            <h1 className="h-display fade-up text-4xl font-semibold tracking-tight sm:text-5xl">Fact-check result</h1>
             <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
               Checked on{" "}
               <time dateTime={check.createdAt}>

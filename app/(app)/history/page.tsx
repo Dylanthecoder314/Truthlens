@@ -13,12 +13,12 @@ export default async function HistoryPage() {
   return (
     <div className="space-y-6">
       <header className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">History</h1>
+        <h1 className="h-display fade-up text-4xl font-semibold tracking-tight sm:text-5xl">History</h1>
         <p className="text-zinc-700 dark:text-zinc-300">The 20 most recent checks.</p>
       </header>
 
       {items.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-zinc-300 bg-white/50 p-10 text-center dark:border-zinc-700 dark:bg-zinc-900/30">
+        <div className="fade-up rounded-2xl border border-dashed border-zinc-300 bg-white/50 p-10 text-center dark:border-zinc-700 dark:bg-zinc-900/30">
           <p className="text-zinc-700 dark:text-zinc-300">No checks yet.</p>
           <Link href="/" className="mt-2 inline-block font-medium text-indigo-700 underline underline-offset-2 dark:text-indigo-300">
             Run your first check
@@ -26,8 +26,8 @@ export default async function HistoryPage() {
         </div>
       ) : (
         <ul className="space-y-3">
-          {items.map((item) => (
-            <li key={item.id}>
+          {items.map((item, i) => (
+            <li key={item.id} className="fade-up" style={{ "--i": Math.min(i, 10) } as React.CSSProperties}>
               <Link
                 href={`/check/${item.id}`}
                 className="block rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-indigo-500/50"
