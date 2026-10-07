@@ -1,0 +1,12 @@
+{
+  "name": "mh370-documentary-tools",
+  "private": true,
+  "type": "module",
+  "description": "Builds the projected map geometry embedded in ../index.html",
+  "scripts": { "build": "node build-maps.mjs" },
+  "dependencies": {
+    "d3-geo": "^3.1.1",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
+  }
+}
