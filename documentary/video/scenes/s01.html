@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>s01 · Cold open</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .when { left: 120px; top: 96px; }
+  .radio-card { left: 50%; top: 50%; width: 1180px; transform: translate(-50%, -58%); text-align: left; }
+  .radio-card .label { font-family: var(--data); font-size: 24px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 26px; }
+  .radio-card .label b { color: var(--route); font-weight: 700; }
+  .radio-card .words { font-family: var(--data); font-size: 64px; line-height: 1.25; letter-spacing: .02em; min-height: 2.5em; }
+  .radio-card .cursor { display: inline-block; width: .55em; height: .9em; background: var(--ink); vertical-align: -.08em; margin-left: .08em; }
+  .title { left: 140px; top: 250px; }
+  .title .pre { font-family: var(--body); font-style: italic; font-size: 64px; color: var(--ink-2); margin-bottom: 18px; }
+  .title .big { font-family: var(--display); font-weight: 800; font-size: 300px; line-height: .8; letter-spacing: -.005em; }
+  .title .meta { font-family: var(--data); font-size: 28px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); margin-top: 44px; }
+  .blip-label { font-family: var(--data); }
+</style>
+</head>
+<body data-scene="s01">
+<div id="stage"></div>
+<script src="mapdata.js"></script>
+<script src="timing.js"></script>
+<script src="lib.js"></script>
+<script>
+(function () {
+  var m, rings = [], blip, blipLabel, when, card, words, cursor, title, mapWrap;
+  var RADIO = "Good night. Malaysian three seven zero.";
+
+  S.scene({
+    fadeIn: 1.2,
+    fadeOut: 0.8,
+    setup: function () {
+      mapWrap = S.div("abs", S.stage); mapWrap.style.inset = "0";
+      m = S.map("ocean", mapWrap);
+      var g = m.layer();
+      g.setAttribute("mask", m.fadeWest(72, 88));
+      S.RINGS.forEach(function (r) {
+        rings.push(S.el("path", { "class": "arc" + (r.n === 7 ? " a7" : ""), d: S.pathFrom(m.P, S.ringPts(r.d, 0, 165, 1)) }, g));
+      });
+      blip = S.el("g", null, m.svg);
+      var igari = m.P(S.PLACES.IGARI[0], S.PLACES.IGARI[1]);
+      blip.setAttribute("transform", "translate(" + igari[0] + " " + igari[1] + ")");
+      var bs = S.el("g", { "class": "sc" }, blip);
+      S.el("circle", { r: 34, fill: "none", stroke: "var(--route)", "stroke-width": 3, "class": "pulse" }, bs);
+      S.el("circle", { r: 10, fill: "var(--route)" }, bs);
+      blipLabel = S.el("text", { x: 26, y: -22 }, bs);
+      blipLabel.textContent = "MAS370";
+
+      when = S.div("abs kicker when", S.stage, "8 March 2014 · 01:19 MYT");
+      card = S.div("abs card radio-card", S.stage,
+        '<div class="label"><span>Flight 370 → Kuala Lumpur Radar</span><b>01:19:30 MYT</b></div><div class="words"><span class="w"></span><span class="cursor"></span></div>');
+      words = card.querySelector(".w"); cursor = card.querySelector(".cursor");
+      title = S.div("abs title", S.stage,
+        '<div class="pre">The Vanishing of</div><div class="big">MH370</div><div class="meta">8 March 2014 · 239 on board</div>');
+    },
+    draw: function (t) {
+      var a = S.cue("s01a"), b = S.cue("s01b"), bEnd = S.cueEnd("s01b"), c = S.cue("s01c"), d = S.cue("s01d");
+
+      // Slow drift over the ocean; the whole map dims as the title arrives.
+      var drift = S.ease(S.prog(t, 0, S.duration));
+      m.cameraLL(S.lerp(84, 92, drift), S.lerp(-6, -10, drift), S.lerp(1.25, 1.1, drift));
+      var mapO = 0.75 * (1 - 0.55 * S.ease(S.prog(t, d, d + 1.5)));
+      S.show(mapWrap, mapO);
+
+      // Rings draw one after another through the first line.
+      rings.forEach(function (p, i) {
+        var s0 = a + 0.6 + i * 1.15;
+        S.drawPath(p, S.ease(S.prog(t, s0, s0 + 2.2)));
+        p.style.opacity = i === 6 ? 1 : 0.7;
+      });
+
+      // The aircraft near IGARI: steady, then gone a moment into s01c.
+      var gone = c + 1.6;
+      var pulse = (t % 1.6) / 1.6;
+      var circ = blip.querySelector(".pulse");
+      circ.setAttribute("r", (10 + 34 * pulse).toFixed(1));
+      circ.style.opacity = (1 - pulse).toFixed(2);
+      var bo = S.fadeWin(t, a + 0.4, gone, 0.5);
+      if (t > gone - 0.6 && t < gone) bo *= (Math.floor(t * 12) % 2) ? 0.15 : 1; // flicker out
+      S.show(blip, bo);
+
+      S.show(when, S.fadeWin(t, 0.6, d, 0.8));
+
+      // Radio card: types out over the radio clip.
+      S.show(card, S.fadeWin(t, b - 0.5, c + 0.4, 0.4));
+      words.textContent = S.typed(RADIO.toUpperCase(), S.prog(t, b + 0.05, bEnd - 0.1));
+      cursor.style.opacity = t > bEnd ? ((Math.floor(t * 2.5) % 2) ? 0 : 1) : 1;
+
+      // Title.
+      var to = S.easeOut(S.prog(t, d + 0.2, d + 1.6));
+      S.show(title, to, "translateY(" + (24 * (1 - to)).toFixed(1) + "px)");
+    },
+  });
+})();
+</script>
+</body>
+</html>

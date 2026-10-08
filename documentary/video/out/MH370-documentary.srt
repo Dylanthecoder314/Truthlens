@@ -1,0 +1,363 @@
+1
+00:00:01,600 --> 00:00:10,165
+At 01:19 on 8 March 2014, a voice from the cockpit of Malaysia Airlines flight 370 spoke
+
+2
+00:00:10,165 --> 00:00:14,606
+to air traffic control for the last time.
+
+3
+00:00:14,856 --> 00:00:18,476
+“Good night. Malaysian three seven zero.”
+
+4
+00:00:19,026 --> 00:00:23,148
+Minutes later, it vanished from air traffic control radar.
+
+5
+00:00:23,148 --> 00:00:28,573
+Twelve years and three seabed searches later, it has never been found.
+
+6
+00:00:28,723 --> 00:00:32,341
+This is the story of what we know, and what we still don’t.
+
+7
+00:00:34,933 --> 00:00:40,586
+Flight 370 was the overnight service from Kuala Lumpur to Beijing.
+
+8
+00:00:40,586 --> 00:00:44,547
+On board were 227 passengers and 12 crew.
+
+9
+00:00:44,597 --> 00:00:46,456
+Most were Chinese citizens.
+
+10
+00:00:46,456 --> 00:00:53,308
+Others came from Malaysia, Indonesia, Australia, India, France, the United States and beyond.
+
+11
+00:00:53,358 --> 00:00:58,183
+Among them were a group of Chinese artists returning from an exhibition,
+
+12
+00:00:58,183 --> 00:01:02,000
+20 employees of a chip company, and two infants.
+
+13
+00:01:03,200 --> 00:01:11,199
+It took off at 00:42. The Boeing 777 was flown by Captain Zaharie Ahmad Shah,
+
+14
+00:01:11,199 --> 00:01:19,856
+who had more than 18,000 flying hours, and First Officer Fariq Abdul Hamid, 27.
+
+15
+00:01:19,906 --> 00:01:26,442
+The plan was routine: climb northeast over the South China Sea, hand over
+
+16
+00:01:26,442 --> 00:01:33,160
+to Vietnamese controllers at waypoint IGARI, land in Beijing at 06:30.
+
+17
+00:01:33,210 --> 00:01:37,121
+At 01:07 the aircraft sent an automatic maintenance report.
+
+18
+00:01:37,121 --> 00:01:40,306
+It was the last one it would ever send.
+
+19
+00:01:41,300 --> 00:01:46,096
+At 01:19, Kuala Lumpur told the crew to contact Ho Chi Minh City.
+
+20
+00:01:46,096 --> 00:01:48,907
+The reply was calm and ordinary.
+
+21
+00:01:48,957 --> 00:01:51,280
+The crew never made that call.
+
+22
+00:01:51,280 --> 00:01:57,322
+Less than two minutes later, near IGARI, its transponder stopped transmitting.
+
+23
+00:01:57,322 --> 00:02:01,102
+Flight 370 disappeared from civilian radar.
+
+24
+00:02:01,252 --> 00:02:07,975
+But military radar, which needs no transponder, was still watching.
+
+25
+00:02:07,975 --> 00:02:18,006
+It saw an unidentified aircraft turn sharply back to the southwest, most likely flown by hand.
+
+26
+00:02:18,900 --> 00:02:21,886
+The aircraft crossed back over the Malay Peninsula,
+
+27
+00:02:21,886 --> 00:02:26,727
+passed just south of Penang Island and flew out over the Strait of Malacca.
+
+28
+00:02:26,777 --> 00:02:33,160
+No jets were sent to intercept it. Controllers in two countries traded calls for hours.
+
+29
+00:02:33,160 --> 00:02:37,131
+The rescue centre was not activated until 05:30.
+
+30
+00:02:37,281 --> 00:02:44,057
+At 02:22, about 200 nautical miles northwest of Penang, military radar lost it.
+
+31
+00:02:44,057 --> 00:02:47,660
+No radar ever saw Flight 370 again.
+
+32
+00:02:48,867 --> 00:02:55,075
+But the aircraft left one more trace. Three minutes later, its satellite terminal logged back
+
+33
+00:02:55,075 --> 00:02:59,263
+on to an Inmarsat satellite high above the Indian Ocean.
+
+34
+00:02:59,313 --> 00:03:02,103
+Every hour after that, a ground station
+
+35
+00:03:02,103 --> 00:03:07,256
+in Perth exchanged a brief automatic signal with the plane: a handshake.
+
+36
+00:03:07,256 --> 00:03:10,425
+It carried no position and no message.
+
+37
+00:03:10,475 --> 00:03:16,606
+But the time each signal took told investigators how far the aircraft was from the satellite.
+
+38
+00:03:16,606 --> 00:03:20,483
+Each handshake placed the plane somewhere on a ring.
+
+39
+00:03:20,533 --> 00:03:24,717
+Tiny shifts in the signal’s frequency showed it was heading south,
+
+40
+00:03:24,717 --> 00:03:27,132
+into the southern Indian Ocean.
+
+41
+00:03:27,182 --> 00:03:32,229
+Twice, the airline called the aircraft by satellite phone. No one answered.
+
+42
+00:03:33,134 --> 00:03:38,076
+At 06:30, when it should have been landing in Beijing, the plane was still flying.
+
+43
+00:03:38,126 --> 00:03:45,887
+At 08:19 it sent one last, partial handshake: most likely the engines running out of fuel
+
+44
+00:03:45,887 --> 00:03:54,010
+and a backup power unit briefly reviving the terminal. An hour later, it did not answer.
+
+45
+00:03:54,160 --> 00:03:56,923
+That final ring became known as the 7th arc.
+
+46
+00:03:56,923 --> 00:04:01,076
+Somewhere close to it, the aircraft came down into the sea.
+
+47
+00:04:01,226 --> 00:04:06,023
+On 24 March, Prime Minister Najib Razak announced that, according
+
+48
+00:04:06,023 --> 00:04:11,566
+to the new data, Flight 370 had ended in the southern Indian Ocean.
+
+49
+00:04:12,567 --> 00:04:16,712
+What followed became the most expensive search in aviation history.
+
+50
+00:04:16,762 --> 00:04:20,832
+Ships and aircraft from many nations combed the ocean surface.
+
+51
+00:04:20,832 --> 00:04:26,806
+In April, an Australian ship picked up pings that seemed to come from the flight recorders.
+
+52
+00:04:26,806 --> 00:04:28,372
+They led nowhere.
+
+53
+00:04:28,422 --> 00:04:36,474
+Then the hunt moved to the seabed: unmapped undersea mountains, water up to 6 km deep.
+
+54
+00:04:36,474 --> 00:04:41,606
+Ships towing sonar searched more than 120,000 km².
+
+55
+00:04:41,656 --> 00:04:47,216
+In January 2017 Malaysia, Australia and China suspended the search.
+
+56
+00:04:47,216 --> 00:04:55,099
+Australia’s investigators called it “almost inconceivable” that a large airliner could still be
+
+57
+00:04:55,099 --> 00:04:56,213
+missing.
+
+58
+00:04:56,363 --> 00:05:04,600
+In 2018 Ocean Infinity tried again with robot submarines, on a “no find, no fee” basis.
+
+59
+00:05:04,600 --> 00:05:11,259
+In four months it covered another 112,000 km². It found nothing.
+
+60
+00:05:12,467 --> 00:05:15,737
+The ocean, though, had begun to give something back.
+
+61
+00:05:15,787 --> 00:05:22,624
+In July 2015, on Réunion Island, beach cleaners found a piece of wing covered in barnacles.
+
+62
+00:05:22,624 --> 00:05:28,709
+It was a flaperon from Flight 370: the first proof it had ended in the sea.
+
+63
+00:05:28,759 --> 00:05:36,368
+More pieces washed up in South Africa, Mozambique, Mauritius, Tanzania and Madagascar.
+
+64
+00:05:36,368 --> 00:05:43,365
+Three are confirmed; many more are judged almost certain or highly likely.
+
+65
+00:05:43,415 --> 00:05:48,040
+Drift models run backwards from the finds pointed to the 7th arc.
+
+66
+00:05:48,040 --> 00:05:55,471
+And the flaps appear to have been retracted, which argues against a controlled landing on water.
+
+67
+00:05:56,667 --> 00:06:01,293
+In July 2018, Malaysian investigators published their final report.
+
+68
+00:06:01,293 --> 00:06:04,850
+They could not say why the plane disappeared.
+
+69
+00:06:04,900 --> 00:06:08,615
+The turns were most likely made under manual control.
+
+70
+00:06:08,615 --> 00:06:12,331
+Nothing unusual was found in the pilots' backgrounds.
+
+71
+00:06:12,331 --> 00:06:16,147
+Third-party interference could not be ruled out.
+
+72
+00:06:16,197 --> 00:06:21,482
+They also found that air traffic control had failed to follow procedures that night.
+
+73
+00:06:22,467 --> 00:06:27,750
+Without the wreckage, theories filled the silence. The evidence rules some of them out.
+
+74
+00:06:27,800 --> 00:06:30,518
+It did not crash in the South China Sea.
+
+75
+00:06:30,518 --> 00:06:35,927
+Radar, satellite data and the debris show it flew for hours to the south.
+
+76
+00:06:35,977 --> 00:06:41,933
+It did not land intact somewhere. The final signals point to a fast descent into the ocean.
+
+77
+00:06:41,983 --> 00:06:45,728
+A deliberate act from the cockpit remains possible.
+
+78
+00:06:45,728 --> 00:06:52,337
+A flight into the southern Indian Ocean on the captain’s home simulator fuelled suspicion,
+
+79
+00:06:52,337 --> 00:06:56,458
+but investigators found no proof and named no one.
+
+80
+00:06:56,508 --> 00:07:02,569
+A hijacking, a ghost flight after a fire, new methods that claim to pinpoint the wreck:
+
+81
+00:07:02,569 --> 00:07:04,633
+none has been proven.
+
+82
+00:07:05,834 --> 00:07:09,899
+In 2025 Ocean Infinity returned on the same terms:
+
+83
+00:07:09,899 --> 00:07:15,145
+US$70 million if it finds the plane, nothing if it doesn’t.
+
+84
+00:07:15,195 --> 00:07:22,722
+Across two short seasons, its robots surveyed about 7,500 km². Again, nothing.
+
+85
+00:07:22,772 --> 00:07:27,514
+Malaysia has extended the contract to June 2027,
+
+86
+00:07:27,514 --> 00:07:32,706
+to search the last 7,400 km² of the target area.
+
+87
+00:07:32,756 --> 00:07:36,757
+The families are still waiting. Some have taken the airline to court.
+
+88
+00:07:36,757 --> 00:07:41,068
+Many have spent twelve years asking governments to keep looking.
+
+89
+00:07:42,467 --> 00:07:46,500
+Somewhere along a curved line in the southern Indian Ocean,
+
+90
+00:07:46,500 --> 00:07:52,691
+several kilometres down, lies a Boeing 777 and the answer to what happened on board.
+
+91
+00:07:53,041 --> 00:07:57,511
+Until it is found, 239 people remain missing.

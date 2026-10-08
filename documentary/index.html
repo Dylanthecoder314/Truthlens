@@ -321,7 +321,7 @@ small.under { display: block; font-weight: 400; font-size: .82rem; color: var(--
   </svg>
   <p class="kicker">A documentary in nine chapters · Updated 7 October 2026</p>
   <h1 class="title"><span class="pre">The Vanishing of</span>MH370</h1>
-  <p class="lede">On 8 March 2014 a Malaysia Airlines Boeing 777 with 239 people on board went silent over the Gulf of Thailand, turned around and flew into the night. Twelve years and four seabed searches later, it has still not been found.</p>
+  <p class="lede">On 8 March 2014 a Malaysia Airlines Boeing 777 with 239 people on board went silent over the South China Sea, turned around and flew into the night. Twelve years and three seabed searches later, it has still not been found.</p>
   <dl class="strip" aria-label="Flight details">
     <div><dt>Callsign</dt><dd>MAS370</dd></div>
     <div><dt>Registration</dt><dd>9M-MRO</dd></div>
@@ -376,7 +376,7 @@ small.under { display: block; font-weight: 400; font-size: .82rem; color: var(--
   <div class="prose">
     <p>MH370 took off at 00:42, a few minutes behind schedule. The aircraft, registration 9M-MRO, was a Boeing 777-200ER that Malaysia Airlines had flown since 2002.</p>
     <p>In the cockpit were Captain Zaharie Ahmad Shah, 53, who had joined the airline in 1981 and had more than 18,000 flying hours, and First Officer Fariq Abdul Hamid, 27, who had recently moved onto the 777.</p>
-    <p>The plan was routine. Climb northeast over the Gulf of Thailand, hand over to Vietnamese air traffic control at a waypoint called IGARI, and land in Beijing at 06:30. At 01:01 the aircraft levelled off at 35,000 feet. At 01:07 it sent an automatic ACARS maintenance report, as it did every half hour. It was the last one. The next report, due at 01:37, never arrived.</p>
+    <p>The plan was routine. Climb northeast across the peninsula and out over the South China Sea, hand over to Vietnamese air traffic control at a waypoint called IGARI, and land in Beijing at 06:30. At 01:01 the aircraft levelled off at 35,000 feet. At 01:07 it sent an automatic ACARS maintenance report, as it did every half hour. It was the last one. The next report, due at 01:37, never arrived.</p>
   </div>
 </section>
 
@@ -805,10 +805,10 @@ window.MAPDATA = {"zoom":{"w":1000,"h":852,"s":4405.7539,"tx":-7327.902,"ty":898
     var XPDR_OFF = 4873;
     var EVENTS = [
       { t: 2520, title: "Takeoff", text: "MH370 departs Kuala Lumpur International Airport for Beijing with 239 people on board." },
-      { t: 3674, title: "Cruise", text: "The aircraft levels off at 35,000 feet, heading northeast over the Gulf of Thailand." },
+      { t: 3674, title: "Cruise", text: "The aircraft levels off at 35,000 feet, heading northeast over the South China Sea." },
       { t: 4020, title: "Last ACARS report", text: "The last automatic maintenance report is sent. The next, due at 01:37, never arrives." },
       { t: 4770, title: "Last words", text: "“Good night. Malaysian three seven zero.” The last radio call from the aircraft." },
-      { t: 4873, title: "Transponder off", text: "Near waypoint IGARI the transponder stops transmitting. MH370 vanishes from civilian radar." },
+      { t: 4873, title: "Transponder signal lost", text: "Near waypoint IGARI the transponder stops transmitting. MH370 vanishes from civilian radar." },
       { t: 4930, title: "The turn back", approx: true, text: "Military radar sees an unidentified aircraft turn back to the southwest, most likely under manual control." },
       { t: 5880, title: "Missing", text: "Ho Chi Minh City controllers call Kuala Lumpur. MH370 has not checked in." },
       { t: 6751, title: "Penang", text: "The aircraft passes just south of Penang Island and heads over the Strait of Malacca." },
@@ -917,7 +917,7 @@ window.MAPDATA = {"zoom":{"w":1000,"h":852,"s":4405.7539,"tx":-7327.902,"ty":898
 
       clock.textContent = hms(t, true);
       clockSub.textContent = "MYT · " + utcLabel(t);
-      setSig(sig.xpdr, off ? "Off since 01:21" : "On", off);
+      setSig(sig.xpdr, off ? "Signal lost 01:21" : "On", off);
       setSig(sig.radar, off ? (t >= 8532 ? "None after 02:22" : "Military radar only") : "Civil radar", off);
       setSig(sig.radio, t >= 4770 ? "Silent since 01:19" : "In contact", t >= 4770);
       setSig(sig.acars, t > 4020 ? "Silent since 01:07" : "Reporting", t > 4020);
