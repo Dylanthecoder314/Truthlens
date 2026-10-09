@@ -356,8 +356,8 @@ window.TIMING = {
     },
     {
      "id": "leftbank",
-     "start": 153.5,
-     "end": 153.5,
+     "start": 155.7,
+     "end": 155.7,
      "sub": "",
      "chunks": []
     },

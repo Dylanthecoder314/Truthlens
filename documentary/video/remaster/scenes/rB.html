@@ -16,6 +16,7 @@
   .bar .end { position: absolute; top: 8px; width: 26px; height: 26px; border-radius: 50%; border: 4px solid var(--ink); background: var(--bg); }
   .bar .lab { position: absolute; top: 48px; font-family: var(--data); font-size: 24px; letter-spacing: .06em; color: var(--ink-2); white-space: nowrap; }
   .bar .lab b { color: var(--ink); }
+  .col { display: inline-block; transform: translateX(.2em); margin-right: -.06em; }
   .bar .mid { position: absolute; top: -34px; left: 50%; transform: translateX(-50%); font-family: var(--data); font-size: 24px; letter-spacing: .1em; text-transform: uppercase; color: var(--led); }
   .list .hd { font-family: var(--display); font-weight: 700; font-size: 104px; line-height: 1; margin-bottom: 28px; }
   .list .it { font-family: var(--display); font-weight: 600; font-size: 66px; line-height: 1.12; padding: 8px 0 10px; border-bottom: 1px solid var(--line); display: flex; gap: 28px; align-items: baseline; }
@@ -43,6 +44,19 @@
 <script>
 (function () {
   var C = S.cue;
+  var ringPts = [];
+  function partial(P, pts, p) {
+    var xy = pts.map(function (q) { return P(q[0], q[1]); }), L = [0];
+    for (var i = 1; i < xy.length; i++) L.push(L[i - 1] + Math.hypot(xy[i][0] - xy[i - 1][0], xy[i][1] - xy[i - 1][1]));
+    var goal = L[L.length - 1] * S.clamp(p), d = "M" + xy[0][0].toFixed(1) + " " + xy[0][1].toFixed(1);
+    for (i = 1; i < xy.length; i++) {
+      if (L[i] <= goal) { d += "L" + xy[i][0].toFixed(1) + " " + xy[i][1].toFixed(1); continue; }
+      var f = (goal - L[i - 1]) / (L[i] - L[i - 1]);
+      d += "L" + S.lerp(xy[i - 1][0], xy[i][0], f).toFixed(1) + " " + S.lerp(xy[i - 1][1], xy[i][1], f).toFixed(1);
+      break;
+    }
+    return p > 0 ? d : "";
+  }
   var m, mapWrap, rings = [], ringLab, shade, kick, intro, q1, q1sub, bar, barLine, q2, q2sub, list, items, listFoot, souls, soulsHow, soulsNum, soulsUnit, soulsBeacon, pings, endcard;
 
   S.scene({
@@ -54,7 +68,8 @@
       var g = m.layer();
       g.setAttribute("mask", m.fadeWest(70, 86));
       S.RINGS.forEach(function (r) {
-        rings.push(S.el("path", { "class": "arc" + (r.n === 7 ? " a7" : ""), d: S.pathFrom(m.P, S.ringPts(r.d, 0, 172, 1)) }, g));
+        ringPts.push(S.ringPts(r.d, 0, 172, 1));
+        rings.push(S.el("path", { "class": "arc" + (r.n === 7 ? " a7" : "") }, g));
       });
       ringLab = S.pin(m.layer(), m.P, S.ringPoint(44.2, S.ringThetaAtLat(44.2, -28)), ["7th arc", "08:19 MYT"], { anchor: "start", dx: 24, sub: true });
 
@@ -65,7 +80,7 @@
       q1 = S.div("abs block", S.stage,
         '<div class="q">What happened in the cockpit?</div>' +
         '<div class="bar"><div class="mid">63 minutes</div><div class="line"></div><div class="end e1" style="left:-13px"></div><div class="end e2" style="left:967px"></div>' +
-        '<div class="lab" style="left:-13px">Last words <b>01:19:30</b></div><div class="lab" style="right:-13px">Last radar contact <b>02:22:12</b></div></div>');
+        '<div class="lab" style="left:-13px">Last words <b>01<span class="col">:</span>19<span class="col">:</span>30</b></div><div class="lab" style="right:-13px">Last radar contact <b>02<span class="col">:</span>22<span class="col">:</span>12</b></div></div>');
       bar = q1.querySelector(".bar"); barLine = q1.querySelector(".line");
       q2 = S.div("abs block", S.stage,
         '<div class="q">Who was flying the Boeing 777?</div>' +
@@ -84,7 +99,7 @@
         '<div class="how">How could a Boeing 777 vanish?</div><div class="num">239</div><div class="unit">people on board</div>' +
         '<div class="beacon">No distress call. No emergency beacon signal detected.</div>');
       soulsHow = souls.querySelector(".how"); soulsNum = souls.querySelector(".num"); soulsUnit = souls.querySelector(".unit"); soulsBeacon = souls.querySelector(".beacon");
-      pings = S.div("abs pings", S.stage, "<b>Seven satellite handshakes</b>All that the aircraft left behind");
+      pings = S.div("abs pings", S.stage, "<b>Seven satellite handshakes</b>The only record of its last six hours");
       endcard = S.div("abs endcard", S.stage,
         '<div class="big">MH370</div><div class="lost">Lost</div><div class="meta">8 March 2014 · 239 people · never found</div>');
     },
@@ -117,7 +132,7 @@
       });
       S.show(listFoot, S.easeOut(S.prog(t, C("deliberate") + 2.2, C("deliberate") + 2.8)));
 
-      S.show(souls, S.fadeWin(t, C("how") - 0.3, C("pings") - 0.1, 0.5));
+      S.show(souls, S.fadeWin(t, C("aboveall") + 0.1, C("pings") - 0.1, 0.5));
       S.show(soulsNum, S.easeOut(S.prog(t, C("souls") - 0.2, C("souls") + 0.9)), "scale(" + (0.96 + 0.04 * S.easeOut(S.prog(t, C("souls") - 0.2, C("souls") + 1.2))).toFixed(3) + ")");
       soulsNum.style.transformOrigin = "left top";
       S.show(soulsUnit, S.easeOut(S.prog(t, C("souls") + 0.4, C("souls") + 1.0)));
@@ -125,8 +140,8 @@
 
       // Seven rings, one per handshake.
       rings.forEach(function (p, i) {
-        var a = C("pings") + i * 0.42;
-        S.drawPath(p, S.ease(S.prog(t, a, a + 1.4)));
+        var a = C("pings") + i * 0.34;
+        p.setAttribute("d", partial(m.P, ringPts[i], S.ease(S.prog(t, a, a + 1.4))));
         p.style.opacity = (i === 6 ? 1 : 0.8) * (1 - 0.5 * S.prog(t, C("greatest"), C("greatest") + 1.5));
       });
       S.show(ringLab, S.fadeWin(t, C("pings") + 3.2, S.duration + 5, 0.6));
@@ -137,7 +152,7 @@
     },
     sfx: function () {
       var out = [];
-      for (var i = 0; i < 7; i++) out.push(["ping", C("pings") + i * 0.42]);
+      for (var i = 0; i < 7; i++) out.push(["ping", C("pings") + i * 0.34]);
       out.push(["hit", C("souls")]);
       out.push(["hit", C("greatest") + 0.2]);
       return out;

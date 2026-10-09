@@ -20,6 +20,8 @@ sys.path.insert(0, str(ROOT.parent / "tools"))
 import mix  # noqa: E402  (bed() and SOUNDS)
 
 SR = 48000
+# The pings sit in the speech band under "only intermittent satellite pings": keep them well below the voice.
+CUE_GAIN = {"ping": 0.4}
 
 
 def loudnorm(src, start, end, out, target=-16.0, lra=11):
@@ -69,7 +71,7 @@ def main():
         if not f.exists():
             continue
         for name, at in json.loads(f.read_text()):
-            s = mix.SOUNDS[name]
+            s = mix.SOUNDS[name] * CUE_GAIN.get(name, 1.0)
             a = int((keep + timing["scenes"][sid]["offset"] + at) * SR)
             b = min(n, a + len(s))
             if 0 <= a < n:
