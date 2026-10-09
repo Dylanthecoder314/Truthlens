@@ -2,6 +2,8 @@
 
 An interactive web documentary about Malaysia Airlines flight MH370, which disappeared on 8 March 2014 with 239 people on board.
 
+Public site (GitHub Pages, served from `main`): https://dylanthecoder314.github.io/Truthlens/documentary/
+
 Published (private until shared): https://claude.ai/artifact/DttCnhCaXVWPPrdN9z3ABu
 
 ## What's in this folder
@@ -34,4 +36,4 @@ npm run build
 
 ## Updating the page
 
-Edit `index.html`, then republish it to the same artifact URL. The status box in chapter 9 and the "Updated" date in the header are as of 7 October 2026.
+Edit `index.html`. Pushing to `main` updates the public site; republish to the same artifact URL to update the claude.ai copy. The status box in chapter 9 and the "Updated" date in the header are as of 7 October 2026.
