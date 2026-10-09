@@ -1,0 +1,5 @@
+build/
+out/*.mp4
+__pycache__/
+remaster/build/
+remaster/out/

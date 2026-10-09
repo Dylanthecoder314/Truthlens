@@ -1,0 +1,1100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Vanishing of MH370</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=B612+Mono:wght@400;700&family=Saira+Condensed:wght@500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* Layout: a single narrative column read like a flight log. Chapters open with
+   a time stamp; figures break out wider, like plates in an investigation report. */
+:root {
+  --bg: #f2f5f4;          /* sea-mist paper */
+  --plate: #e6edec;       /* figure panels */
+  --ink: #13212b;         /* chart ink */
+  --ink-2: #44575f;
+  --ink-3: #5f727b;
+  --rule: #ccd8d9;
+  --water: #d3e4ea;       /* nautical-chart water */
+  --land: #e9e0c8;        /* nautical-chart land tint */
+  --land-edge: #b9aa82;
+  --border: #a3946c;
+  --sea: #3b6c82;         /* water names, chart convention */
+  --route: #b0136b;       /* aeronautical magenta: the flown track, the 7th arc */
+  --arc: #0f6bb0;         /* satellite handshake rings */
+  --s1: #b85a0c;          /* searched 2014-17 */
+  --s2: #0b8f63;          /* Ocean Infinity */
+  --v-no: #b42318;
+  --v-unlikely: #a8460a;
+  --v-unproven: #855c00;
+  --v-open: #175cd3;
+  --halo: #f2f5f4;
+  --font-display: "Saira Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-data: "B612 Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b161d; --plate: #102029; --ink: #e2eaec; --ink-2: #b2c2c8; --ink-3: #8ea2ab;
+    --rule: #22353f; --water: #0f2430; --land: #26363c; --land-edge: #3e535b; --border: #56707a;
+    --sea: #7fb0c6; --route: #e0508f; --arc: #4797cf; --s1: #d07e34; --s2: #22a57b;
+    --v-no: #f97066; --v-unlikely: #fd853a; --v-unproven: #fdb022; --v-open: #84adff;
+    --halo: #0b161d; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b161d; --plate: #102029; --ink: #e2eaec; --ink-2: #b2c2c8; --ink-3: #8ea2ab;
+  --rule: #22353f; --water: #0f2430; --land: #26363c; --land-edge: #3e535b; --border: #56707a;
+  --sea: #7fb0c6; --route: #e0508f; --arc: #4797cf; --s1: #d07e34; --s2: #22a57b;
+  --v-no: #f97066; --v-unlikely: #fd853a; --v-unproven: #fdb022; --v-open: #84adff;
+  --halo: #0b161d; color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+  padding-block: 0 4rem;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration-color: var(--route); text-decoration-thickness: 1.5px; text-underline-offset: .2em; }
+a:hover { color: var(--route); }
+:focus-visible { outline: 2px solid var(--arc); outline-offset: 2px; }
+h1, h2, h3 { text-wrap: balance; }
+p { margin: 0 0 1.1em; }
+.prose { max-width: 38rem; margin-inline: auto; }
+.prose em { font-style: italic; }
+.mono { font-family: var(--font-data); font-size: .9em; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  max-width: 70rem;
+  margin-inline: auto;
+  padding-block: clamp(2.5rem, 7vw, 5rem) 2.5rem;
+  display: grid;
+  gap: 1.75rem;
+  overflow-x: clip;
+}
+.hero > * { position: relative; z-index: 1; min-width: 0; }
+.hero-rings {
+  position: absolute;
+  z-index: 0;
+  top: 0; right: clamp(-6rem, -6vw, -1rem);
+  width: min(58%, 36rem);
+  height: 100%;
+  pointer-events: none;
+}
+.hero-rings circle { fill: none; stroke: var(--arc); stroke-width: 1.25; opacity: .35; }
+.hero-rings circle.a7 { stroke: var(--route); stroke-width: 2.5; opacity: .9; }
+.kicker {
+  font-family: var(--font-data); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-3); margin: 0;
+}
+.title { margin: 0; font-family: var(--font-display); font-weight: 800; line-height: .8; letter-spacing: -.005em; font-size: clamp(5.5rem, 25vw, 14rem); }
+.title .pre {
+  display: block; font-family: var(--font-body); font-style: italic; font-weight: 400;
+  font-size: clamp(1.35rem, 3.6vw, 2.1rem); line-height: 1.2; letter-spacing: 0; color: var(--ink-2); margin-bottom: .5rem;
+}
+.lede { font-size: clamp(1.15rem, 2.2vw, 1.35rem); line-height: 1.5; max-width: 34rem; margin: 0; }
+.strip {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(7.25rem, 1fr));
+  gap: 1px; background: var(--rule); border: 1px solid var(--ink);
+  max-width: 48rem; margin: 0; font-family: var(--font-data);
+}
+.strip div { background: var(--bg); padding: .5rem .7rem .55rem; min-width: 0; }
+.strip dt { font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.strip dd { margin: .1rem 0 0; font-size: .95rem; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.status { font-family: var(--font-data); font-size: .8rem; line-height: 1.5; color: var(--ink-2); max-width: 48rem; margin: 0; display: flex; flex-wrap: wrap; gap: .4rem .8rem; align-items: baseline; }
+.chip {
+  display: inline-block; font-family: var(--font-data); font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--route); border: 1.5px solid currentColor; padding: .1rem .45rem; border-radius: 2px; white-space: nowrap;
+}
+
+/* ---------- Contents ---------- */
+.toc { max-width: 70rem; margin: 0 auto; padding-block: 1.25rem 2.5rem; border-top: 1px solid var(--ink); }
+.toc h2 { font-family: var(--font-data); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 400; color: var(--ink-3); margin: 0 0 .75rem; }
+.toc ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: .1rem 2rem; }
+.toc a { display: grid; grid-template-columns: 2rem 1fr; gap: .25rem; padding: .3rem 0; text-decoration: none; border-bottom: 1px solid var(--rule); font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; line-height: 1.3; }
+.toc a span { font-family: var(--font-data); font-size: .72rem; font-weight: 400; color: var(--ink-3); padding-top: .25rem; }
+
+/* ---------- Chapters ---------- */
+.chapter { max-width: 70rem; margin-inline: auto; padding-block: 3.5rem 1rem; border-top: 1px solid var(--rule); }
+.chapter-head { max-width: 38rem; margin: 0 auto 1.6rem; }
+.stamp {
+  font-family: var(--font-data); font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3);
+  display: flex; flex-wrap: wrap; gap: .2rem 1.1rem; margin: 0 0 .6rem;
+}
+.stamp .no { color: var(--route); font-weight: 700; }
+.chapter h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.3rem, 6.5vw, 3.6rem); line-height: .98; margin: 0; letter-spacing: .003em; }
+.quote { max-width: 44rem; margin: 2.25rem auto; padding: 0; }
+.quote p { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.45rem, 3.4vw, 2.1rem); line-height: 1.18; margin: 0 0 .6rem; }
+.quote footer { font-family: var(--font-data); font-size: .74rem; letter-spacing: .04em; color: var(--ink-3); }
+.radio { font-family: var(--font-data); font-size: clamp(1.1rem, 2.6vw, 1.45rem); letter-spacing: .02em; line-height: 1.4; margin: 1.6rem 0; padding-block: .9rem; border-block: 1px solid var(--rule); }
+.radio small { display: block; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: .25rem; }
+
+/* ---------- Figures ---------- */
+.fig { max-width: 70rem; margin: 2.5rem auto; }
+.fig-head {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .3rem 1rem;
+  font-family: var(--font-data); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3);
+  border-bottom: 1px solid var(--ink); padding-bottom: .4rem; margin-bottom: 1rem;
+}
+.fig-head strong { color: var(--ink); font-weight: 700; }
+.note { font-family: var(--font-data); font-size: .72rem; line-height: 1.55; color: var(--ink-3); margin-top: .75rem; max-width: 60rem; }
+.legend { display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; font-family: var(--font-data); font-size: .74rem; color: var(--ink-2); margin: .75rem 0 0; padding: 0; list-style: none; align-items: center; }
+.legend li { display: inline-flex; align-items: center; gap: .45rem; }
+.key { display: inline-block; width: 1.6rem; height: 0; border-top: 2.5px solid var(--route); }
+.key.dotted { border-top-style: dotted; border-top-width: 3px; }
+.key.dashed { border-top: 1.5px dashed var(--ink-3); }
+.key.arc { border-top: 1.5px solid var(--arc); }
+.key.box { width: .9rem; height: .9rem; border: 1.5px solid; }
+.key.box.s1 { border-color: var(--s1); background: color-mix(in srgb, var(--s1) 45%, transparent); }
+.key.box.s2 { border-color: var(--s2); background: color-mix(in srgb, var(--s2) 45%, transparent); }
+.key.dot { width: .7rem; height: .7rem; border-radius: 50%; border: 0; background: var(--ink); }
+.key.ring { width: .75rem; height: .75rem; border-radius: 50%; border: 1.75px solid var(--ink); background: transparent; }
+
+/* ---------- Maps (SVG) ---------- */
+.map { display: block; width: 100%; height: auto; border: 1px solid var(--rule); background: var(--water); }
+.map .water { fill: var(--water); }
+.map .land { fill: var(--land); stroke: var(--land-edge); stroke-width: .75; vector-effect: non-scaling-stroke; }
+.map .borders { fill: none; stroke: var(--border); stroke-width: .75; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.map .sc { transform: scale(var(--k, 1)); }
+.map text { font-family: var(--font-data); font-size: 11px; fill: var(--ink); paint-order: stroke; stroke: var(--halo); stroke-width: 3px; stroke-linejoin: round; }
+.map text .sub { fill: var(--ink-3); }
+.map .place text { font-size: 10.5px; letter-spacing: .16em; fill: var(--ink-3); stroke: none; }
+.map .sea text { font-size: 10.5px; letter-spacing: .1em; fill: var(--sea); stroke: none; }
+.map.is-small .minor { display: none; }
+.map .mk { fill: var(--ink); stroke: var(--halo); stroke-width: 1.5px; }
+.map .mk.ring { fill: var(--halo); stroke: var(--ink); stroke-width: 1.75px; }
+.map .mk.wp { fill: var(--halo); stroke: var(--ink); stroke-width: 1.5px; }
+.map .mk.sat { fill: var(--arc); stroke: var(--halo); }
+.map .route-planned { fill: none; stroke: var(--ink-3); stroke-width: 1.5; stroke-dasharray: 6 5; vector-effect: non-scaling-stroke; }
+.map .route-civil { fill: none; stroke: var(--route); stroke-width: 2.75; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.map .route-mil { fill: none; stroke: var(--route); stroke-width: 3; stroke-linecap: round; stroke-dasharray: .1 7; vector-effect: non-scaling-stroke; }
+.map .plane path { fill: var(--route); stroke: var(--halo); stroke-width: 1.25px; }
+.map .plane.dark path { fill: var(--halo); stroke: var(--route); stroke-width: 1.75px; }
+.map .plane text { font-size: 10.5px; font-weight: 700; }
+.map .plane .tag-2 { font-weight: 400; fill: var(--ink-2); }
+.map .arc { fill: none; stroke: var(--arc); stroke-width: 1.4; opacity: .8; vector-effect: non-scaling-stroke; transition: opacity .2s, stroke-width .2s; }
+.map .arc.a7 { stroke: var(--route); stroke-width: 2.75; opacity: 1; }
+.map.has-hot .arc { opacity: .18; }
+.map.has-hot .arc.is-hot { opacity: 1; stroke-width: 3.25; }
+.map .band { stroke-width: 1; vector-effect: non-scaling-stroke; fill-opacity: .45; }
+.map .band.s1 { fill: var(--s1); stroke: var(--s1); }
+.map .band.s2 { fill: var(--s2); stroke: var(--s2); }
+.map .debris.other .mk { fill: var(--halo); stroke: var(--ink); stroke-width: 2px; }
+.map.hide-arcs .layer-arcs, .map.hide-search .layer-search, .map.hide-debris .layer-debris { display: none; }
+
+/* ---------- Fig. 1: the night track ---------- */
+.deck { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 1.25rem; align-items: start; }
+@media (max-width: 860px) { .deck { grid-template-columns: minmax(0, 1fr); } }
+.panel { font-family: var(--font-data); border: 1px solid var(--ink); background: var(--plate); padding: 1rem; min-width: 0; }
+.clock { font-size: clamp(2rem, 5vw, 2.6rem); line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.clock-sub { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin: .45rem 0 0; }
+.signals { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin: 1rem 0; }
+.signals div { background: var(--plate); padding: .45rem .6rem .5rem; min-width: 0; }
+.signals dt { font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.signals dd { margin: .1rem 0 0; font-size: .82rem; line-height: 1.35; }
+.signals dd::before { content: "\25CF\00A0"; color: var(--ink); }
+.signals dd.lost { color: var(--route); }
+.signals dd.lost::before { content: "\25CB\00A0"; color: var(--route); }
+.event-now { font-family: var(--font-body); font-size: 1.02rem; line-height: 1.45; margin: 0; min-height: 5.8em; }
+.event-now b { display: block; font-family: var(--font-data); font-weight: 700; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--route); margin-bottom: .2rem; }
+.controls { display: flex; gap: .75rem; align-items: center; margin-top: .9rem; }
+.controls input[type="range"] { flex: 1; min-width: 0; accent-color: var(--route); }
+.btn {
+  font-family: var(--font-data); font-size: .74rem; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink); background: var(--bg); border: 1.5px solid var(--ink); border-radius: 2px;
+  padding: .45rem .8rem; cursor: pointer; white-space: nowrap;
+}
+.btn:hover { background: var(--ink); color: var(--bg); }
+.btn[aria-pressed="false"] { color: var(--ink-3); border-color: var(--rule); background: transparent; }
+.events { list-style: none; margin: 1.25rem 0 0; padding: 0; columns: 3 19rem; column-gap: 1.5rem; }
+.events li { break-inside: avoid; }
+.events button {
+  all: unset; box-sizing: border-box; width: 100%; cursor: pointer;
+  display: grid; grid-template-columns: 4.6rem 1fr; gap: .6rem; padding: .45rem .3rem;
+  border-bottom: 1px solid var(--rule); font-family: var(--font-body); font-size: .93rem; line-height: 1.4; color: var(--ink-2);
+}
+.events button:hover { background: var(--plate); }
+.events button:focus-visible { outline: 2px solid var(--arc); outline-offset: -2px; }
+.events time { font-family: var(--font-data); font-size: .76rem; color: var(--ink-3); padding-top: .15rem; font-variant-numeric: tabular-nums; }
+.events .is-past button { color: var(--ink); }
+.events .is-now button { background: var(--plate); color: var(--ink); box-shadow: inset 2px 0 0 var(--route); }
+.events .is-now time { color: var(--route); font-weight: 700; }
+
+/* ---------- Fig. 2 controls ---------- */
+.toolbar { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: .9rem; align-items: center; }
+.toolbar span { font-family: var(--font-data); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-right: .25rem; }
+.arcs { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13.5rem), 1fr)); gap: 0 1.25rem; }
+.arcs button {
+  all: unset; box-sizing: border-box; width: 100%; cursor: pointer; display: grid; grid-template-columns: 3.4rem 1fr; gap: .5rem;
+  padding: .4rem .25rem; border-bottom: 1px solid var(--rule); font-family: var(--font-data); font-size: .78rem; line-height: 1.35; color: var(--ink-2);
+}
+.arcs button:hover, .arcs button.is-hot { background: var(--plate); color: var(--ink); }
+.arcs button:focus-visible { outline: 2px solid var(--arc); outline-offset: -2px; }
+.arcs b { color: var(--arc); font-weight: 700; font-variant-numeric: tabular-nums; }
+.arcs li:last-child b { color: var(--route); }
+
+/* ---------- Prologue: 239 dots ---------- */
+.souls { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr)); gap: 1.4rem 1.75rem; }
+.souls .big { grid-column: 1 / -1; }
+.grp h3 {
+  display: flex; justify-content: space-between; gap: .5rem; margin: 0 0 .5rem; padding-bottom: .25rem; border-bottom: 1px solid var(--rule);
+  font-family: var(--font-data); font-weight: 400; font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2);
+}
+.grp h3 span { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+.dots { display: flex; flex-wrap: wrap; gap: 4px; }
+.dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--ink); }
+.dots i.crew { background: transparent; box-shadow: inset 0 0 0 1.75px var(--ink); }
+
+/* ---------- Tables ---------- */
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; line-height: 1.4; }
+th, td { text-align: left; vertical-align: top; padding: .6rem .75rem .6rem 0; border-bottom: 1px solid var(--rule); }
+thead th { font-family: var(--font-data); font-weight: 400; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); border-bottom: 1px solid var(--ink); }
+tbody th { font-weight: 600; }
+td.num, .ledger td.when { font-family: var(--font-data); font-size: .82rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+small.under { display: block; font-weight: 400; font-size: .82rem; color: var(--ink-3); }
+.debris-table { min-width: 36rem; }
+.st { font-family: var(--font-data); font-size: .74rem; white-space: nowrap; }
+.st::before { content: "\25CF\00A0"; }
+.st.other::before { content: "\25CB\00A0"; }
+.ledger { min-width: 38rem; }
+.bar { display: flex; align-items: center; gap: .6rem; font-family: var(--font-data); font-size: .8rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.bar i { display: block; height: .7rem; border-radius: 0 3px 3px 0; min-width: 3px; }
+.bar i.s1 { background: var(--s1); }
+.bar i.s2 { background: var(--s2); }
+.bar i.pending { background: transparent; border: 1.5px dashed var(--s2); border-left-width: 1.5px; }
+.bar-track { flex: 0 0 9rem; }
+
+/* ---------- Claims ---------- */
+.claims { list-style: none; margin: 0 auto; padding: 0; max-width: 52rem; border-top: 1px solid var(--ink); }
+.claim { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: .5rem 1.5rem; padding: 1.2rem 0; border-bottom: 1px solid var(--rule); }
+@media (max-width: 640px) { .claim { grid-template-columns: minmax(0, 1fr); } }
+.claim h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.35rem; line-height: 1.2; margin: 0 0 .4rem; }
+.claim p { margin: 0; color: var(--ink-2); }
+.verdict {
+  align-self: start; justify-self: start; display: inline-flex; gap: .4rem; align-items: center;
+  font-family: var(--font-data); font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  border: 1.5px solid currentColor; border-radius: 2px; padding: .2rem .5rem; margin: .2rem 0 0;
+}
+.verdict.no { color: var(--v-no); }
+.verdict.unlikely { color: var(--v-unlikely); }
+.verdict.unproven { color: var(--v-unproven); }
+.verdict.open { color: var(--v-open); }
+
+/* ---------- Findings list, status, sources ---------- */
+.findings { padding-left: 1.2rem; margin: 0 0 1.2em; }
+.findings li { margin-bottom: .55rem; }
+.findings li::marker { color: var(--route); }
+.statusbox { max-width: 38rem; margin: 2rem auto; border: 1.5px solid var(--ink); font-family: var(--font-data); }
+.statusbox h3 { margin: 0; padding: .5rem .8rem; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; background: var(--ink); color: var(--bg); }
+.statusbox dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; }
+.statusbox dt, .statusbox dd { margin: 0; padding: .5rem .8rem; border-top: 1px solid var(--rule); font-size: .82rem; }
+.statusbox dt { color: var(--ink-3); text-transform: uppercase; letter-spacing: .06em; font-size: .7rem; padding-top: .62rem; }
+.statusbox dd b { color: var(--route); }
+.epilogue p { font-size: 1.2rem; line-height: 1.55; }
+.sources { max-width: 52rem; margin: 0 auto; font-size: .9rem; line-height: 1.5; padding-left: 1.4rem; columns: 2 22rem; column-gap: 2.5rem; }
+.sources li { margin-bottom: .5rem; break-inside: avoid; }
+.sources li::marker { font-family: var(--font-data); font-size: .75rem; color: var(--ink-3); }
+.colophon { max-width: 52rem; margin: 2.5rem auto 0; padding-top: 1rem; border-top: 1px solid var(--ink); font-family: var(--font-data); font-size: .72rem; line-height: 1.6; color: var(--ink-3); }
+
+@media (max-width: 640px) {
+  body { font-size: 1rem; }
+  .hero-rings { width: 75%; opacity: .55; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .map .arc { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="hero-rings" viewBox="0 0 500 640" preserveAspectRatio="xMaxYMid meet" aria-hidden="true">
+    <!-- The seven satellite handshake rings, drawn to their relative radii. -->
+    <circle cx="-130" cy="320" r="428"/><circle cx="-130" cy="320" r="398"/><circle cx="-130" cy="320" r="406"/>
+    <circle cx="-130" cy="320" r="436"/><circle cx="-130" cy="320" r="482"/><circle cx="-130" cy="320" r="567"/>
+    <circle class="a7" cx="-130" cy="320" r="575"/>
+  </svg>
+  <p class="kicker">A documentary in nine chapters · Updated 7 October 2026</p>
+  <h1 class="title"><span class="pre">The Vanishing of</span>MH370</h1>
+  <p class="lede">On 8 March 2014 a Malaysia Airlines Boeing 777 with 239 people on board went silent over the South China Sea, turned around and flew into the night. Twelve years and three seabed searches later, it has still not been found.</p>
+  <dl class="strip" aria-label="Flight details">
+    <div><dt>Callsign</dt><dd>MAS370</dd></div>
+    <div><dt>Registration</dt><dd>9M-MRO</dd></div>
+    <div><dt>Type</dt><dd>B777-200ER</dd></div>
+    <div><dt>Route</dt><dd>KUL → PEK</dd></div>
+    <div><dt>Airborne</dt><dd>00:42 MYT</dd></div>
+    <div><dt>On board</dt><dd>239 souls</dd></div>
+  </dl>
+  <p class="status"><span class="chip">Not found</span><span>More than 230,000 km² of seabed searched since 2014. The current search contract runs to 30 June 2027.</span></p>
+</header>
+
+<nav class="toc" aria-label="Chapters">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#prologue"><span>—</span>239 on board</a></li>
+    <li><a href="#departure"><span>01</span>Departure</a></li>
+    <li><a href="#good-night"><span>02</span>“Good night”</a></li>
+    <li><a href="#radar"><span>03</span>A ghost on military radar</a></li>
+    <li><a href="#handshakes"><span>04</span>Seven handshakes</a></li>
+    <li><a href="#search"><span>05</span>The search</a></li>
+    <li><a href="#debris"><span>06</span>What the sea gave back</a></li>
+    <li><a href="#report"><span>07</span>The official answer</a></li>
+    <li><a href="#claims"><span>08</span>Claims and evidence</a></li>
+    <li><a href="#still-searching"><span>09</span>Still searching</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<section class="chapter" id="prologue" aria-labelledby="h-prologue">
+  <div class="chapter-head">
+    <p class="stamp"><span class="no">Prologue</span><span>Kuala Lumpur International Airport</span></p>
+    <h2 id="h-prologue">239 on board</h2>
+  </div>
+  <div class="prose">
+    <p>MH370 was the overnight service from Kuala Lumpur to Beijing, a flight of about five and a half hours. On board were 227 passengers, two of them infants, and 12 Malaysian crew.</p>
+    <p>Most passengers were Chinese citizens, among them a group of calligraphers and painters returning from an exhibition in Kuala Lumpur. Twenty were employees of the chip maker Freescale Semiconductor. Two were young Iranian men travelling on stolen European passports; police concluded they were migrants trying to reach Europe, with no link to what happened.</p>
+  </div>
+  <figure class="fig" aria-labelledby="cap-souls">
+    <div class="fig-head"><strong id="cap-souls">Everyone on board, by nationality</strong><span>One dot per person</span></div>
+    <div class="souls" id="souls"></div>
+    <ul class="legend"><li><i class="key dot"></i>Passenger</li><li><i class="key ring"></i>Crew</li></ul>
+    <figcaption class="note">Final manifest after the two stolen-passport holders were identified as Iranian. Malaysia: 38 passengers and 12 crew.</figcaption>
+  </figure>
+</section>
+
+<section class="chapter" id="departure" aria-labelledby="h-departure">
+  <div class="chapter-head">
+    <p class="stamp"><span class="no">Chapter 01</span><time>00:42 MYT · Sat 8 Mar 2014</time><span>16:42 UTC · 7 Mar</span></p>
+    <h2 id="h-departure">Departure</h2>
+  </div>
+  <div class="prose">
+    <p>MH370 took off at 00:42, a few minutes behind schedule. The aircraft, registration 9M-MRO, was a Boeing 777-200ER that Malaysia Airlines had flown since 2002.</p>
+    <p>In the cockpit were Captain Zaharie Ahmad Shah, 53, who had joined the airline in 1981 and had more than 18,000 flying hours, and First Officer Fariq Abdul Hamid, 27, who had recently moved onto the 777.</p>
+    <p>The plan was routine. Climb northeast across the peninsula and out over the South China Sea, hand over to Vietnamese air traffic control at a waypoint called IGARI, and land in Beijing at 06:30. At 01:01 the aircraft levelled off at 35,000 feet. At 01:07 it sent an automatic ACARS maintenance report, as it did every half hour. It was the last one. The next report, due at 01:37, never arrived.</p>
+  </div>
+</section>
+
+<section class="chapter" id="good-night" aria-labelledby="h-goodnight">
+  <div class="chapter-head">
+    <p class="stamp"><span class="no">Chapter 02</span><time>01:19:30 MYT</time><span>17:19:30 UTC</span></p>
+    <h2 id="h-goodnight">“Good night”</h2>
+  </div>
+  <div class="prose">
+    <p>As MH370 approached the edge of Malaysian airspace, the Kuala Lumpur controller told the crew to contact Ho Chi Minh City. The reply was the last thing anyone heard from the aircraft.</p>
+    <p class="radio"><small>MH370 to Kuala Lumpur Radar, 01:19:30</small>“Good night. Malaysian three seven zero.”</p>
+    <p>The crew never called Ho Chi Minh. At 01:21:13, as the aircraft passed IGARI, its transponder stopped transmitting. The transponder is what tells civilian radar which plane it is seeing and at what altitude. Without it, MH370 disappeared from controllers' screens.</p>
+    <p>Malaysian military radar works differently. It bounces radio waves off anything in the sky, so it kept recording an unidentified aircraft. Moments after IGARI, that aircraft turned back to the southwest. The 2018 investigation concluded the turn was most likely flown by hand, not by the autopilot.</p>
+    <p>At 01:38, controllers in Ho Chi Minh City called Kuala Lumpur to ask where MH370 was. Calls went back and forth between the two control centres, the airline and the military for hours. The Kuala Lumpur rescue coordination centre was not activated until 05:30.</p>
+  </div>
+</section>
+
+<section class="chapter" id="radar" aria-labelledby="h-radar">
+  <div class="chapter-head">
+    <p class="stamp"><span class="no">Chapter 03</span><time>01:21–02:22 MYT</time><span>17:21–18:22 UTC</span></p>
+    <h2 id="h-radar">A ghost on military radar</h2>
+  </div>
+  <div class="prose">
+    <p>The unidentified aircraft flew back across the Malay Peninsula, passed just south of Penang Island at about 01:52 and headed out over the Strait of Malacca. It passed the tiny island of Pulau Perak at about 02:03, then followed a line close to the airway that leads toward India and the Middle East.</p>
+    <p>Military radar recorded the aircraft but no one sent planes to intercept it. Its last radar return came at 02:22, about 200 nautical miles northwest of Penang. No radar ever saw MH370 again.</p>
+    <p>Search crews spent the first days in the South China Sea, along the planned route. On 15 March, Prime Minister Najib Razak said the aircraft's movements were consistent with deliberate action by someone on the plane.</p>
+  </div>
+
+  <figure class="fig" id="fig-night" aria-labelledby="cap-night">
+    <div class="fig-head"><strong id="cap-night">Fig. 1 · The last radar track</strong><span>00:42–02:22 MYT, 8 March 2014</span></div>
+    <div class="deck">
+      <svg class="map" id="map-night" role="img" aria-labelledby="cap-night map-night-desc"><desc id="map-night-desc">Map of the Malay Peninsula showing MH370's route from Kuala Lumpur northeast to waypoint IGARI, the turn back across the peninsula past Penang and Pulau Perak, and the last military radar contact over the Andaman Sea at 02:22.</desc></svg>
+      <div class="panel" aria-live="polite">
+        <div class="clock" id="clock">02:22:12</div>
+        <p class="clock-sub" id="clock-sub">MYT · 18:22:12 UTC, 7 Mar</p>
+        <dl class="signals">
+          <div><dt>Transponder</dt><dd id="sig-xpdr">On</dd></div>
+          <div><dt>Seen by</dt><dd id="sig-radar">Civil radar</dd></div>
+          <div><dt>Radio</dt><dd id="sig-radio">In contact</dd></div>
+          <div><dt>ACARS</dt><dd id="sig-acars">Reporting</dd></div>
+        </dl>
+        <p class="event-now" id="event-now"></p>
+        <div class="controls">
+          <button class="btn" id="play" type="button">Play</button>
+          <label class="sr-only" for="scrub">Time on 8 March 2014 (MYT)</label>
+          <input id="scrub" type="range" min="2520" max="8532" step="1" value="8532">
+        </div>
+      </div>
+    </div>
+    <ul class="legend">
+      <li><i class="key"></i>Tracked with transponder (civil radar)</li>
+      <li><i class="key dotted"></i>Military radar only</li>
+      <li><i class="key dashed"></i>Planned route (schematic)</li>
+    </ul>
+    <ol class="events" id="events"></ol>
+    <figcaption class="note">Positions between the published fixes are interpolated, so the track is approximate. Drag the slider or pick an event to move through the night. Times are Malaysia Time (UTC+8).</figcaption>
+  </figure>
+</section>
+
+<section class="chapter" id="handshakes" aria-labelledby="h-handshakes">
+  <div class="chapter-head">
+    <p class="stamp"><span class="no">Chapter 04</span><time>02:25–08:19 MYT</time><span>18:25–00:19 UTC</span></p>
+    <h2 id="h-handshakes">Seven handshakes</h2>
+  </div>
+  <div class="prose">
+    <p>MH370 left one more trail. At 02:25 its satellite terminal, which had been off, logged back on to the Inmarsat-3F1 satellite parked 35,800 km above the Indian Ocean. For the next six hours, a ground station in Perth and the aircraft exchanged brief automatic signals called handshakes. They carried no position and no message.</p>
+    <p>Each handshake did record two numbers. The time a signal took to make the round trip gives the distance between the aircraft and the satellite, which places the plane somewhere on a ring around the point beneath the satellite. The shift in the signal's frequency reflects the plane's motion, and that pattern matched a track to the south, not the north.</p>
+    <p>Twice the airline phoned the aircraft over the satellite link, at 02:39 and 07:13. No one answered. At 06:30, when MH370 should have been landing in Beijing, it was still flying and still answering handshakes.</p>
+    <p>The last complete handshake came at 08:11. At 08:19:29 the aircraft itself asked to log on again: a partial handshake. Investigators believe this is what happens when both engines run out of fuel and a backup power unit starts, briefly reviving the satellite terminal. When the ground station called at 09:15, nothing answered.</p>
+    <p>That final ring became known as the 7th arc. The last satellite data are consistent with a steep, fast descent, which puts the wreck close to the arc. On 24 March, after analysis by Inmarsat and the UK Air Accidents Investigation Branch, Najib told the world what the data meant.</p>
+  </div>
+  <blockquote class="quote">
+    <p>“It is therefore with deep sadness and regret that I must inform you that, according to this new data, flight MH370 ended in the southern Indian Ocean.”</p>
+    <footer>Najib Razak, Prime Minister of Malaysia, 24 March 2014</footer>
+  </blockquote>
+
+  <figure class="fig" id="fig-arcs" aria-labelledby="cap-arcs">
+    <div class="fig-head"><strong id="cap-arcs">Fig. 2 · The 7th arc</strong><span>Satellite rings, search areas and debris finds</span></div>
+    <div class="toolbar" role="group" aria-label="Map layers">
+      <span>Show</span>
+      <button class="btn" type="button" data-layer="arcs" aria-pressed="true">Handshake rings</button>
+      <button class="btn" type="button" data-layer="search" aria-pressed="true">Search areas</button>
+      <button class="btn" type="button" data-layer="debris" aria-pressed="true">Debris finds</button>
+    </div>
+    <svg class="map" id="map-arcs" role="img" aria-labelledby="cap-arcs map-arcs-desc"><desc id="map-arcs-desc">Map of the Indian Ocean from Africa to Australia. Seven curved rings centred on the point beneath the Inmarsat satellite at 64.5 degrees east show where the aircraft could have been at each handshake. The seventh ring runs southwest of Australia, where shaded bands mark the areas searched in 2014 to 2017 and in 2018. Debris markers sit on Réunion, Mauritius, Madagascar, Mozambique, Tanzania and South Africa.</desc></svg>
+    <ul class="legend">
+      <li><i class="key arc"></i>Handshake ring</li>
+      <li><i class="key"></i>7th arc, 08:19</li>
+      <li><i class="key box s1"></i>Searched 2014–17</li>
+      <li><i class="key box s2"></i>Searched 2018</li>
+      <li><i class="key dot"></i>Debris confirmed</li>
+      <li><i class="key ring"></i>Almost certain or highly likely</li>
+    </ul>
+    <ol class="arcs" id="arc-list" aria-label="Handshakes. Select one to highlight its ring."></ol>
+    <figcaption class="note">Rings are reconstructed from the published satellite timing values and drawn approximately, as are the search areas. The 2025–26 searches (about 7,571 km²) targeted gaps close to the arc and are too small to show at this scale. The rings also extend north into Asia; the frequency data ruled out that northern route.</figcaption>
+  </figure>
+</section>
+
+<section class="chapter" id="search" aria-labelledby="h-search">
+  <div class="chapter-head">
+    <p class="stamp"><span class="no">Chapter 05</span><time>March 2014 – May 2018</time><span>Southern Indian Ocean</span></p>
+    <h2 id="h-search">The search</h2>
+  </div>
+  <div class="prose">
+    <p>The hunt for MH370 became the most expensive search in aviation history. In March and April 2014, ships and aircraft from many countries combed the ocean surface west of Perth. Satellites spotted hundreds of floating objects. None came from the plane.</p>
+    <p>In early April, the Australian ship <em>Ocean Shield</em> picked up acoustic pings that seemed to come from the aircraft's flight recorder beacons. A robot submarine searched the seabed beneath and found nothing. Investigators later concluded the signals had not come from MH370.</p>
+    <p>From October 2014, ships towing sonar swept the seafloor along the 7th arc, over undersea mountains that had never been mapped, in water up to six kilometres deep. The search was led by the Australian Transport Safety Bureau and funded by Malaysia, Australia and China. It covered more than 120,000 km² and cost about A$200 million. On 17 January 2017 the three governments suspended it.</p>
+  </div>
+  <blockquote class="quote">
+    <p>“It is almost inconceivable and certainly societally unacceptable in the modern aviation era … for a large commercial aircraft to be missing and for the world not to know with certainty what became of the aircraft and those on board.”</p>
+    <footer>Australian Transport Safety Bureau, final search report, 3 October 2017</footer>
+  </blockquote>
+  <div class="prose">
+    <p>In January 2018 the marine robotics company Ocean Infinity began a private search on a “no find, no fee” basis, using a fleet of autonomous underwater vehicles launched from the ship <em>Seabed Constructor</em>. In about four months it covered more than 112,000 km², mostly north of the earlier search area. It found nothing, and the search ended in late May 2018.</p>
+  </div>
+</section>
+
+<section class="chapter" id="debris" aria-labelledby="h-debris">
+  <div class="chapter-head">
+    <p class="stamp"><span class="no">Chapter 06</span><time>July 2015 onward</time><span>Western Indian Ocean coastlines</span></p>
+    <h2 id="h-debris">What the sea gave back</h2>
+  </div>
+  <div class="prose">
+    <p>On 29 July 2015, workers cleaning a beach at Saint-André on Réunion Island found a two-metre section of aircraft wing covered in barnacles. French investigators confirmed it was a flaperon from 9M-MRO. It was the first physical proof that MH370 had ended in the ocean.</p>
+    <p>More pieces followed, carried thousands of kilometres west by ocean currents to the coasts of East Africa and the islands of the western Indian Ocean. Many were found by local beachgoers and by the American amateur investigator Blaine Gibson, who spent years walking remote beaches. Of 27 items examined for the 2018 safety report, three were confirmed as coming from MH370 and 16 more were judged almost certain or highly likely.</p>
+  </div>
+  <figure class="fig" aria-labelledby="cap-debris">
+    <div class="fig-head"><strong id="cap-debris">Key debris finds</strong><span>Locations on Fig. 2</span></div>
+    <div class="scroll">
+      <table class="debris-table">
+        <thead><tr><th scope="col">Part</th><th scope="col">Found at</th><th scope="col">When</th><th scope="col">Assessment</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Right flaperon</th><td>Saint-André, Réunion</td><td class="num">Jul 2015</td><td><span class="st">Confirmed</span></td></tr>
+          <tr><th scope="row">Engine cowling fragment with Rolls-Royce stencil</th><td>Mossel Bay, South Africa</td><td class="num">Dec 2015</td><td><span class="st other">Almost certain</span></td></tr>
+          <tr><th scope="row">Horizontal stabiliser panel marked “NO STEP”</th><td>Sandbank off Vilankulo, Mozambique</td><td class="num">Feb 2016</td><td><span class="st other">Almost certain</span></td></tr>
+          <tr><th scope="row">Left outboard flap section</th><td>Mauritius</td><td class="num">May 2016</td><td><span class="st">Confirmed</span></td></tr>
+          <tr><th scope="row">Right outboard flap section</th><td>Pemba Island, Tanzania</td><td class="num">Jun 2016</td><td><span class="st">Confirmed</span></td></tr>
+          <tr><th scope="row">Cabin and other fragments</th><td>Madagascar, Rodrigues, Mozambique, South Africa</td><td class="num">2016–17</td><td><span class="st other">Varies by item</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </figure>
+  <div class="prose">
+    <p>The debris narrowed the problem in two ways. Drift modelling by Australia's science agency CSIRO, run backwards from where and when pieces washed ashore, pointed to a crash site on the 7th arc, most likely north of the area searched by 2017. And the flaperon and flap sections suggested the wing flaps were retracted when the aircraft hit the water. That argues against a controlled ditching, where a pilot would normally extend the flaps to land slowly on the sea.</p>
+  </div>
+</section>
+
+<section class="chapter" id="report" aria-labelledby="h-report">
+  <div class="chapter-head">
+    <p class="stamp"><span class="no">Chapter 07</span><time>30 July 2018</time><span>Safety Investigation Report</span></p>
+    <h2 id="h-report">The official answer</h2>
+  </div>
+  <div class="prose">
+    <p>Malaysia's international safety investigation team published its final report in July 2018, a document of roughly 1,500 pages including appendices. It could not determine why MH370 disappeared. Its main findings:</p>
+    <ul class="findings">
+      <li>The turn back after IGARI and later course changes were most likely made under manual control, not by the autopilot.</li>
+      <li>Investigators found no evidence of abnormal behaviour, stress or financial trouble in the backgrounds of the captain or first officer.</li>
+      <li>No mechanical fault was identified that would explain the flight path. The team said it could not rule out unlawful interference by a third party.</li>
+      <li>Air traffic control failed to follow procedures. Kuala Lumpur was slow to start emergency procedures, did not monitor radar continuously, relied on the airline's information and did not call on the military for help.</li>
+    </ul>
+    <p>The report did not name anyone as responsible. Its authors were clear that a definitive answer would require finding the wreckage and the flight recorders.</p>
+  </div>
+</section>
+
+<section class="chapter" id="claims" aria-labelledby="h-claims">
+  <div class="chapter-head">
+    <p class="stamp"><span class="no">Chapter 08</span><span>Fact check</span></p>
+    <h2 id="h-claims">Claims and evidence</h2>
+  </div>
+  <div class="prose">
+    <p>Few events have produced more theories. Here is how the best-known ones hold up against the evidence that exists.</p>
+  </div>
+  <ol class="claims">
+    <li class="claim">
+      <p class="verdict no"><span aria-hidden="true">✕</span>Contradicted</p>
+      <div><h3>It crashed in the South China Sea, or was shot down near its planned route.</h3>
+      <p>Military radar tracked the aircraft flying west for an hour after IGARI, satellite handshakes continued for six more hours, and confirmed wreckage washed up thousands of kilometres away in the western Indian Ocean.</p></div>
+    </li>
+    <li class="claim">
+      <p class="verdict no"><span aria-hidden="true">✕</span>Contradicted</p>
+      <div><h3>It landed intact somewhere, such as Central Asia or a remote island.</h3>
+      <p>The satellite frequency data fit a southern route, not a northern one. The final signals point to a high-speed descent, and parts of the aircraft have come ashore in Africa and on Indian Ocean islands.</p></div>
+    </li>
+    <li class="claim">
+      <p class="verdict unproven"><span aria-hidden="true">?</span>Unproven</p>
+      <div><h3>One of the pilots deliberately diverted the aircraft.</h3>
+      <p>The manual turns and a route that slipped between radar coverage suggest someone who knew the aircraft well. Data recovered from the captain's home flight simulator included a simulated flight deep into the southern Indian Ocean, flown weeks earlier. Malaysian police said they found nothing else unusual, and the official investigation found no evidence in either pilot's background and named no one.</p></div>
+    </li>
+    <li class="claim">
+      <p class="verdict unproven"><span aria-hidden="true">?</span>Unproven</p>
+      <div><h3>Hijackers took control of the aircraft.</h3>
+      <p>No group claimed responsibility and there was no ransom demand. Background checks on passengers found no links to terrorism. The 2018 report said third-party interference could not be ruled out, but it found no evidence for it.</p></div>
+    </li>
+    <li class="claim">
+      <p class="verdict unlikely"><span aria-hidden="true">↓</span>Unlikely</p>
+      <div><h3>A fire or mechanical failure disabled the crew, and the plane flew on as a “ghost flight”.</h3>
+      <p>A disabled crew could explain hours of straight flight south on autopilot. It explains much less well the sequence of turns after IGARI, which the investigation found were most likely flown by hand, or the path that tracked a published airway.</p></div>
+    </li>
+    <li class="claim">
+      <p class="verdict unproven"><span aria-hidden="true">?</span>Unproven</p>
+      <div><h3>Amateur radio data (WSPR) has pinpointed the crash site.</h3>
+      <p>Engineer Richard Godfrey argues that disturbances in weak radio signals sent by amateur stations traced the aircraft's flight. Many radio experts doubt such signals can detect an aircraft at all, and the method has not been independently validated.</p></div>
+    </li>
+    <li class="claim">
+      <p class="verdict open"><span aria-hidden="true">…</span>Open question</p>
+      <div><h3>Underwater microphones could show where it hit the sea.</h3>
+      <p>A 2024 Cardiff University study found that hydrophones run by the nuclear test monitoring network should be able to detect a large aircraft striking the ocean, and urged a fresh look at the recordings from that morning. No signal has yet been tied to MH370.</p></div>
+    </li>
+  </ol>
+</section>
+
+<section class="chapter" id="still-searching" aria-labelledby="h-still">
+  <div class="chapter-head">
+    <p class="stamp"><span class="no">Chapter 09</span><time>2025–2027</time><span>Ocean Infinity returns</span></p>
+    <h2 id="h-still">Still searching</h2>
+  </div>
+  <div class="prose">
+    <p>In December 2024 Malaysia agreed in principle to let Ocean Infinity search again on the same terms: no find, no fee, with US$70 million payable only if the wreck is found. The company's ship <em>Armada 86 05</em> began work in late February 2025, and the contract was signed on 25 March. Bad weather in the southern Indian Ocean halted the search in April.</p>
+    <p>The ship returned on 30 December 2025 and searched until 23 January 2026. Across both phases it logged 28 search days and surveyed about 7,571 km², roughly half of a 15,000 km² target area chosen from the latest analysis. On 8 March 2026, the twelfth anniversary, Malaysia's transport ministry announced that nothing had been found.</p>
+    <p>In June 2026 the cabinet extended the contract by a year, to 30 June 2027, so the company can survey the remaining 7,428.54 km². The terms did not change. As in previous seasons, the work depends on the calmer weather of the southern summer.</p>
+  </div>
+  <figure class="fig" aria-labelledby="cap-ledger">
+    <div class="fig-head"><strong id="cap-ledger">Twelve years of searching</strong><span>Seabed area covered</span></div>
+    <div class="scroll">
+      <table class="ledger">
+        <thead><tr><th scope="col">Phase</th><th scope="col">When</th><th scope="col">Seabed area</th><th scope="col">Result</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Surface search<small class="under">Multinational, led by Australia</small></th><td class="when">Mar–Apr 2014</td><td><span class="mono">Ocean surface only</span></td><td>No MH370 debris</td></tr>
+          <tr><th scope="row">Underwater search<small class="under">ATSB for Malaysia, Australia, China</small></th><td class="when">Oct 2014 – Jan 2017</td><td><div class="bar"><span class="bar-track"><i class="s1" style="width:100%"></i></span>120,000 km²</div></td><td>Not found</td></tr>
+          <tr><th scope="row">Ocean Infinity, first search</th><td class="when">Jan – May 2018</td><td><div class="bar"><span class="bar-track"><i class="s2" style="width:93.3%"></i></span>112,000 km²</div></td><td>Not found</td></tr>
+          <tr><th scope="row">Ocean Infinity, second search</th><td class="when">Feb 2025 – Jan 2026</td><td><div class="bar"><span class="bar-track"><i class="s2" style="width:6.3%"></i></span>7,571 km²</div></td><td>Not found</td></tr>
+          <tr><th scope="row">Ocean Infinity, extension<small class="under">Remaining target area</small></th><td class="when">to 30 Jun 2027</td><td><div class="bar"><span class="bar-track"><i class="pending" style="width:6.2%"></i></span>7,428.54 km²</div></td><td>Pending</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </figure>
+  <div class="prose">
+    <p>For the families, the search is only part of it. Next-of-kin groups such as Voice370 have spent twelve years pressing governments to keep looking and to share what they know. In December 2025 a Beijing court ordered Malaysia Airlines to pay about 2.9 million yuan to each of eight families. Another 23 cases were still pending, and 47 families had settled with the airline.</p>
+  </div>
+  <div class="statusbox" role="note" aria-labelledby="h-status">
+    <h3 id="h-status">Status · 7 October 2026</h3>
+    <dl>
+      <dt>Aircraft</dt><dd><b>Not found</b></dd>
+      <dt>Contract</dt><dd>Ocean Infinity, no find, no fee, to 30 June 2027</dd>
+      <dt>Left to search</dt><dd>7,428.54 km² of the current target area</dd>
+      <dt>Flight recorders</dt><dd>Not recovered</dd>
+    </dl>
+  </div>
+</section>
+
+<section class="chapter epilogue" aria-label="Epilogue">
+  <div class="prose">
+    <p>Somewhere near a curved line drawn across the southern Indian Ocean, several kilometres down, lies a Boeing 777 and the answer to what happened on board. Until it is found, 239 people remain missing, and their families are still waiting.</p>
+  </div>
+</section>
+
+<section class="chapter" aria-labelledby="h-sources">
+  <div class="chapter-head">
+    <p class="stamp"><span class="no">Sources</span><span>Checked 7 October 2026</span></p>
+    <h2 id="h-sources">Sources</h2>
+  </div>
+  <ol class="sources">
+    <li>Australian Transport Safety Bureau, <a href="https://www.atsb.gov.au/sites/default/files/media/5773565/operational-search-for-mh370_final_3oct2017.pdf">The Operational Search for MH370</a>, 3 October 2017.</li>
+    <li>ATSB, <a href="https://www.atsb.gov.au/sites/default/files/media/5773389/ae-2014-054_mh370-search-and-debris-update_aug2017.pdf">MH370 search and debris update</a>, August 2017.</li>
+    <li>ATSB, <a href="https://www.atsb.gov.au/sites/default/files/media/5773388/debris-examination-update-5_amended.pdf">Debris examination update</a>.</li>
+    <li>ATSB, <a href="https://www.atsb.gov.au/node/652">MH370 First Principles Review and CSIRO drift reports</a>.</li>
+    <li>Inmarsat, <a href="https://www.inmarsat.com/news/malaysian-government-publishes-mh370-details-uk-aaib">Malaysian government publishes MH370 details from UK AAIB</a>.</li>
+    <li>Wikipedia, <a href="https://en.wikipedia.org/wiki/Timeline_of_Malaysia_Airlines_Flight_370">Timeline of Malaysia Airlines Flight 370</a>.</li>
+    <li>AP via 6abc, <a href="https://6abc.com/post/investigators-cant-rule-out-interference-in-loss-of-mh370/3851642/">Investigators can't rule out “interference” in loss of MH370</a>, 30 July 2018.</li>
+    <li>AirlineRatings, <a href="https://www.airlineratings.com/articles/mh370-report-not-rule-unlawful-interference">MH370 report does not rule out “unlawful interference”</a>, 2018.</li>
+    <li>Malay Mail, <a href="https://www.malaymail.com/news/malaysia/2018/07/30/investigators-conclude-mh370-disappearance-still-a-mystery/1657429">Investigators conclude MH370 disappearance still a mystery</a>, 30 July 2018.</li>
+    <li>New Straits Times, <a href="https://www.nst.com.my/amp/news/nation/2016/09/173418/confirmed-debris-found-tanzania-mh370">Confirmed: Debris found in Tanzania is from MH370</a>, September 2016.</li>
+    <li>Anadolu Agency, <a href="https://aa.com.tr/en/asia-pacific/debris-found-in-mauritius-confirmed-from-flight-mh370/660259">Debris found in Mauritius confirmed from flight MH370</a>, 7 October 2016.</li>
+    <li>AirlineRatings, <a href="https://www.airlineratings.com/articles/mh370-debris-came-from-disparate-parts-of-the-plane">MH370 debris came from disparate parts of the plane</a>.</li>
+    <li>The Maritime Executive, <a href="https://maritime-executive.com/article/ocean-infinity-concludes-mh370-search">Ocean Infinity concludes MH370 search</a>, May 2018.</li>
+    <li>CBS News, <a href="https://www.cbsnews.com/news/mh370-missing-plane-search-resumes-indian-ocean-infinity-12-years-later/">Search for missing MH370 plane resumes in Indian Ocean</a>, December 2025.</li>
+    <li>Malay Mail, <a href="https://www.malaymail.com/news/malaysia/2026/03/08/new-mh370-search-in-southern-indian-ocean-yields-no-clues-says-transport-ministry/211805">New MH370 search yields no clues, says transport ministry</a>, 8 March 2026.</li>
+    <li>Malay Mail, <a href="https://www.malaymail.com/news/malaysia/2026/03/09/ocean-infinity-ends-latest-mh370-hunt-after-151-days-at-sea-mapping-140000-sq-km-with-no-new-clues/211959">Ocean Infinity ends latest MH370 hunt</a>, 9 March 2026.</li>
+    <li>New Straits Times, <a href="https://www.nst.com.my/amp/news/nation/2026/06/1475833/govt-extends-ocean-infinity-mh370-search-deal-another-year">Govt extends Ocean Infinity MH370 search deal for another year</a>, June 2026.</li>
+    <li>The Diplomat, <a href="https://thediplomat.com/2026/06/malaysia-extends-search-for-missing-malaysia-airlines-flight-mh370/">Malaysia extends search for missing flight MH370</a>, June 2026.</li>
+    <li>The Standard (Hong Kong), <a href="https://www.thestandard.com.hk/world/article/318793/Beijing-court-orders-compensation-for-MH370-flight-families">Beijing court orders compensation for MH370 flight families</a>, December 2025.</li>
+    <li>Kadri et al., <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11065988/">Underwater acoustic analysis … revisiting MH370</a>, Scientific Reports, 2024.</li>
+    <li>RTL-SDR, <a href="https://www.rtl-sdr.com/nils-critiques-the-mh370-wspr-aircraft-scatter-theory/">A critique of the MH370 WSPR aircraft scatter theory</a>.</li>
+  </ol>
+  <p class="colophon">Times are Malaysia Time (MYT, UTC+8) unless marked UTC. Map coastlines from Natural Earth. The flight track between published fixes, the handshake rings and the search areas are approximate reconstructions for illustration. No images on this page are AI-generated.</p>
+</section>
+
+</main>
+
+<script>
+/*MAPDATA:BEGIN*/
+window.MAPDATA = {"zoom":{"w":1000,"h":852,"s":4405.7539,"tx":-7327.902,"ty":898.1378,"land":"M291.3 854L289.3 845.4L279.6 818.8L269.1 783.1L261.9 767.3L253.6 754.7L251.1 751.9L214.3 729.3L208.2 726L201.6 724L192.2 722.5L184.7 716.8L181.9 706.3L180.3 692.3L178.3 683.9L176.4 679.2L160.9 669.2L155.1 661.4L150.1 652.7L145.4 646.1L128.5 623.1L122.7 617L115.5 612.8L94.5 608.3L88.1 604.5L77.8 591.3L71.8 584.7L53.2 570.1L21.6 539.3L15.3 531.6L10.3 523.6L6.4 515L-2 500L-2 467.8L-1.3 467.4L7.5 464.6L16.9 464.9L25.5 466.1L33.8 468.4L41.9 473.5L56 486.1L64.3 490.5L73.4 492.5L92 495.5L101.4 496.1L118.8 492L128.5 492.4L137.4 495.5L145.7 497.2L165.6 494.9L169.5 495.6L173.1 497.3L176.1 500L185.3 510.1L200.8 522.4L205.2 530.3L207.7 539.3L209.3 541.3L226.8 558.3L228.7 565.5L226.2 575.3L231.5 583.2L248.4 590.5L258.3 595.9L260.5 599.1L261.9 603L267.7 608.9L274.7 612.6L296.3 622.5L324.8 643.4L341.1 653.3L354.4 668.2L359.4 675.5L363.3 683.2L371.3 694.4L385.1 708.5L388.7 712.6L392.3 718.8L396.7 724.5L402 729.7L408.1 733.7L414.2 735.1L424.4 745.1L430 748.3L429.1 740.4L424.4 733.6L424.4 729.3L425.3 725.7L429.1 722.5L433.6 721.7L442.1 724.5L455.7 736.4L461.5 743.3L466 753L469.6 763L475.1 767.9L482.6 769.7L491.1 770.3L498.9 773.4L516.9 787.3L523 793.7L527.4 801.3L530.7 810.4L532.7 819.9L533.8 822L545.4 833.3L551.5 838.2L559 840.6L580.6 843.1L588.3 847.1L594.7 853.6L594.8 854L291.3 854ZM1002 49L997.7 52.2L990.3 53.3L984.2 55.1L977 68.9L964.8 70.6L943.2 81.8L936 87.3L929.4 89.4L919.9 94.2L918 92.4L914.7 88.4L906.7 86.3L902.5 81.8L901.4 76L900.3 73.7L898.6 77L897.2 90.8L895.9 93.9L892.3 95.3L885.3 91.3L879 83.3L869.6 88.9L872.3 89.6L876.8 89.2L880.1 90.5L882.8 95.8L882.6 98.8L881.2 102.2L872.3 102.7L860.7 101.5L858.8 101.9L869.3 107.2L879 110.2L883.4 113.5L883.4 116.2L877.9 120.5L873.7 125.9L873.4 129.3L873.4 133L868.7 136.2L865.7 135.6L857.4 130L833.6 107.9L837.2 114.1L862.1 139.2L866.2 147.5L867.1 153.3L864.3 156.1L860.1 159.7L852.1 159.9L838.6 150.6L817.2 128.2L810 125.3L831.6 150.7L835.2 157L838.8 164.1L837.7 168.3L835.8 172.4L784.6 195.9L776.8 206.2L770.7 218.8L760.8 225.6L755 232.1L737.8 235.6L728.4 234.6L738.1 222.9L732 218.6L731.7 188.7L734.2 156L738.6 139.6L745 135.6L753.3 133L753.3 129.6L752.5 125.5L748.3 120L743.3 117.4L736.4 116.3L730.9 109.4L726.7 109.7L720.1 112L716.2 109L714.8 104.4L708.7 98.7L702.1 93.1L689.3 82.9L664.4 79.4L661.7 74.9L659.2 74.1L657 79.9L643.1 85.5L637.3 82.1L633.2 78L633.7 73L637.9 68.9L644.5 65.9L647.8 55.6L642.6 42.4L638.1 38.6L633.2 35.5L628.2 40.5L624 48.8L619.6 53.2L613.2 54.1L604.1 53.9L600.5 41.2L599.4 30.5L600.5 18.2L601.9 11L593 0.9L592.8 -2L1002 -2ZM339.1 -2L332.8 10.7L327.8 30.2L324.2 39.2L322 55.8L306.5 80.8L302.9 94.9L297.4 100.3L299.3 104.5L299.6 111.6L297.6 130.4L297.1 146L299.3 154.4L306.8 170.9L305.1 175.8L304.3 182.5L310.4 185.6L315.1 186.6L340.3 178.7L348.9 180.8L352.2 188.1L354.4 194.4L358.5 228.7L360.8 235.2L366 241.3L371.6 247.6L373.5 246.6L373.8 244.1L374 241.4L379.3 247.9L383.2 260.1L396.5 324.2L400.3 332.4L403.4 340.9L395.4 336.7L393.1 322.6L390.9 316.5L387.9 315.7L383.5 315.7L383.2 313.3L386.5 308.6L385.9 303.1L381.2 298.5L373.8 302.1L374 312.1L377.4 319.8L390.1 336.9L394.3 344L399.2 346L406.7 344.9L415.6 352.2L422.5 358.9L439.9 369.3L450.4 368.2L461.8 365.6L469.3 366.3L476.7 369L485.6 377.6L500 399.2L523.3 417.2L536.5 420.2L541.5 422.6L556.5 446.5L576.1 463.4L584.4 469.6L590.8 472.7L599.7 481.6L607.4 492.9L624.3 524.7L627.1 538.7L628.4 560L624.6 592.2L620.1 608.1L621 615.7L627.1 627.2L625.4 638.2L626.5 647.3L626 672.5L629.6 679.9L633.7 684.7L654.7 699.7L656.4 705.1L666.6 724.2L686 765.6L691.3 784.2L690.7 789.3L688.5 791.3L682.7 793.2L678 789.6L676.3 786.9L676.9 783.7L675 780.5L670.5 776.7L667.8 773.3L668.6 778.9L668.6 786.2L662.8 786.9L655 784.6L645.6 786.6L634.5 795.7L629.3 796L625.1 788.2L622.9 783L619.6 779.3L584.4 760.3L571.4 755.4L557.6 741.1L526.6 725.2L506.9 709.7L498.6 700.2L478.4 691.6L469.8 681.7L465.4 679.7L461.2 676.1L465.7 666.5L463.7 656.4L461.5 647.8L447.4 630.9L440.5 619.2L426.9 607.5L421.7 600.7L416.7 593L419.7 590.1L422.8 588.5L420 582.8L412.5 572.9L408.9 561.5L408.9 540.1L398.1 509.8L388.7 467.8L390.4 453.1L387.9 437.1L381.8 421.8L373.8 410.8L370.7 401.8L351.6 377.9L338.3 368.1L340 350.3L336.1 346.8L331.1 346.5L327.3 341.6L330.6 330.9L325.3 333L318.1 332.5L312.3 329.7L307.9 315L304.8 310.6L298.8 302.8L290.7 302.8L288 299.2L288.5 289.7L282.7 283.9L274.9 279.1L268.6 276.4L261.9 261L256.7 257.2L252.2 254.3L246.2 256.3L244.2 261.8L240.1 267.1L235.6 266.4L231.2 263.4L226.2 248.1L225.1 238.7L226.5 221.3L232.9 205.6L236.5 180.6L242 164.8L245.6 159.5L251.1 138L261.9 110.3L258.3 111.3L251.1 122.5L247.8 116.8L245.9 111L248.1 97.7L243.7 72.5L246.4 69.1L248.9 67.3L253.9 57.7L259.7 48.1L260.3 36.6L265 28.3L263.9 21.2L264.1 12.9L265.3 6.2L264.7 0.6L266.5 -2L339.1 -2ZM462.9 668.2L459 669.6L459 667.6L459.6 664.8L462.4 662.1L463.7 663.7ZM1002 612.5L1001.1 614.2L990.5 617L984.4 613L991.1 608.2L993.3 607.8L995 606.9L995.5 604.9L983.6 601.7L980.3 598.8L977 591.6L977 587.1L992.2 574.9L995.8 573.5L996.3 578.6L1002 585.5L1002 612.5ZM844.9 655.3L844.6 660.5L839.4 657.4L838.3 651.5L840.2 649.7L843.8 650.7ZM804.5 677.9L801.2 678.1L800.4 675.9L800.6 672L800.1 668.8L799.2 666.5L799.2 662.5L802.3 664.5L804.5 666.4L807.3 667.7L809.2 668.5L810.3 669.2L808.4 674.8ZM492.8 738.3L497.2 744.5L498.1 748.7L495 753.4L493.9 760.6L484.8 766.2L477 764.8L474.5 762.8L469.6 751.9L470.1 742.7L473.1 739.1L480.3 739.6L487.8 734.5ZM548.2 822L544.6 824.4L540.4 820.7L536.8 815.5L535.2 810L533.5 800.9L532.9 794.5L535.2 790.8L536.5 790.9L542.9 794.6L547.1 801.2L549.6 803.2L549.8 809.2L548.4 816.1ZM553.2 785.9L553.7 795.8L548.2 793.2L543.5 789.3L536.5 786.3L527.7 785.4L521.3 782.9L516.9 778.3L516.9 776.2L517.2 774.5L518.5 773.1L551.5 782.1ZM594.4 840.7L593 843.6L590 841.5L575 838.2L570 837.9L557 834.1L553.2 832.3L550.4 829.7L551.2 825.1L553.2 822.3L554.3 814.4L557.6 811.2L563.9 817.1L571.1 822.1L575.3 824.4L588 829.5L592.5 832ZM605.2 831.2L602.7 833.5L598.8 832.9L595 830.3L589.4 825.6L583.6 821.5L575.9 818.8L571.1 818.1L569.5 817.1L571.1 809L576.1 808.5L592.2 816L597.4 820.1ZM603.3 854L604.1 848.7L606.6 844.3L610.5 844.4L614.9 851L614.4 854L603.3 854ZM624.8 817.5L625.4 821.7L620.1 820.7L616.5 815.7L619.6 812.3L621.5 810.9L623.5 815.7ZM626.8 847.1L625.4 848L618.8 838.3L620.4 832.7L622.1 831.2L625.7 834.7L628.4 838.3L630.7 842.6ZM655.9 836.5L656.4 838.8L649.5 834.3L649.2 831.1L650 829.6L654.2 833.1ZM671.1 807.3L676.1 810.6L679.9 808.5L679.7 811.3L678.8 814.1L674.1 822L666.4 820.3L664.4 817.7L663.9 815.7L665 814.5L665.8 810.6L669.1 810.6ZM714.3 804.6L714.5 810.4L719 813.2L720.1 817.5L719.2 824.3L715.4 832.1L713.4 834.1L707.9 832.5L706.2 830L705.4 827.9L706.2 826.4L702.1 824.5L704.9 821.6L702.9 817.3L691.8 820L688.5 820.1L688 815.3L688.5 813.3L697.1 807.3L702.1 806.1L707.6 807.4ZM687.7 834L682.7 836.3L676.6 829.2L676.9 827.6L677.4 826.4L678.6 825.6L682.2 829.2L686.6 830.5ZM191 854L183.6 852.3L183.3 848.8L177.2 834L166.4 825.7L162 825.3L159.2 816.9L153.7 806.8L137.1 788.5L149.8 788.6L155.9 784.2L157.3 780.6L158.4 779.7L167.8 785.4L184.7 807L191.3 810L200.5 819.9L202.7 823.2L200.2 830.1L198.3 849.8L194.7 854L191 854ZM156.7 738.5L156.2 740.3L148.2 732.1L139.3 727.6L142.9 726.5L150.4 727.7L153.4 728.9L156.2 732.9ZM89.7 716.6L84.8 717.3L80.3 715.7L76.5 711.3L55.7 698.5L49.3 698.3L44.9 695L39.4 693.9L33.6 685.4L32.2 680.7L36.6 678.5L39.1 673.9L46 675.9L53.8 684.2L61.8 687.2L64 688.8L67.9 693.4L86.1 704.7L88.1 708.5L89.5 712.4ZM-2 443.6L-1.1 443.8L4.8 445.4L5.3 448.1L5 450.4L3.4 452.5L-1.1 451.5L-2 450.1L-2 443.6ZM870.4 227.9L868.2 228.1L866.5 226.5L873.7 221.5L872.9 224.8L873.2 226.5ZM674.1 94.7L675.5 98.7L675 107.6L671.9 116.6L673 120.5L670.5 122.9L665.5 106.3L658.9 99.1L657.5 96.2L661.4 96.5L668 91.9L671.4 91.8ZM595.8 24.7L594.4 25.4L593 25.4L591.6 24.3L591.9 19.7L592.7 17L595.2 16.4ZM561.3 -2L560.6 2.1L556.5 -1.1L556.6 -2L561.3 -2ZM666.9 795.7L655.3 800.8L642.3 796.2L646.4 788.6L655.3 786.9L662.2 789.3L666.1 791L668.9 793.2ZM686.3 688L682.4 688.8L680.5 688.3L679.1 685.2L682.2 678.4L683.3 677.2L686.3 684.7ZM383.7 490.4L381.8 492.5L376.3 491.3L377.4 478.7L380.4 477.1L385.4 479.4L387.6 481.5ZM350 399.9L355.2 408.2L352.7 411.9L351.3 412.9L348 411.7L345 415L341.9 415.5L338.9 409.9L335.3 407.6L334.5 403.5L339.4 402.9L342.2 404.2L347.7 401.5ZM335.6 395.6L334.2 396L331.4 389.7L335 380.7L338.6 391.7ZM367.4 149L366.6 150.2L363.5 147.7L361.3 144.9L360.2 141.4L364.9 141.5L367.1 144.9ZM367.1 157.5L367.4 162L365.7 167.2L358.8 170.4L356.3 166.2L356.9 159.5L358 157.9L364.9 158.3ZM253.4 286.1L252.5 287.4L248.6 272.6L254.2 276.5ZM239.2 288.5L238.4 294.3L235.4 294.2L232 297.8L230.7 298.3L227.9 286.8L230.9 270.4L232.6 268L234.8 272.3L241.2 274.4L238.4 283.7ZM231.5 199.2L227.1 200.1L227.6 195.8L228.7 193.1L230.9 192.4L231.8 197ZM249.5 50L247.8 50.2L246.2 49.9L244.5 48.7L248.4 40.3ZM224 50.7L230.4 64.3L229.5 66.4L228.7 67.4L227.1 67L224.6 59.7L219.9 55.1L214 55.9L218.7 49.9L220.7 48.5ZM221.8 130.4L218.2 135L216.8 134.7L218.5 127.3L224.8 121.7L230.1 121.2L229.5 124.7L225.7 128.9ZM230 -2L229.5 0.5L228.2 5.9L224.8 9.5L224.6 11.3L224 11.3L222.1 10L223.2 2.5L225.5 -2L230 -2ZM249.2 -2L248.4 4.9L243.7 2.5L241.2 2.5L239.8 -2L249.2 -2ZM290.7 312.6L292.7 322L289.9 320L287.7 316L287.7 310.1L288.2 309.1ZM912.7 94.2L906.4 98.9L905.8 95L911.4 92.4L913.3 90.4L915 90.4ZM616.8 69.1L613.8 72.1L609.3 65.8L609.3 64.2Z","borders":"M702.1 93.1L705.1 92.3L708.7 89L712.6 85L722.3 84.4L732 84.6L734.5 83.5L738.3 79.1L744.7 73.6L749.7 70.4L750.8 67.9L748.9 62L747.8 55.9L749.7 54L758.3 55.1L768 57.9L770.2 59.2L775.7 51.7L777.4 50.9L781 50.9L790.4 49.5L799.8 47.5L804.2 47.9L808.4 52.9L811.7 57.8L813.4 58.1L818.1 56L822.2 58.6L830.5 63L835.5 63.1L833 53.2L835.8 46.1L835.2 44.2L830.5 40.9L814.8 27.9L812 23.9L812.3 17.8L811.7 8.8L810.3 3.2L810.6 0L811.2 -2M261.9 110.3L263 104.5L265.3 97.9L266.9 91.6L267.5 81.7L266.1 76.5L266.1 73.6L268.3 69.9L276.1 63.6L286.6 53.3L299.3 38.8L312.3 16.6L318.7 3.6L321.4 -1L323.5 -2M523.3 417.2L520.8 421.7L519.7 428.4L510.5 437.5L509.1 442.7L505.5 449.5L499.2 452.9L493.9 453.6L490.6 453.1L488.4 451.7L484.8 445.4L482.8 443.6L481.2 443L469.6 447.4L458.2 452.1L456.3 456.6L453.2 461.5L449.9 463.5L447.1 463.9L444.6 461L440.5 457.2L437.2 453.6L438 447.8L444.4 439.3L445.2 433.4L444.4 423L442.7 417.1L440.8 417L437.7 416L428.9 417L424.4 410.3L422.5 403L419.7 400.3L416.7 398.7L410 401.3L405.1 399.8L388.2 393.3L381.8 383.1L378.2 382.8L375.2 383.9L374 386.3L372.1 398.2L370.7 401.8"},"wide":{"w":1000,"h":737,"s":550.8344,"tx":-172.9712,"ty":237.7923,"land":"M1002 585.5L1001.4 585.6L1000.5 584.3L999.4 584.1L997.3 584.1L994.2 583.7L988.5 584.2L985.8 584.8L984.7 585.3L982.7 585L979.3 585.4L978.1 586.2L977.2 586.9L975.4 590L973.5 591L971.9 591.1L970.1 591.3L966.5 594.3L962.8 597.2L961.5 597.5L960.2 598L958.4 598.3L957.5 598.5L953.2 597.8L950.6 597.7L947.2 597.3L944.3 595.8L942.1 595L939.6 591.9L938.1 590.7L935.3 589.3L934.5 589.3L933.8 589.7L932.7 588.7L932.7 587.4L932.4 586.3L932.4 583.5L932.6 580.1L933.6 580.9L934.4 581.6L936.1 581.6L937.6 580.3L938.5 578.5L939.2 576.4L939.1 574.2L938.6 570.4L938.9 569.6L939.4 569.3L939.6 567.4L939.7 561.5L939.4 559.4L937 554.9L935.4 551.1L934.3 549.4L933.4 546.6L932.6 542.8L932.3 540.8L932.1 537.3L932.4 535.3L932.2 534.1L931.3 530.9L929 527.9L928.7 526.8L928.7 525.7L928.2 524.3L926.4 521.6L924.6 519.3L924.3 518.1L924 513.4L923.3 511.3L920.2 505.9L916.6 501.3L915.6 499.4L915.2 498.7L915.4 498.7L915.8 498.9L916.3 499.4L916.5 499.4L916.7 499L916.7 498.2L916.8 497.7L917.1 497.9L917.5 498.9L918.7 501.5L919 502.8L920.5 503.2L920.9 502.8L921.4 502.2L921.6 500.4L920.9 499.5L920.2 499.2L919.1 497.9L918.3 495.7L917.2 493.7L917.2 493L917.7 492.5L918.6 492.8L919.4 493.9L920.2 495L920.1 496.9L920 497.4L920 497.8L920.4 498.2L920.8 498.5L921.2 498L921.6 497L921.8 497.1L922.5 499.6L922.9 500.2L923.9 501L924.7 500.4L925.1 499.9L925 498.2L925.2 496.5L925.1 495.2L922.9 491.9L921 487.9L919.8 485.9L918.9 482.9L918.2 481.9L917.4 480.2L917.4 478.3L917.4 477L918.1 474.2L918.7 472.8L920.7 469.5L920.8 468.1L920.8 467L921 465.4L921 464.2L920.8 463.1L920 461.3L921 458.1L922.6 454.1L923.2 453.5L924.2 452.9L924.4 453.8L923.9 456.6L924.6 458L924.4 459.7L925 459.4L925.9 459.1L926.6 458.2L927 457.4L928.8 454.1L929.8 452.9L931.3 452L934.2 450.9L937 449.4L938.3 448L940 446.9L941.2 445.6L942.3 444.7L948.1 441.4L949 440.8L950.3 440.7L951.8 440.8L953.2 440.7L954.7 441.4L955.8 441.5L958.4 440.7L959.8 440L962.3 438.4L963.4 437.9L965.9 437.4L968.7 436.8L972.1 434L974.5 434.2L976.7 434.5L978.5 433.7L982.6 433.2L984.9 432.5L989.2 430.7L990.3 430.1L992 428.8L993.6 427.1L995 425L996 423L996.4 422L997.3 420.4L997.8 419.2L998.3 418.6L1000 417.7L1002 415.8L1002 585.5ZM1002 412.3L1001.8 410.9L1001.3 409.2L1001.3 408L1001.5 406.8L1002 405.9L1002 412.3ZM954.9 156.4L954 157.1L954.1 156.2L954.3 155.4L955.2 153.7L955.9 153.2L956.9 151.9L957.6 151.2L959 149.9L960.4 148.6L960.8 148.5L961.3 148.4L961.7 148.3L962.6 147.5L964.8 145L966.6 143.2L968.5 140.8L969.4 140.1L969.6 139.9L971.3 137.7L971.9 137.4L972.4 137.2L972.9 136.9L973.2 136.5L973.8 135.5L974.1 134.4L973.9 133.8L973.6 132.9L974 131.6L974.3 131.1L975.6 128.5L975.9 128L976.4 128.3L976.5 128.8L976.2 129.9L976.2 130.4L976.5 130.9L976.1 131.8L977 134.3L977.7 135.8L977.7 136.3L976.8 137.2L976.3 137.4L975.1 137.7L974.6 138L973.8 138.7L973.3 139.7L973.2 140.2L972.9 140.6L970.6 141.2L969.5 141.7L969 142L968.7 142.5L968.9 143.4L966.9 146.8L966.3 147.7L965.7 148.4L964.8 148.9L963.7 149.3L962.7 149.9L962.1 151.1L961.4 152.1L960.4 152.9L959.4 153.5L958.4 154.1L957.3 154.4L957 154.8L956.8 155.4L956.3 155.7L955.8 155.8ZM1002 135L1001.8 135.1L1001 135.5L1000.4 136.1L999.8 136.7L999.5 136.8L999.3 136.6L999.3 136.3L999.7 134.9L999.6 134.3L999.4 133.8L999.6 132.6L1000.1 131.6L1000.4 130.4L1000.5 128.2L1000.9 125.1L1000.9 124.7L1000.6 124.3L999.4 123.9L998.9 123.6L999.1 123L999.6 122.6L1000.2 122.6L1000.8 123L1002 123.5L1002 135ZM987.5 107L987.9 107.1L989.5 106.8L990.1 106.9L990.5 107.5L991.1 107.7L991.5 108L992.3 107.5L993 108L993.7 109.1L994.6 109.9L995.3 110.4L995.5 110.9L995 111.5L994.9 112.4L994.9 113.3L995.5 115.3L995.3 115.8L994.7 116.6L994.3 117.4L994.3 117.7L994.1 118L994.1 118.6L993.7 118.5L993.4 118.6L993.1 118.9L992.6 119.4L991.8 119.3L991.4 119.1L991.3 118.6L991.1 118.2L990.8 118L990 117.2L989.6 116.5L989.5 115.9L989.3 115.2L988.9 114.7L988.4 114.2L988.2 113.8L988.1 113.3L988 112L987.2 110.4L986.9 110L986.2 109.7L985.6 109.2L985.3 108.7L985.1 107.8L984.9 107.7L984.4 107.8L984 107.6L984.1 107L984.6 106.6L985.2 106.6L987 106.8ZM1002 322.1L1001.7 322L1000.8 322.2L998.4 323.3L997.4 323.4L996.6 323.7L996.3 323.2L995.9 322.9L995.1 322.9L994.3 322.9L993.4 323.9L992.1 323.6L991.6 323.8L991.1 324L990.6 324L990.1 324L988.2 323.2L986 322.8L983.8 322.9L981.9 322.5L980.8 322.8L979.8 323.3L979.5 322.8L979.2 322.4L978.8 321.7L978.8 321L978.9 320.5L979.2 320L979.4 319.5L979.5 319L979.9 319.3L980.3 319.2L981.6 318.6L982.9 317.8L984.1 317.5L984.8 317.4L985.3 317.5L985.9 317.5L986.6 317.3L987.5 317.9L987.9 318.1L989.2 318.1L990.4 318.5L991.4 319.1L993 319.6L993.9 320.3L994.6 320.6L995.1 320.6L995.6 320.5L996.2 320.1L996.9 319.9L997.5 319.9L998.6 319.7L999.1 319.6L999.6 319.4L1000.1 319.5L1000.6 319.8L1002 320.7L1002 322.1ZM980.8 328.3L981.3 328.8L982.8 329.6L983.1 330L983.2 330.5L983.5 331L984.2 331.1L985 331L985.5 331.2L986 331.7L986.8 332.5L987.4 333.5L988.2 334L988.7 334.8L988.4 335.5L987.4 336.4L986.8 336.6L986.1 336.7L984.9 337.3L984.5 337L983.1 336.8L982.1 336.4L981.2 335.6L980.7 334.8L980 334.1L978.9 333.6L976.9 332.2L975.6 332.1L975.1 332.2L974.6 332.2L971.9 331.6L971.5 331.2L971.2 330.7L970.8 330.3L970.7 329.7L971 329.3L971.4 329L972.9 328.4L973.9 328.2L975.1 328.3L977 328.1L978.7 328.4L979.3 328.2L980.1 327.6L980.4 327.8ZM963.8 318L964.3 318.4L964.7 318.4L965.6 317.8L966.2 317.6L966.8 317.6L967.4 317.7L967.9 318.1L968.1 318.8L968.3 319L968.7 318.2L969.1 317.9L969.6 317.8L970.4 317.8L971 318.2L971.5 319.4L971.5 320.4L971.7 320.8L972.1 321.1L972.3 321.5L972.1 321.9L971.9 322L971.1 322.2L970.8 322.2L970.5 321.9L970.2 321.8L969.4 321.9L968.6 322.1L968.7 322.5L969.3 322.6L969.5 322.8L969.5 323.1L969.2 323.1L968.5 322.8L967.9 322.8L966.1 323.3L965.6 323.3L965.3 322.9L965.3 321.8L965.1 321.5L963.7 322.8L963.3 323.1L962.7 323.3L962.2 323.2L960.1 324L959.5 323.9L958.9 323.9L956.7 324.7L955.6 325L955 325L954.4 324.9L953.9 325L953.4 325.4L952.4 325.6L951.5 325.4L950.6 325.1L949.8 324.7L949.6 324.2L949.7 323.6L950 322.8L949.8 321.4L949.9 320.8L950.3 320.1L950.8 319.9L951.4 319.9L952.5 319.3L953.4 318.5L954 318.6L955.3 319.1L956 319.2L957.3 319.1L957.8 319.4L958 320.2L958.3 320.4L958.7 320.6L959.6 321.9L960.4 321.8L961.2 322L962.5 321.3L963.4 321.3L963.7 320.7L963.1 320.1L962.4 319.6L962.1 319.5L961.6 319.5L961.3 319.4L959.7 318.3L959.2 317.7L958.9 316.9L959.1 316.4L960.2 315.9L960.7 315.8L962.6 316.1L962.9 316.4L963.4 317.6ZM948.4 320.9L947.2 322.9L947.6 323.3L947.9 323.6L945.9 324L945 323.8L944.5 323.8L942.5 323.4L941 323L940.9 322.6L941 322.2L941.4 322.3L942.5 322.4L943 322.2L943 320.9L942.8 319.2L944.3 317.8L945.2 317.3L946.1 316.9L948.5 317.7L948.8 317.9L949.1 318.2L949.3 318.7ZM936.9 316.5L937.9 317L939.3 318.5L939.4 318.9L939 319.3L938 320L935.8 320.9L935.5 321.4L935 322.3L934.9 322.7L934.7 322.9L934.5 323.1L934 323.2L933.5 323L934 322.4L934 321.7L933.6 321.1L933.2 320.5L932.2 319.8L931.1 319.1L930 318.8L928.9 318.6L928.5 318.3L927.8 317.5L927.6 317L927.5 316.6L927.6 316.1L927.9 316.1L929 316.2L931 316.7L932 316.8L932.6 316.6L934.1 315.6L934.5 315.6L935.9 316.1ZM846.5 253.8L846.9 254.5L847.3 255.1L847.7 255.7L848.1 258.8L849.6 261.5L854 262.5L853.2 263L852.9 263.3L852.6 263.8L852 265.6L852 266L852.4 266.7L852.5 267.3L852 267.3L851.4 267.2L850.9 266.9L850.4 266.6L849.9 266.3L849.4 266.2L848.5 265.6L847.3 265.3L846.1 265L845.5 264.2L845.2 263.2L845.5 261.8L845.2 261.4L844.8 261L844.2 260L844 258.8L843.3 258.3L842.2 258L841.8 257.8L839.8 258.2L839.3 258.1L838.9 257.8L837.8 257.4L837.8 256.8L838.3 256.2L839.5 255.7L840.1 255.2L840.2 254.6L840 254.2L840.1 253.7L840.5 253.3L840.9 252.9L842.1 252.5L842.7 253.3L842.9 253.9L843.2 254.4L843.7 253.7L843.4 252.5L844.3 252.3L845.2 252.3L845.9 252.6L846.4 253.1ZM1002 169.4L1001.6 170.3L1001.3 170.8L1000.9 171.2L1000.2 171L999.6 170.6L999 169.6L999.2 168.4L999.9 167.6L1000.4 166.8L1001 163.9L1001.1 162.9L1001.2 162.5L1002 161.5L1002 169.4ZM1002 60.4L1001.7 61.2L1001.4 64.3L1001.4 65.2L1001.6 66.1L1002 67L1002 78.4L1001.2 80.1L999.7 80.4L997.9 81.2L996.9 81.8L996 82.6L995.7 83.7L996 84.2L996.1 84.7L996.1 85.2L995.9 85.7L995 86.8L994.7 87.8L994.3 88.2L994.1 88.7L994.1 89.2L994.5 89.8L995.5 91.9L996.7 94L996.9 94.2L997 94.5L996.3 95.1L996.4 96.1L996.5 97.1L997.5 99.5L997.7 100.2L998 100.7L998.5 101.2L999.1 101.6L1000.7 102.4L1001.3 102.5L1002 102.5L1002 102.4L1002 105.4L1001.9 105.3L1000.6 103.9L997.8 102.5L997.5 102.4L996.9 102.5L996.5 102.7L995.1 103.4L994.6 103.9L994.6 104.7L993.6 105.3L992.3 105.4L991.2 105L990.4 104.2L989.6 104.2L988.8 103L987.7 102.8L986.8 103.8L986.6 101.9L986.6 100L986.9 99.4L987.3 98.9L989.6 97L989.8 96.3L989.7 95.4L989.2 94.7L988.4 94.3L987.5 94.1L986.8 93.7L986.3 93.1L985.9 94.2L986.3 95.9L986.4 97.1L986 97.5L985.5 97.5L984.9 97.3L984.5 97L984.2 95.8L983.4 95.1L983.1 94L982.8 93.8L982 93.9L981.5 93.4L981.1 92.1L981.1 90.8L980.7 89.6L980.3 88.5L980.1 87.6L979.6 83.5L979.6 83.2L979.4 82.9L978.8 82.4L978.5 81.8L978.4 81.4L978.5 79.4L978.7 78.9L979 78.7L979.6 79.1L980 79.5L980.5 79.8L981 80.1L981.9 81.3L982.2 81.4L983.3 81.4L983.9 81.3L984.2 80.8L984.4 80.3L984.4 79.7L983.8 77.9L983.6 76.6L983.6 75.5L983.8 74.3L984.6 72.3L984.7 71L984.7 69.2L984.8 68.1L984.8 67.5L984.3 66.5L984.1 65.5L985.6 60.2L986 59.2L986.3 58.1L986.5 56.7L987.5 56.3L988.5 55.7L989.1 55.8L989.6 55.9L990.8 55.6L991.3 55.6L992.8 56.1L996 58L997.2 58.5L998.4 58.8L999.4 58.9L1000.3 58.5L1000.6 58.1L1001.3 56.9L1002 56.8L1002 60.4ZM1002 100.9L1001.9 100.7L1001.9 100.4L1002 100.3L1002 100.9ZM1002 233.2L1000.5 233.3L998.4 233.6L997.3 233.5L996.1 233.1L995.3 233L994.4 233L990.4 233.5L989.4 233.5L987.4 232.8L986.2 232.7L985.1 232.9L984 233.5L983.7 233.9L982.5 235.2L981.9 236.2L981.4 237.4L981.1 238.7L980.8 239.7L980.8 240.7L981 241.9L981.3 243.1L981.6 244L983 246.1L983.3 246.4L984.8 247L985.7 247.8L986.5 249.9L987.1 251L987.7 251L988.4 250.9L989.5 251L990.6 251.3L991.8 250.7L992.3 249.5L993 248.5L994.5 246.8L995.3 246L995.8 245.8L996.4 245.9L996.8 246.3L997.4 246.7L998.5 246.9L999.6 246.8L1000.8 246.2L1001.2 245.9L1001.6 245.4L1002 245.3L1002 252.9L1001.4 253.1L998.6 254.1L997.8 254.8L997.2 255.7L996.6 256L995.8 256.1L995.2 255.9L994.1 255.4L993.7 255.8L993.7 256.5L994.2 256.7L995.1 257.5L995.8 258.5L996.3 258.7L997.3 259L997.7 259.3L998.5 260.2L999.6 262.2L1000.1 263.3L1000.7 264.2L1002 265.2L1002 281L1001.9 281.1L1001 281.5L1000.4 282.3L1000.4 282.8L1000.6 283.9L1000.3 284.3L999.1 284.5L997.5 284.2L996.5 283.9L996 283.6L995.2 282.8L995 281.9L995.5 279L995.7 278.6L995.9 278.3L996.2 277.8L996.3 277.2L995.5 276.4L994.3 276.1L993.3 275.5L989.5 272L989.3 271.7L989.3 271.1L989.4 270.5L990.7 268.6L990.8 268.3L991 266.7L991 265.5L990.8 264.2L990.2 263.5L989.2 263.2L988 263.2L987 263.4L985.9 264.1L984 265.4L983.2 266.2L983.1 267.2L983.6 268.1L984.2 269L984.4 270L984.9 273.5L984.9 273.8L984.4 274.8L984.2 277.1L984.4 280.3L984.7 282.2L984.6 283.3L983.7 285.6L983.4 286.8L983.4 287.3L984.4 289.7L984.7 290.7L984.8 291.6L983.7 291.2L983.2 291.2L982.6 291.3L981.4 291.5L980.2 291.5L979.8 291.7L978.9 292.3L978.4 292.6L978 292.6L976.5 291.8L975.5 291L974.7 290L974.6 289L974.8 287.9L975.2 286.7L976.1 284.7L976 283.4L976.3 282.4L976.8 281.3L977 280.4L977.1 276.6L977 276.3L975.8 274L975.7 273.7L975.7 273.1L975.8 272.5L975.8 272L975.6 271.6L975.1 271.2L974.6 271.1L973.4 271.2L971 271.8L970.3 271.3L969.8 270.5L969.5 269.3L969.3 268.2L969.4 267L969.7 266L969.4 265.2L969 264.4L969 264L969.3 263.6L969.7 263.3L970.2 263.1L970.7 262.8L972 261.7L972.4 260.7L972.4 259.5L972.8 258.4L973.4 257.3L974.2 256.3L974.4 255.3L974 253.7L974.2 253L974.1 252.2L974.1 251.3L974.5 249.8L976 246.5L977.4 244.8L977.9 244.3L978.6 245.1L979.2 246.1L979.2 245.2L979 244.4L978.5 242.4L978 238.6L978.1 238.3L978.6 238.3L979.2 238L979.4 237.4L978.9 236L978.9 235.5L979.8 233.5L980.7 232.8L981 232.3L981.2 231.1L981.6 230.7L982.2 230.3L982.9 229.5L983.3 228.5L983.5 228.4L983.8 228.3L984.2 229.3L984.7 229.6L985.7 229.9L986.5 229.6L986.7 229.1L987 228.7L987.5 228.3L987.9 227.8L988.4 226.7L989.1 225.8L989.5 225.4L990 225.2L990.5 225.1L991.1 225L992.3 225.7L993 225.8L993.7 225.7L994.2 225.8L994.6 226.1L994.9 226.7L995.2 227.2L995.6 227.4L996 227.5L998.6 227.3L1001 227.9L1002 227.9L1002 233.2ZM859.3 295.7L860.3 296.8L861.1 297.4L862.1 297.7L863.2 297.7L864.2 297.8L865.4 298.3L866.6 298.4L867.2 298.4L867.8 298.2L868.2 298.1L868.5 298.3L869.4 299.3L870.3 300.1L870.5 300.6L871.1 302.6L871.8 303.2L872.8 303.4L874 303.4L875.1 303.5L877.8 304L878.8 303.9L879.8 303.4L880.6 303.7L882.8 304.3L883.9 304.4L885.2 304.3L886.5 304.2L887.1 304.4L887.6 304.7L888.1 304.8L888.6 304.7L889.5 304.3L890.2 303.4L890.7 302.3L891 301.1L891.3 300.6L891.6 300.2L892.1 299.9L892.6 299.7L893.9 299.8L894.2 300.1L895.6 302.1L895.9 302.2L897.5 302.4L897.9 302.3L898.8 301.9L899.4 301.9L900.3 302.3L900.8 302.8L901.2 303.1L903.7 303.4L904.6 304.2L905.1 304.3L906.8 304.2L908 304.3L909 304.5L909.4 305.8L909.8 307L910 307.4L911 307.8L911.4 308.2L911.3 309.4L911.4 310.6L913.5 311.6L915.8 312.2L918.2 312.3L920.6 312.1L921.8 311.8L923.4 311.4L923.7 311.4L926.7 312.7L927 312.9L927.3 313.9L927.3 315L926.7 317.5L926.7 318.2L926.7 318.9L927.3 320.4L927.7 320.8L928.7 321.6L928.8 322L928.6 322.4L927.4 322.1L926.7 321.8L926.3 321.3L925.7 320.9L924.5 321L922.4 320.5L920 319.6L915.8 317.7L914.7 317.8L913.6 318L912.4 318.5L911.2 318.8L910.3 318.9L909.4 318.8L907.2 318.4L904.9 318.1L899.1 317.9L897.4 317.5L894.7 317.3L892.5 316.9L890.4 316.4L884.9 313.9L883.1 313.3L877.6 312.1L876.8 312L874.8 312.1L873.6 311.7L872.4 311.7L870.8 312.1L870.3 312.4L869.7 313L868.5 313L867.4 312.8L864.5 312.3L863.5 311.9L862.4 311.4L861.4 310.7L861 310.5L858.5 309.8L856.4 309.6L852.2 309.3L851.2 309.1L850.5 308.8L850.1 308.3L850.1 307.6L850.4 307L850.8 306.4L851.1 305.8L848 304.6L845.6 303.9L844.5 303.8L843.4 303.8L842.3 303.9L841.1 303.8L840.5 303.7L840 303.6L839.4 303.7L838.9 303.7L838.8 303.1L839.1 302.6L839.7 302.1L840.1 302L840.2 302.8L840.4 303L840.9 303.2L841.1 303.1L842.1 302.1L842.3 301.5L842.8 300.1L843.3 300.4L843.8 300.2L844 300L844.8 296.7L845.5 295.7L846.4 295L846.8 294.7L847.7 295.2L849.5 295.4L850.5 295.8L851.6 295.8L852.6 296L854 296.5L854.6 296.5L855 296.3L855.8 295.7L856.1 294.6L857.3 295.2L858.9 295.4ZM754.7 187.4L755.9 187.5L758.1 187L759.3 187.1L760.4 187.4L761.4 187.7L763.9 187.4L764.4 187.5L764.8 187.7L765.2 188L766.4 189.3L768.3 190.8L768.9 191.8L769.2 192.9L769.4 193.2L771.6 195.3L771.8 196.2L771.5 197.4L772.1 198.4L774.3 199.3L775.5 200L775.8 200.4L776 200.9L776.7 201.6L777.5 202.1L780.2 203.3L783.8 205.9L785.9 207.2L787.5 209.1L788.1 210L788.6 210.9L789.6 212.3L791.4 214.1L791.8 214.6L792.3 215.4L792.8 216.1L793.5 216.7L794.2 217.2L795 217.4L796.3 218.7L797 219.1L796.9 218.1L796.3 217.2L796.3 216.7L796.4 216.2L796.9 215.8L797.4 215.7L798.5 216.1L800.2 217.6L800.9 218.4L801.5 219.6L801.9 220.9L802.6 221.5L803.5 221.7L804.6 221.8L805.6 222.2L807.8 223.9L808.6 224.7L809.1 225.7L809.6 226.8L809.8 228L809.9 228.3L811.4 229.7L812.2 230.3L813.1 230.6L815.8 230.9L816.8 231.4L817.6 232.2L817.9 233.1L817.3 233.8L815.2 234.9L812.9 235.7L815.1 235.4L816.2 235.1L817.3 234.6L818.3 233.9L819.9 233L820.5 232.8L821.2 232.9L821.8 233.2L822.8 234.1L823.7 235L824.4 236.1L824.8 237.3L824.1 238L822.9 238.5L821.4 239.6L821.2 240.1L821.5 240.4L821.2 241.3L822 241.8L822.2 242.3L821.4 242.9L821.5 243.3L822.4 245L822.8 245.4L824.2 246.3L826.3 247.2L827.5 247.6L828.8 247.9L829.4 247.9L830.3 247.8L830.5 248.1L831 249.8L831.2 250.9L831.5 253.2L831.9 254.1L831.8 255.3L832.3 256.3L833.4 256.9L834.5 257.4L835 257.9L835 258.7L834.8 259.3L834.4 259.7L833.3 260.7L833.1 261.2L832.9 262.2L833.1 262.7L833.6 262.8L833.9 262.5L835.3 261.1L835.7 260.8L836.2 260.6L836.7 260.5L839.2 260.5L840.3 260.7L841.2 261.2L842.1 261.8L845.1 265.6L846.5 267.7L846.6 268.2L846.7 268.7L846.4 269.2L845.1 270.6L845 271L844.6 272.6L844.7 273.7L845.1 274.2L845.4 274.7L845.4 275.1L844.6 277.5L844.5 277.8L845 281.6L845 282.6L844.9 283.9L845 286L844.3 292.5L844.2 292.8L843.7 293.8L843 293.8L842.4 293.6L842 293.3L841.8 292.8L841.5 292.4L839.8 291.2L839.4 291.4L837.7 292.9L837.3 293.1L836.7 292.9L835.8 292.5L833 290.9L832.9 291.4L832.8 292.1L833.4 293.8L833.4 294.5L832.9 294.7L832.6 294.7L831.5 293.7L830.4 292.6L829.2 291.1L828.3 290.4L827.5 289.7L825.2 286.7L824.7 286.2L821.2 284.2L820.5 283.7L819.6 282.8L818.6 282L816.5 280.8L812.8 277.7L811.2 276L809.5 273.1L808.9 272.4L805.9 270.3L804.3 269L803.6 268.3L802 265.7L801.5 264.8L801 264L800 263.4L799.2 262.7L797.5 260.3L797 259.4L796.6 258.4L796.7 256.4L793.1 250.3L792.2 248.4L791.4 245.7L791.2 245.5L789.2 243.1L788.6 242.4L787.8 241.6L787.1 240.8L785.8 238.1L785.2 237.4L784.5 236.8L782 235.8L781.1 235.2L780.3 234.4L779.9 233.4L779.4 231.2L778.2 227.9L776.9 223.4L776 221.4L774.9 219.9L774.6 219.5L770 216.7L769.2 216.3L768.4 216L767.2 215.8L766.3 215.1L766 213.8L765.7 212.1L765.5 211L765.3 210.4L763.3 209.2L762.6 208.2L762 207.1L761.4 206.3L759.3 203.4L758.5 202.6L757.6 202.1L755 201.6L754.2 201.1L752.9 199.4L752.2 198.6L749.9 196.8L745.9 192.9L745.1 192L744.5 191L744 189.9L742.3 186.9L742.5 186.3L742.7 185.7L742.7 185.2L742.5 184.7L742.5 184.2L743 183.9L744.1 183.6L745.3 183.6L746.4 183.8L747.4 184.1L748.4 184.7L750.2 186.3L751.2 186.8L752.4 187.1ZM950 173.3L949.8 174.1L950 174.1L951 173.6L952 172.3L952.6 171.1L953.1 170.6L954.1 170.9L954.3 171.1L954.2 171.9L954.3 172.4L954.7 173.5L955.5 174.1L956.7 174.5L957.7 175L958.1 175.4L958.3 175.9L958.5 176.6L958.5 177.4L957.8 178.1L958.1 179.3L958 180L957.8 180.6L956.7 181.1L959.7 180.6L960.5 180.3L961.5 179.5L962.1 180.2L962.6 181.3L962.2 181.6L960.8 182.1L960.8 182.2L961.2 182.8L961.8 182.8L962.9 182.4L963.9 181.7L964.3 181.7L964.9 181.9L965.9 182.3L966.4 182.6L966.9 183.1L967.2 183.9L968.3 184.3L970.7 185.5L971.1 185.6L971.6 185.7L972.8 185.5L973.2 185.7L973.5 186.1L973.7 186.7L973.6 187.3L973.5 187.7L973.2 188.1L972.3 188.7L970.2 189.4L967.9 190L966.8 190L965.1 189.5L964.5 189.5L964 189.8L963.2 191.3L964.6 192.9L966.9 194.5L967.2 194.9L967.1 195.4L966.7 195.7L966.2 195.8L965 196.1L963.6 196.3L962.6 196.5L961.5 196.9L960.5 196.8L959 196.1L958.6 196L958.1 196.4L957.7 197.4L957.3 197.7L956.6 198L956.3 198.6L957.2 199.4L957.3 200L958 200.5L958.8 201.3L958.9 201.5L959.2 201.9L959.3 202.3L958.7 202.7L957.9 202.8L957.3 202.4L956.8 201.9L956.6 202.5L956.2 202.9L954.6 202.8L953.5 202.8L952.4 202.9L953 203L953.4 203.2L955.2 204.8L955.5 205.4L955 206.6L955.2 207.1L955.9 207.3L956.7 207.9L957.3 208L957.7 208.3L957.7 208.9L958 209.4L957.3 209.6L958 209.8L958.6 210L958.2 210.3L958 210.6L958.2 210.8L959 211.1L959.4 211.4L959.6 212.1L960.4 213.3L961.8 214.9L962.1 215.5L962.1 216L961.9 216.5L961.1 217L960.4 217.7L960.3 218L959.4 218.3L959.8 218.5L960.2 218.9L960.8 219.8L962.2 221.4L963 222L966 224.2L967.6 225.1L969.7 227.3L970.7 227.8L971 228.4L970.1 229.3L968.7 229.7L966.6 230L964.4 229.6L963.3 229.4L962.4 228.9L961.6 227.8L960.6 227.2L961 227.9L961.3 228.5L961.1 229.2L960.7 229.8L960 230.2L959.3 230.5L959 230.8L957.2 234.5L956.9 235.5L956.3 239.7L956.3 240.9L957.1 243.1L957.2 244.3L957.4 244.8L957.2 245.2L956.9 245.4L955.3 246.1L954.2 246.7L953.3 247.5L952.5 248.5L951.9 249.2L951 249.6L950.4 249.5L949.9 249.2L949.6 248.5L949.4 247.8L949.2 248.4L949.3 248.9L949.5 249.4L949.7 250L949.5 250.6L949.1 251L948.1 251.5L947.6 252L947.5 252.7L947.2 253.2L946.8 253.5L945.4 254.3L945.1 254.6L944.9 255L945.7 254.9L946.3 255L946.4 255.7L946.6 256.3L946.3 257.5L945.3 258.4L945.8 258.6L946.3 258.8L947.3 259L947.7 259.9L947.5 261L947.3 261.9L946.6 262.2L946.1 262L945.6 262L945.3 262.3L945.2 262.8L945.9 262.6L945.8 263.8L945.7 265L945.4 265.7L945 266.3L944.4 266.4L943.9 266L943.7 266.5L943.9 266.9L944.7 267.9L944.2 268.1L943.9 268.4L943.7 268.9L942.8 270L942.4 270.8L942.2 271.7L941.8 272.4L935.1 275.4L929.7 277.9L929.3 277.7L929 277.4L928.8 273.4L928.2 271.4L928.1 270.3L927.3 271.3L926.8 271.2L926.3 270.9L925.9 270.6L925.9 270.2L926.3 268.9L925.8 269.6L925.3 270.1L924.7 270.1L924.2 269.8L924.1 269.4L923.8 269.3L922.6 270.5L921 271L920.2 271L919.5 270.7L919.5 269.8L919.5 269L919.3 268.5L918.8 268.4L918.4 268.4L917.3 268.8L916.9 268.8L916.7 269L913.7 266L913.1 268.4L911.1 269.7L909.6 270.5L908.1 270.2L906.5 269.7L905 270.3L903.4 271.8L902.9 272L902.4 272L902.1 271.8L902.2 270.7L902.2 269.6L902.1 267.2L901.9 266.7L901.5 266.1L900.9 265.6L900.5 265.9L900.2 266.4L898.9 266.4L897.7 266L896.7 266.2L894.6 267.2L893.5 267.3L892.9 267.1L892.5 266.6L892.7 266.1L893.2 265.8L892.4 266.1L891.6 266.5L891.3 266.9L891 266.7L890.1 265.6L888.2 266L887.9 266.1L887.5 266.5L887 266.3L886.8 265.9L886.7 263.6L885.7 259.3L885.5 257L885.3 256.5L884.2 255.7L884.2 254.5L884.8 253.6L884.9 252.5L884.7 251.2L884.4 250.1L884 249.2L883.4 248.4L882.5 247.5L881.5 246.9L879.3 246.1L878.2 246.2L877.7 245.9L877.4 245.5L877.5 244.8L878 244.3L878.5 244.2L878.5 243.9L877.4 243.3L876.5 242.5L876.2 242.1L876.1 241.6L876.1 240.3L876.4 239.6L876.5 239.2L876.8 237.9L877.4 237.5L877.3 237.3L877.1 237.1L876.7 236.7L876.4 236.2L875.7 235.4L874.4 234.4L874.2 232.7L874 230.2L874.1 229L874.5 226.9L875.3 226.2L875.8 226L876.2 225.7L875.9 225.7L875.6 225.8L875 225.9L875.5 224L875.7 223.4L876.5 222.3L877.6 221.4L878 220.3L878.6 219.3L881 218.3L881.6 219.6L881.9 219.9L883.2 220.8L884.4 221.3L885.6 221.5L886.9 221.5L887.4 221.4L887.9 221.3L888.4 221.4L891 222.9L892.1 223.2L893.1 223.1L893.6 223.2L895.1 224.3L895.6 224.4L896.3 224.4L895.4 223.9L894.7 223.5L894.5 222.8L894.6 222.1L895.2 221.6L895.6 221.1L895.8 219.5L896.1 218.7L896.6 217.9L896.7 217.2L896.2 216.7L896.1 215.7L896.2 214.9L896.5 214.4L897 214.7L897.5 215L898.1 215L898.4 214.9L898.5 214.5L898.4 213.8L898.4 212.5L899.1 211.4L900.2 210.7L901.2 210.3L904.9 209.8L910.9 208.3L912.6 207.7L913.3 207.4L913.8 207L914.7 205.6L916.5 203.5L917.7 201.8L920.2 199.3L922.3 197L922.6 196.5L922.9 195.3L922.9 194.6L922.8 194L923.1 193.8L923.5 193.6L924.7 193.6L925.9 193.4L927.1 192.9L928.2 192.3L929.2 191.6L930.1 190.8L931.1 190.2L932.6 189.4L933.1 189.5L933.1 190L932.9 190.6L934 190.6L936.2 190.3L936.7 190L937.6 189.2L938 188.8L938.2 187.8L937.1 187.2L936.7 186.5L936.7 185.7L938 184.2L938.4 183.8L938.6 184.4L939.2 184.5L939.7 184.5L940.3 184.5L941 183.7L941.5 182.7L942.8 181.1L943.3 180L943.6 178.8L947 175L947.4 174.4L949.5 170.5L949.7 170.4L950.3 170.8L950.4 172L950.3 172.5ZM996.8 -2L996.5 -1.4L996.2 -0.6L995.9 1.5L995.4 3.5L994.9 6L994.1 8.7L993.7 9.8L993.1 10.8L991.9 12.8L990.4 14.4L989.8 15.7L989.3 16.9L989.1 18.2L989.2 19.4L989 20.6L988.8 21.7L987.8 21.3L987.3 20.6L987.2 19.2L986.5 17.7L986.3 17.2L985.3 16.3L984.4 15.8L983.7 15.2L983.8 15.3L983.3 14.4L982.9 13.4L982.1 10.7L981.9 10.1L981.5 9.5L981.4 8.9L981.5 8.3L981.9 7.3L982.1 6.3L981.9 5L982 3.6L982.2 3.1L985 -2L996.8 -2ZM893.1 41.6L893.6 42L893.9 42.7L894.2 43.9L894.3 45L893.3 45.7L892.5 46L890.7 48.7L890.3 49.6L890.1 49.9L890 50.3L890 50.7L889.5 52L889.1 53.6L888.9 54.2L888.4 54.7L887.7 55L887.4 55L887 55.2L886.1 56L885 56.7L885.2 57L885.2 57.3L884.7 57.6L884.3 57.6L882.8 57.8L882.2 58.3L881.7 59.2L881.5 59.3L880.6 59.5L879.9 59.6L878.8 59L878.2 58.8L876.7 58.5L875.2 58.1L874.2 57.6L872.1 56.4L871.8 54.2L871.4 53.1L871.4 52.6L871.6 49L871.7 48.6L872 48.2L872.9 47.4L874 46.8L875.5 45.4L876.7 44.8L877.6 43.9L877.1 44L876.6 43.9L877.1 43.1L877.5 42.7L878 42.5L879 42.6L879.9 42.5L880.5 41.8L881.2 41.7L883.7 41.9L885.4 41.6L886.2 40.9L886.6 40.9L887.9 41.1L888.3 41.7L888.3 41.3L888.3 40.9L888.6 40.9L890.2 41.7L890.2 40.7L890.3 40.5L890.8 40.1L891.1 40.1L891.7 40.9L892.3 41.3ZM596 143L596.9 143L597.9 143L598.6 143.1L599.8 144.7L603 147.3L604.7 150.1L604.9 150.7L605.1 151.2L605.5 151.3L605.9 151.6L607.6 154.2L607.9 154.7L607.8 155.3L607.9 155.7L608.4 155.9L609 156L609.3 156.4L609.8 158.5L609.8 159.2L609.9 159.5L612.1 162.7L612.3 163.1L612.2 163.4L612.3 163.7L612.7 164.3L613.4 165.8L613.7 166.2L614.2 167.5L614.2 170.1L614 171.3L613.6 172.7L613.1 174.1L612.6 175L611.9 175.9L609.4 177.7L608.7 178L605.5 179.1L603.1 180.2L600.9 180.5L598.7 179.9L597.1 178.5L596.2 176.5L595.6 174.3L594.8 172L594.1 164.7L593.8 162.6L593.3 160L593.4 158.9L593.7 157.8L593.7 160.2L594 160.4L594.3 160.1L594.5 157.7L594.7 156.6L595.6 153.9L595.6 153.4L595.4 152.4L595.5 151.9L596.8 150L597.1 148.9L597.3 147.7L597.2 146.5L597 145.3L598 145.7L598.6 146.1L599.2 146.4L599.7 146.2L600.2 146.2L599.9 145.6L598.6 145L596.6 144.6L595.9 144.1L595.7 143.7L595.8 143.2ZM303.3 358.3L303.7 359.3L304.3 360.3L305.8 362.7L306.5 363.6L307.1 364.6L307.4 366.5L308.4 369.6L309.4 374.1L309.7 378.8L310 381L310.7 383.1L312 385.2L312.4 387.5L311.6 389.9L310.5 392.2L310.2 392.7L309.7 393.3L309.5 393.2L308.6 392.6L307.9 391.7L307 389.4L306.7 388.2L306.3 388.1L305.3 388.2L304.5 388.9L304.4 389.3L304.5 390.6L304.8 391.8L304.9 392.9L304.9 394.4L305.3 394.9L305.7 395.3L306.1 396.2L306.2 398.5L305.9 399.7L305.2 400.7L305.2 401.3L305.5 401.8L305.2 402.2L304.2 402.6L303.8 403L303.3 404L302.4 406.1L302.3 407.2L302.9 410.4L302.7 412.7L301.6 417.2L301 419.3L300.1 421.8L298.7 425.1L297.3 429.3L296.2 433.6L295.3 436.2L294.3 438.8L293 443.3L291.9 448L290.2 453.1L287.8 458.8L287.6 459.5L287.1 462.5L286.6 465L286 467.5L284.7 471.7L284.5 473L284.2 474.3L283 476.9L282.4 477.9L282.1 478.9L281.9 480.2L281.5 481.5L280.6 483.9L279.2 485.9L278.3 486.7L276.3 487.7L275.2 488L273 488L270.8 488.6L268.5 489.8L266.3 491.1L265.5 491.8L264.5 492.1L261.6 492.2L260.7 491.9L257.8 489.7L256.7 489.3L254.6 489L254 488.8L253.4 488.5L252.5 487.4L250.8 486.4L250.4 486.1L250.1 485.4L249.9 484.7L249.5 483.9L249.2 482.3L248.6 481.3L247 479.3L246.9 478.7L246.7 476.7L246.8 475.4L246.6 472.9L246.8 471.7L247.4 470.6L247.1 469.5L246.6 468.3L246.3 467.1L245.9 466L244.2 463.9L243.9 462.9L243.6 461.9L243 458.7L242.9 457.6L243 455.2L243.2 454L243.6 453.1L243.7 452.5L244 452L244.4 451.5L244.6 451L245.2 448L246 447.4L247.2 447L248.1 446.2L248.7 445.1L249.2 443L250.6 440.8L251.2 439.7L252.3 438L253.4 435.6L253.7 434.5L253.9 433.3L254.2 430.8L254.4 429.5L254.3 428.3L253.8 427L252.3 424.7L252.3 424.2L252.4 422.5L252.3 421.3L251.7 420L251.1 418.9L250.4 416.7L250.1 413.1L250.2 411.8L250 410.6L249.5 409.5L249.8 407.6L254.1 400.7L254.2 399.9L254.1 397.8L254.1 396.5L254.3 396.1L254.6 395.8L255.3 395.7L258.8 395.4L259.2 395.2L260.1 394.6L261.3 393.5L261.8 393.2L262.3 393.3L262.5 393.8L262.9 394L264.3 393.5L264.9 393.5L265.4 393.6L265.7 393.1L265.8 392.5L266 392L266.4 391.8L268.2 391.7L269.3 391.5L270.8 391L271.1 391.1L272.3 392.7L272.7 392.8L273.1 392.9L273.5 392.6L272.5 391.8L272.4 391.3L272.4 390.8L273 389.7L273.8 388.8L275.8 387.5L277.7 386L278.3 385.9L278.8 386.1L279.2 387.9L279.2 388.2L279.5 388.2L279.8 388L280.2 387.3L280.2 386.7L279.9 386.1L279.8 385.6L279.8 385.2L280.8 384.1L281.6 383.1L281.9 381.9L282.3 381.3L283.1 380.7L283.3 380.8L283.6 381.3L283.7 381.9L283.5 382.4L283.1 382.9L283 383.6L283.5 383.8L283.9 383.6L284.6 382.3L285.3 381.1L285.8 380.5L286.3 380.1L287.3 380.2L288.2 380.4L286.7 379.2L286.3 377.4L288.1 374.4L288.1 373.8L288.3 373.6L288.4 373.4L287.5 372.3L287.4 371.8L287.5 371.1L287.9 370.4L288.3 369.9L288.9 369.7L289.3 370L290.3 370.8L291 371L291.8 370.2L292.4 369.2L293.4 368.5L294.5 368.1L296.2 366.5L297.3 363.2L297.3 362.3L297.1 361.1L296.7 360L296.1 358.6L296.2 358.3L297.2 358.5L297.5 358.3L298.4 357.1L300.1 354.8L300.7 354.8L301.1 355.2L301.3 355.9L301.6 356.3L302.7 357.4ZM961.4 -2L960.5 -1.1L959.9 -0.1L959 -0.2L958.3 0.6L957.9 1.7L957.4 1.5L956.3 1.7L956 2.2L956.3 2.4L956.3 2.8L955.9 4L955.4 4.3L955.2 3.8L955 3.1L954.6 3L954 3.7L953.3 4.2L952.6 4.4L952.2 3.9L951 3.7L950.5 5.8L949.5 6.5L949.1 6.7L948.3 6.8L948.8 7.1L949 7.6L948.7 8.1L947.9 8.2L947.4 8.6L947.2 10.4L946.8 11.1L945.5 11.1L944.6 10.7L944.4 11L944.2 11.3L943.7 11.7L942.8 11.7L940.8 12.6L939.9 12.3L938.8 12L938 12.3L937.8 12.9L937.4 13.4L936.3 13.4L935.4 12.8L934.5 12.4L933.5 12.8L932.7 13.5L931.8 13.8L931.6 14.2L931.2 14.5L930.2 14.4L929.8 13.2L929.3 13L928.7 13.6L928.5 14.1L928.2 14.4L928.3 15.4L927.8 15.4L927.1 14.8L926.3 14.7L925.6 15.3L925.8 15.7L925.7 16.1L926.1 16.4L926.2 16.8L925.8 17L925.8 17.5L925.6 17.8L924.3 17.3L923.3 17L922.4 17.1L922.1 16.8L922 16.4L923.1 15.9L923.2 15.6L922.4 15.4L921.4 14.6L920.7 13.3L919.8 12.6L919.3 11.9L919.2 10.8L919 10.3L919.1 9.7L919.3 9.1L918.4 9.4L917.7 9.9L917.8 10.5L917.7 11.1L916.6 11.4L916.6 11.7L916.7 11.9L917.5 12.7L917.7 13.3L918.1 13.7L918.7 14.7L918.7 16.7L919.1 17.3L918.9 17.8L918.7 18.6L918.2 18.8L917.4 19L916.9 19.2L916.5 19.4L916 20L914.8 20.1L914.3 18.7L913.5 19.7L913.3 21.5L912.9 21.9L912.5 22.1L911.6 21.5L910.8 21.9L910.1 22.4L909.9 22.8L909.4 23.2L908.5 22.8L907.8 22.1L908 21.6L907.9 21.3L907.6 21.1L907.2 21.1L907.4 21.7L907.5 22.9L907.2 23.3L906.7 23.6L905.6 23.3L904.9 22.9L904 22.5L903.3 22.4L903.1 23.2L902.6 23.8L902.1 23.9L901.6 23.8L901 24.5L900.7 24.9L900 25.5L898 25.7L897.2 26.2L896.3 26.1L895.6 26.3L895.1 26.2L894.8 25.9L894.3 25.9L894.2 26.8L893 27.1L892 27.2L890.8 28.3L890 29L889.4 29.1L889 28.9L888.7 27.8L888.5 27.7L888.4 28.7L888.2 29.4L887.7 29.9L886.4 30.8L886.1 31.8L886.3 32.7L888.1 32.9L888.3 33.4L888.1 33.8L887.7 34.1L887.6 34.6L889.5 36.2L889.5 36.8L889.2 37.1L888.9 37.8L887.9 38.5L885.7 38.8L884 38.5L883.4 37.8L883.5 37.3L883.9 37.4L884.4 37.3L884.3 36.9L884 36.6L883.2 36.2L882.6 35.1L882.7 34.2L882.3 33.5L881.9 32.9L881.5 32.5L881.3 32.1L881.7 30.7L881.5 29.9L882.2 28.9L882.5 27.7L883.8 27.3L883.9 26.3L882.9 26.2L882.2 25.4L882.1 25.8L881.6 25.8L880.7 24.3L880.4 24.1L880 24.1L880.2 25.7L879.1 26.3L878.3 26.5L877.1 26.6L876.4 26.8L875.7 26.7L875.9 26.2L876.2 25.6L875.9 25.1L875.2 24.8L874.2 24.8L873.5 24.7L872.8 24.7L872.5 24.5L871.8 23.7L871.2 23.3L871 22.8L871.2 22.2L871 21.9L869.9 21.9L870 22.7L870.1 23.6L870.4 24.3L870.2 24.7L869.6 25L869 24.2L868.7 24L868.4 24.1L868.2 24.8L867.7 25.5L866.7 25.4L866 25.8L865.1 26L864.6 26.1L863.5 26.1L862.5 27L861.8 27.4L860.8 27.8L859.6 28.3L859.3 29.2L859.3 29.9L859.1 30.7L857.3 31.7L856.8 31.6L856.4 31.2L855.9 31.3L855.5 31.5L855.1 31.5L854.6 31.7L854 31.7L853.4 31.3L853.1 31.2L852.7 31.2L852.6 31.6L853.2 33.2L853.3 33.9L851.4 36.1L851.6 37.5L851.1 38.5L849.9 39.4L847.7 41.6L846.7 41.6L845.9 42.1L844.3 45.7L844.3 46.9L844 47.8L844.1 48.7L843.4 50.4L842.6 51.1L842.5 52L843.5 53.9L843.7 54.3L844.2 55.3L844.6 56L845 56.7L846.7 58.6L847.5 59.2L848.4 59.6L850.1 61.3L850.9 62.4L850.5 63.1L850.7 64.7L849.5 64.2L849.7 64.4L851.1 65.2L853.2 68.2L855 69.7L856.9 71.4L857.5 72.9L859.1 74L861 75.5L860.9 75.8L861.4 76.2L862.7 77.1L863.5 77.9L863.7 78.7L864.2 78.8L864.7 78.6L865.3 78.6L865.6 78.6L866.2 79.5L866.9 80.3L867.3 81L867.6 80.9L867.9 81L868 81.6L868.1 82L869.1 83.2L869.6 84.3L870.9 86.1L871.8 87.1L872.5 87.7L873.2 88.1L874 90.1L874.4 91.9L875.1 93.9L875.8 94.7L875.8 96.4L876.3 98L876.8 99.2L876.9 100.3L877.1 100.9L877.3 101.3L877.8 103.3L877.7 104.2L877.3 103.3L877.4 105.9L877.7 107.3L877.5 109L877.9 109.6L878.6 111.5L879 112.2L879 114.5L879.2 115.7L878.6 115L878.2 114.2L877.6 114.6L877.1 115.2L877.9 117.7L876.9 117.5L877 120.9L877.4 121.6L877.4 122L877.3 122.5L877.1 122L877 121.5L876.8 121.6L876.9 121.8L876.5 122.4L876.5 123.2L876.8 123.8L876.8 124.3L876.6 124.9L876.2 125.5L875.3 125.6L875.1 126.8L874.8 128.1L873.2 128.3L872.1 129.4L870.6 129.9L869.3 131L868 132L867 132.2L866.3 132.4L865.4 134.1L863.8 134.3L861.1 135.7L860.2 136.4L859.4 136.7L858.2 137.3L858 137.1L857.6 136.5L856.6 136.3L856 135.7L855.9 135L855.8 134.7L855.6 135.1L855.4 136.9L855.2 137.2L854.8 137.4L853.9 136.9L853.1 135.9L851.9 136.6L852.3 136.7L852.8 136.7L853.2 136.8L853.6 137.5L853.6 137.9L853.4 138.3L852.3 138.3L850.8 138.2L850.6 138.2L851.9 138.9L853.1 139.3L853.7 139.7L853.7 140L853 140.6L852.4 141.2L852.4 141.7L852.4 142.1L851.8 142.5L851.4 142.4L850.4 141.8L847.4 139L847.9 139.8L851 142.9L851.5 143.9L851.6 144.7L851.3 145L850.7 145.5L849.7 145.5L848 144.3L845.4 141.5L844.5 141.2L847.2 144.3L847.6 145.1L848.1 146L847.9 146.5L847.7 147.1L841.3 150L840.3 151.3L839.6 152.9L838.3 153.7L837.6 154.5L835.5 155L834.3 154.8L835.5 153.4L834.7 152.8L834.7 149.1L835 145L835.6 143L836.4 142.4L837.4 142.1L837.4 141.7L837.3 141.2L836.8 140.5L836.1 140.2L835.3 140L834.6 139.2L834.1 139.2L833.2 139.5L832.8 139.1L832.6 138.6L831.8 137.8L831 137.1L829.4 135.9L826.3 135.4L825.9 134.9L825.6 134.8L825.3 135.5L823.6 136.2L822.9 135.8L822.4 135.3L822.4 134.6L823 134.1L823.8 133.7L824.2 132.5L823.5 130.8L823 130.3L822.4 129.9L821.7 130.6L821.2 131.6L820.7 132.1L819.9 132.3L818.7 132.2L818.3 130.7L818.1 129.3L818.3 127.8L818.5 126.9L817.4 125.6L817.3 124.4L816.8 123.8L816.6 124.1L816.6 124.5L816.4 124.5L816.1 123.8L815.2 122.7L815 121.5L813.9 120.1L813.4 119.6L813.2 120L812.9 120.5L811.8 119.8L810.9 119.1L810.2 117.7L810 118L809.8 118.3L808.9 117.2L808 116.3L807.1 116L806.6 115.7L806.1 115.3L805 114.8L802.3 115.5L798.9 114.9L797.6 115.5L797 115.1L796.7 114.5L797 113.5L797.1 111.4L797.5 109.9L797.3 108.7L797.5 108.2L797.7 107.5L797.1 107.2L794.7 106.6L794.2 106.1L793.6 106.7L790.7 106.9L789.6 107.4L788.6 108.2L788.3 109.3L788.9 110L789.3 111.3L788.2 114L788.1 114.8L788.5 118.1L788.3 119.9L787.8 121.1L786.9 122.2L786.5 124L785.8 124.9L784.8 126.8L784.2 129.3L783.7 130.4L783.5 132.5L781.5 135.6L781.1 137.4L780.4 138L780.6 138.6L780.7 139.4L780.4 141.8L780.4 143.8L780.6 144.8L781.6 146.9L781.4 147.5L781.3 148.3L782 148.7L782.6 148.8L785.8 147.8L786.8 148.1L787.2 149L787.5 149.8L788 154.1L788.3 154.9L789 155.7L789.7 156.5L789.9 156.3L789.9 156L790 155.7L790.6 156.5L791.1 158L792.8 166L793.3 167.1L793.6 168.1L792.6 167.6L792.4 165.8L792.1 165.1L791.7 165L791.2 165L791.1 164.7L791.5 164.1L791.5 163.4L790.9 162.8L789.9 163.3L790 164.5L790.4 165.5L792 167.6L792.5 168.5L793.1 168.8L794.1 168.6L795.2 169.5L796 170.4L798.2 171.7L799.5 171.5L800.9 171.2L801.9 171.3L802.8 171.6L803.9 172.7L805.7 175.4L808.6 177.7L810.3 178L810.9 178.3L812.8 181.3L815.2 183.4L816.3 184.2L817.1 184.6L818.2 185.7L819.2 187.1L821.3 191.1L821.6 192.9L821.8 195.5L821.3 199.5L820.7 201.5L820.8 202.5L821.6 203.9L821.4 205.3L821.5 206.4L821.5 209.6L821.9 210.5L822.4 211.1L825.1 213L825.3 213.7L826.6 216.1L829 221.2L829.6 223.5L829.6 224.2L829.3 224.4L828.6 224.7L828 224.2L827.8 223.9L827.8 223.5L827.6 223.1L827 222.6L826.7 222.2L826.8 222.9L826.8 223.8L826.1 223.9L825.1 223.6L823.9 223.8L822.5 225L821.9 225L821.4 224L821.1 223.4L820.7 222.9L816.3 220.6L814.7 219.9L812.9 218.2L809 216.2L806.6 214.2L805.5 213L803 212L801.9 210.7L801.4 210.5L800.9 210L801.4 208.8L801.2 207.6L800.9 206.5L799.1 204.4L798.3 202.9L796.6 201.5L795.9 200.6L795.3 199.6L795.7 199.3L796.1 199.1L795.7 198.4L794.8 197.1L794.3 195.7L794.3 193L793 189.2L791.8 184L792 182.1L791.7 180.2L790.9 178.2L789.9 176.9L789.6 175.7L787.2 172.7L785.5 171.5L785.7 169.3L785.2 168.9L784.6 168.8L784.1 168.2L784.5 166.9L783.9 167.1L783 167.1L782.3 166.7L781.7 164.9L781.3 164.3L780.6 163.4L779.6 163.4L779.2 162.9L779.3 161.7L778.6 161L777.6 160.4L776.8 160.1L776 158.1L775.3 157.7L774.7 157.3L774 157.5L773.7 158.2L773.2 158.9L772.7 158.8L772.1 158.4L771.5 156.5L771.4 155.4L771.5 153.2L772.3 151.2L772.8 148.1L773.5 146.1L773.9 145.4L774.6 142.8L776 139.3L775.5 139.4L774.6 140.8L774.2 140.1L773.9 139.4L774.2 137.7L773.7 134.6L774 134.1L774.3 133.9L775 132.7L775.7 131.5L775.7 130.1L776.3 129L776.2 128.2L776.2 127.1L776.4 126.3L776.3 125.6L776.8 124.9L777.6 124.3L777.3 124.1L776.9 123.7L775.9 124.3L775.3 124.1L775.2 123.5L775.3 122.9L775.4 122.5L775.8 122L775.8 121.1L775.6 120.3L775.9 119.4L775.3 119.4L775 119.2L775.1 118.6L775.7 118.1L775.2 117.2L775.6 116.3L775.6 115L775.3 114L775.3 113.2L774.9 111.9L774.7 110.1L773.9 108.8L773.2 106.9L771.6 104.5L771.6 103.4L771.5 102.5L771.1 102L770.6 105.3L770.2 104.7L770.1 102.8L769.9 102L770.1 100.2L769.2 98.5L769 97.3L768.3 95.4L768.5 94.9L769.4 95.4L768.6 94.3L767.9 94.5L767.4 93.3L767.3 90.1L766.7 88.9L767 87.6L766.4 83.2L765.2 81.7L765.4 80.5L765.7 79.4L765.7 77.3L766 76.7L766.5 76.2L766 76.4L765.5 76.5L764.4 76.7L763.2 76.7L762.8 75.2L762.1 74.5L761.6 73L761.3 71.3L761.5 70.9L760.6 70.2L760.3 69.8L759.3 68.7L758.1 67.9L758.4 68.5L758.7 68.8L758.1 69.9L758.7 71.6L758.2 72.7L757.8 74.1L757.3 74.8L756 76.3L754.8 76.8L754.1 76.9L753.5 76.7L752.7 76L752.5 75.3L752.4 74.3L752.1 74.1L751.8 74.2L752.2 75.6L752.2 76.2L753.1 77.5L752.8 77.8L751.2 78.5L750.7 78.4L750.4 78.5L750.3 79.1L750.1 79.4L747.7 80.2L747.2 81.2L746.9 82.2L745.7 83.5L744.1 84.7L743.7 84.6L743.2 84.4L743.3 83.1L743.8 82.1L743.7 81L743.6 81.6L742.5 83.2L742 83.7L741.1 83.5L739.8 83.7L739.3 82.1L739.3 81.6L739.2 81L739.4 80.5L739.3 80.1L739 80.9L738.9 81.6L738.4 82.2L737.1 82.9L737.1 82L737 81.3L737.3 80.6L737.2 79.5L737.6 77.9L737.6 77.4L737.5 76.8L737.3 77.7L737.1 78.6L736.8 78.8L736.4 79L735.5 80.1L735 81L733.6 81.8L732.9 81.8L732.8 80.7L733.4 76.8L733.9 76.2L734.1 75.5L734.6 73.2L735.1 72.4L735.3 70.5L735.5 70.2L736.2 68.8L736.4 66.2L736.1 64.9L735.5 63.6L734.9 59.8L733.3 56.7L733.1 55.7L732.4 54.4L733.1 54.3L731.6 53.2L731.4 52.8L731.1 50.2L731.2 48.8L731 49L730.8 49.8L730.2 50.2L730.4 51.7L730.4 52.1L730.1 52.7L728.8 52.1L727.9 51.4L726.9 49.8L725.9 47.9L726.2 47.6L726.7 47.6L728.1 49L729.1 49.3L729.6 48.9L730.4 48.3L730.7 47.2L730.3 46.8L729.6 46.5L729.2 46.2L728.5 45.5L728.4 45.1L728.2 44.6L727.5 44.2L727 43.8L727.5 43L727.9 42.4L726.7 42.4L725.4 41.4L725 41.1L724.6 40.9L723.5 40.8L722.6 41.1L723 42.5L723 43L722.4 42.9L721.1 40.7L721.5 40.2L722 39.6L721.8 39.6L721.3 39.6L721.8 37.6L721.4 37.3L721.3 37.9L721 38.5L720 39.9L719.5 39.7L719.1 39.3L719.6 38.6L719.9 38.4L720.1 38L719.7 37.2L719.1 36.7L718.6 35.7L718.3 35.7L718.5 36.8L718.5 38.5L717.4 36.7L715.1 34.1L714.6 33.4L714.5 33.4L713.9 32.4L713.4 31.4L712 29.4L711.6 25.9L711.6 24.2L710.7 22.1L710.1 19.3L709.8 18.5L710.1 17.6L710.2 17.3L710 17.3L709.5 17.8L709 16.7L708.6 15.6L707 13.5L706.5 12.6L706.5 11.7L705.8 12.6L704.9 13.2L704 14.2L703.3 14.5L701.4 14.7L700.2 13.4L698.6 10.2L698.4 9.5L698.6 7.6L698.2 5.9L698.2 4.9L698.1 4.3L697.8 4.4L697.7 4.9L697.7 5.5L697.6 6.1L696.2 6L694.9 5.7L696 6.6L697.3 6.9L697.9 7.7L698 8.4L698 9.1L697.4 9.6L696.8 9.9L696.9 10.6L697.6 11.5L696.7 11.7L696.5 12.3L696.5 13.1L696.9 13.8L697.1 14.3L697 14.8L697.4 15.3L698 16.4L698.2 17.1L697.9 18.2L697.6 18.6L697 19L695.7 20.4L695 21.9L694.5 22.7L693.8 22.8L693.5 22.5L693 22.1L693 21.3L693.1 20.7L694.3 19.3L693.7 19.5L692.9 19.9L691.9 20.6L691.5 19.7L691.3 18.8L691.3 17.7L692.1 16L691.1 16.9L690.8 17.9L691 19.1L690.8 19.9L690.5 21.1L689.9 21.7L689.1 22.2L688.7 22.8L688.1 23.3L688.1 22.3L687.9 21.1L687.3 18L687.2 18.7L687.5 20.6L687.5 21.8L687 22.8L686.1 23.8L685.3 23.9L684.9 23.8L684.3 23.1L683.6 22.2L683.4 20.7L683.2 19.9L682.9 21.5L682.2 21.5L682.9 22.6L683.1 23.4L683.2 24.5L682.3 24.6L681.8 24.5L681.3 23.5L681.1 24.4L680.2 25.2L679.9 24.8L679.7 24.4L679.7 23.6L680.2 20.8L680.1 20.5L679.8 20.3L679.4 20.2L679.2 19.6L678.5 22.6L678.8 23.8L678.7 24.4L677.4 24.9L676 23.8L675.8 23.4L675.7 24L675.5 24.8L674.2 24.7L673.6 24.1L674 23L674.8 20.6L674.9 19.4L673.9 18.6L673 18.1L672.5 17L672.7 18.2L673.2 18.7L673.9 19L674.6 19.6L674.1 20.4L673.5 20.9L672.5 22.7L671.4 23.7L669.9 24.5L665.4 25.6L664.4 26.1L663 27.5L662.1 28.8L661.9 30.1L662.4 31.6L662.9 33.8L663.2 34.3L662.7 35.1L661.8 36L661.2 37.2L661.2 37.8L661.1 38.3L658.6 39.7L658.1 40.6L657.5 41.4L656.7 40.9L656.2 40.9L656.8 41.6L656.7 42.1L656.5 42.3L655.9 42.6L652.4 43.6L649.7 44.6L649 44.6L649.1 44.3L649.6 44L649.6 42.8L649 42.6L648.6 42.6L646.6 44L645.8 45.4L646 45.6L646.4 45.6L647.8 44.8L648.4 45L648.5 45.3L646.4 46.5L642 50.4L641.8 51.2L641.2 52L640.5 52.9L639 54.8L636.3 57.8L635.6 58.9L631.3 61.1L630.5 61.8L628.7 64L626.9 65.8L624.7 67.3L621.1 69.1L618.8 70.9L618.1 72.1L618.1 72.6L618.3 73.1L618.7 73.7L618.8 74.1L618.6 74.9L618.5 75.3L617.9 76.3L616.7 77.1L613.1 78.6L612.6 78.6L609.6 78.3L608.5 78.6L608.1 79.3L607 82.3L606.1 83.1L605.7 83.8L605.5 84.3L604.9 84.3L604.5 84.1L604.1 84.3L603.7 83.3L602.9 83L602.4 83L599.8 84L599 84.8L597.1 88.7L596.6 91.2L597.1 93.9L597.7 96.1L597.9 97.1L597.8 98.4L597.4 99L597.2 99.7L597.5 101.3L598.3 103.3L598.5 104.1L598.5 105L599.1 106.9L598.7 106.6L598.4 105.7L597.6 104.7L596.7 105.7L597.2 106.5L598.9 107.4L599.4 108.2L598.3 114.8L597.5 117.1L596.5 118.7L595.9 119.3L594.8 121.7L593.9 124.6L593.8 125.8L594.1 127L593.7 127.7L593.2 128.3L594.2 128.1L594.6 128.7L594.7 129.5L594.7 133.6L594.6 138L593.8 138.2L592.9 138.2L592.2 138.1L591.6 137.9L590.3 138.2L589.5 138.7L589 139.4L589 140.8L586.5 144.3L585.9 145.4L585.7 146.5L586.1 147.1L586.7 147.7L587.5 147.9L589.2 148.1L590 148.5L590.5 149L588.6 148.4L586.3 148.3L581 149.9L579.5 151L578.7 152L578.2 154.2L578.1 155.7L577.5 156.9L574.7 158.8L572.9 159.4L572.3 159.9L570.2 159.2L567.9 157.6L567 156.7L563.6 152.4L563 151.9L562.3 150L562.2 149.3L562 149.1L561.7 148.9L561.5 148.6L560.8 146.5L560.5 144.3L560 141.9L560.4 142L561 142.8L561.3 144L561.3 145.6L561.7 145.8L562.1 145.7L561 141.9L560.1 141L559.8 140.9L559.6 140.3L559.5 139.6L559.6 139.2L558.9 138L558.6 137.2L556.9 133.5L556.2 130.8L555 127.8L554.3 126.8L553.1 124.5L552.1 123.4L551.1 122L550.3 121.3L550 121L547.5 116L546.8 113.3L546.2 112L545.9 111L545 106.7L545 106L544.9 105.1L544.3 103.3L543.2 101.4L542.9 100.2L543 99.7L542.3 97.8L542.1 96.9L541.7 96.1L541.2 95.4L540.6 94.8L539.3 92.9L538.8 92.4L538 91.2L537.4 88.9L536.6 88L537.8 88L537 87.1L536.7 86.5L536.2 86.2L536.8 85.3L535.9 85.4L535.4 84.8L534.7 83.2L533.4 81.4L533.2 80.4L532.1 77.3L531.2 69.9L530.3 66.6L530.3 65.7L529.3 62.8L528.8 60.8L528.6 59.2L528.3 58.1L528 56L527.6 55.3L527.6 54.9L527.9 53.9L528.6 52.4L528.9 51.5L528.6 50.1L527.9 51.5L527.2 51.9L526.9 50.9L526.9 49.5L526.9 49.1L527 48.6L528.7 48.9L526.8 48L526.6 47.5L526.5 47.1L526.9 46.4L526.2 45.8L525.9 44L525.7 43.6L525.7 43.2L526 40.7L527.7 35.7L527.8 34.6L527.7 33L527.3 31.7L527.1 30.4L527 30L526.5 29.9L525.9 29.4L525.2 27.4L525.8 26.7L526.3 26.4L525.7 26.5L525.1 26.5L526.1 25.5L527 24.8L529 24L529.9 23.5L528.6 24L527.3 24.1L524.4 24L524.9 22.2L525.4 21.5L526 21.2L525.2 21.3L524.2 21.1L524.5 19.2L525.3 18.8L526 18.7L527 18.5L526 18.2L524.9 18L523.6 18.3L522.4 18.1L521 18.1L521.6 18.3L522.2 18.9L521.9 20L521.6 20.6L520.8 21L520.2 21.7L519.9 22.3L519.6 22.7L520.2 23L520.9 23.2L521.3 23.7L521.7 24.4L521.7 25.7L520 28.9L519.4 29.6L515.1 31.5L513.4 32.6L509.8 33.9L508.5 34.2L506.9 33.9L504.6 32.9L501.2 30.2L500.3 29.4L497.6 26L495.6 24.2L494.1 22.6L492.2 21L490.5 18.8L490.1 17.9L490.2 16.9L490.9 16.4L491.6 16.6L492.3 17.4L492.7 17.8L493.1 17.9L495.7 16.6L496.7 16.7L497.4 16.1L498.2 16.2L500 15.2L500.8 15.1L501.7 14.9L503.2 12.4L504.2 10.8L504.9 10.5L504.9 10.1L504.7 9.5L504.2 9.7L503.8 10.2L503.5 10.8L503.3 11.1L502.4 10.8L501.8 10.8L501.2 11L498.6 12L497.5 12.8L496.8 13L492.7 12.1L488.6 9.9L486.9 8.5L485.9 6.7L484.8 4.5L485.1 3.9L486.8 2.6L488.2 1.6L487 2L485.5 2.7L484.8 3.1L484.1 4L483 4.2L482.6 2.9L482.4 1.5L482.2 2.1L481.9 2.6L481.4 1.9L481.1 1.6L480.8 1.8L480.3 1.8L479.4 1L479 1.8L477.6 2L477.4 1.4L477.4 0.8L476.6 1.3L476 0.6L475.7 -0.2L475.5 -0.4L475.3 -0.7L474.7 -1L474.1 -1.8L474.1 -2L961.4 -2ZM324.8 -2L324.9 -0.8L325.4 -0.1L326.1 0.2L328.1 0.3L329.3 0L331.9 -1.2L333.2 -1.6L336.8 -1.5L339.7 -1L344.3 -0.7L345.2 -0.8L347.6 -1.8L347.9 -2L373.9 -2L374.2 -1.6L376.2 0.2L377.1 0.8L380.9 2.1L383 2.5L385.8 3L387.8 3.9L388.4 4L389.4 3.7L390.2 3.7L392.1 5.1L392.6 6.3L393.4 7L394.1 8L394.6 9.1L396.1 10.8L397.3 12.6L398.4 14L399.4 14.9L400.9 15.2L402.2 15.6L402.3 16.5L402.2 17.7L401.9 18.6L400.8 20.3L400.5 21.4L399.2 23.1L397.8 26.1L397.2 26.7L394.9 28.2L393.2 30.1L391.3 33.2L389.8 36.3L389.2 37.3L388 37.5L387.2 37.4L386.7 37.1L386.9 36.3L387 35.3L386.3 35.4L385.6 35.6L384.1 38L383.3 39L383.1 40.3L382.7 42L382.2 43.5L381.9 44.8L381.9 45.5L382.3 47.3L382.4 49.1L382.6 50.2L382.8 51.5L382.1 51.9L381.5 52.1L379.1 52.3L376.7 52.7L374.6 53.4L373.3 54.2L371.7 55.9L370.7 60.1L369.1 62L368 62.3L365.4 62.5L361.7 63L360.4 63.4L358.2 66L358.1 66.8L358.5 67.4L358.6 68.1L358.5 68.7L357.4 70.3L356.4 71.5L353.6 72.3L352.6 71.8L351.6 71.6L349.8 71.6L346.8 71.9L345.8 72.7L344 73.4L342.4 74.3L339.4 74.7L337.4 75.4L332.5 77.2L331.2 78L330.1 79L329.2 80.2L328.6 82.4L329.1 84.3L329 85.4L327.8 86.1L326.6 86.6L325.3 87.3L324.5 87.5L323.9 88.1L323.2 88.6L320.5 89.6L317.5 90.5L312.8 91.5L311 92.6L309.3 93.4L306.8 93.6L303.4 94.7L301.5 95.5L299.1 96.9L298.6 97.3L298.2 98.3L297.4 99.2L296 100.6L294.9 101.3L294.2 101.4L292.8 101.8L291.2 101.9L288.4 101.4L287.7 101.7L287.1 102.3L285 103.2L282.8 105.2L281.2 105.7L278.6 106.3L276.8 107.1L275.6 107.5L274.1 107.6L271.2 107.5L268.5 107.8L266 108.4L264.8 109.4L263.4 111.1L261.2 111.7L260.7 112.3L260 113.5L258.6 113.9L257.3 114.1L256 113.5L253.5 115L252.5 115.2L251.1 115.3L250.1 115.6L249.4 115.5L248.5 114.9L246.5 114.2L245.1 114.7L245 113.3L242.6 109.1L243.1 105.4L243.1 104.9L242.7 103.2L241.3 101.7L241.3 99.8L240.8 98.4L240.5 97.1L240.6 96.7L240.6 96.3L239.9 94.2L239.7 93.7L239.6 93.3L239.8 92.9L239.8 92.5L239.4 91.9L239 90.6L237.1 89.6L237.5 88.7L237.9 89L238.4 89.3L238.5 88.7L238.5 88.2L237.7 85.4L238.9 81.6L238.5 78.2L238.4 77.4L237.8 76.2L237.8 75.4L237.5 74.5L237 73.9L236.1 73.2L236 72.3L235.4 71.4L234.5 70.7L234 69.3L233.6 67.5L231.3 65.2L228.4 63L227.5 61.7L226.1 59.2L225.3 57.2L223.4 55L223.3 54.1L223 53L222.6 51.8L222.3 50.8L220.4 46.7L219.7 46L219.2 45.1L219 44.4L218.9 44L217.5 43.3L216.2 41.5L212.4 38.8L210.5 38.5L209 37.5L207.9 36.2L206.7 33.9L204.6 31.5L202.9 28L203.4 26.8L203.4 25.9L202.8 24.4L202.3 23.2L201.8 22.1L202.2 20.5L202.3 18.8L202.6 17.8L202.9 16.8L202.6 14.7L202 13.6L202 12.9L201.4 12.5L200.8 11.7L201.4 11.7L200.4 10.6L200 10L199.6 8.5L199.1 7.3L197.6 4.6L196.8 3L195.1 0.9L193.3 -0.6L192.2 -1.3L191.6 -1.9L190.6 -2L324.8 -2ZM167.9 -2L168.1 -1.6L169.5 -0.7L171 0.6L169.6 0.5L169.2 0.6L168.7 0.8L168.5 1.7L168.4 2.3L168.5 5.9L168.9 7.6L170.2 11.1L171.2 12.1L171.7 12.7L172.3 13.2L175.3 14.3L177.1 16.8L181.1 19.9L181.5 20.7L181.5 20.9L181.6 23.3L182 25.2L183.5 27.9L184.8 29.3L185.2 30.1L185.3 30.5L185.2 30.8L184.8 30.4L184.2 30.2L184.1 31.4L184.3 32.3L184.4 34L184.9 35.8L184.5 37.4L184.6 40.2L185.3 43.6L185.1 45.8L186.2 50.8L187.3 53.5L187.9 54.2L188.5 54.5L189.8 54.8L191.6 56.2L193.1 57.7L193.6 58.5L194.3 59.3L194.8 59.1L195.1 58.9L195.5 59.6L197.9 61.1L198.2 61.8L201.1 67.6L202.3 71L203.3 74.6L204.1 80L204.9 82.7L206 84.1L206.8 86.6L207.6 86.7L208 87.4L208.9 89.8L209.5 90.7L209.8 89.9L209.8 89.5L209.6 88.7L209.8 87.8L210.3 87.2L211.4 88L212 88.6L212.2 89.8L212.4 90.4L213.5 91.8L214.5 92.2L215.8 92.3L216.8 92.6L217.7 93.1L219.3 94.5L222.9 95.7L225.8 99.4L227.5 102L233.2 105.9L234.1 107.8L234.7 109.6L235.8 109.5L237.9 111.5L238.5 113.1L240.1 113.6L240.4 112.7L241.2 113.5L241.5 114.6L241.7 115.1L243.3 117L243.8 118L244.4 119.7L244.1 120.7L243.7 121.3L243 121.9L240.9 123.2L238.5 124.1L237 125.9L235.8 125.8L236 126.4L236.4 126.5L237.1 126.4L238.4 125.9L239.6 125.6L240.8 125.6L242 125.8L242.8 126.5L244.7 128L246.5 131L248.6 133.5L251.6 135.8L252.7 136.5L253.8 137L259.1 136.9L262.9 134.8L266.4 133.3L267.5 133L269.5 133.4L271.7 133.5L273.7 134L274.7 133.9L278.6 132.1L281.1 130.4L282.8 129.7L283.5 129.7L285.7 130.3L288.7 130L292.7 128.5L294 128.2L295 128.2L297.2 128.9L297.5 128.9L298.7 128.7L301.8 128L304.3 127L308.8 126.2L312.2 124.3L312.8 123.3L313.8 122.1L315.3 121.7L319.2 123.1L319.8 123.2L319.6 124.1L319.4 124.9L318.7 126.4L318.1 128.1L318.5 130.6L318.7 134.7L318.6 135.3L318.3 135.9L318.2 136.4L317.8 136.5L317.6 136.8L318 136.9L319.1 136.5L319.1 136L319.2 135.8L320.2 136.3L320.9 136.5L321.1 137L321 137.4L319.9 137.2L319.3 137L317.7 137.4L316.7 137.9L316.4 138.7L316.1 141.9L315.7 144L315.6 146.7L314.3 148.6L313.8 149.8L311.9 152.4L310.8 154.6L310.5 155.7L308.7 158.7L306.3 161L305.4 163.9L304.6 165.8L303.6 167.4L301.4 170.4L300.4 172.5L299 176.1L298.6 178.3L294.7 184.9L290.8 190.1L288.3 194.5L283.8 199.6L277.7 206.2L269.7 214L267.6 215.6L258.9 220.4L253.2 224.4L250.4 227.2L247.3 229.5L244.9 231.8L237.7 239.5L236.9 240.2L236.2 240.9L235.3 242.2L234.7 242.7L232.9 244.9L231.8 246L230.6 247.1L230.1 247.9L229.7 248.9L229.3 249.4L228.2 251.5L227.3 253L226.3 254.1L224.9 255.7L223.8 256.5L222.2 256.8L221.8 256.8L221.2 256.5L220.9 256.9L220.7 257.6L220.4 257.4L220.1 257.3L220.3 258.4L220.5 258.9L220.2 259.6L219.5 260.3L219.4 260.8L217.8 262.2L215.5 262.4L214.3 263.1L213.7 263.6L213.3 264.9L213.5 266.8L212.8 268.3L212.7 269.1L211.5 270L211 270.9L210.6 271.8L210.3 272.2L209.8 274.2L209.3 275.4L209.1 275.9L209 276.2L208.6 276.9L208.3 277.4L208.1 277.8L206.7 280.9L205.6 282.3L204.7 282.1L204.2 282.7L204.1 282.9L203.9 283.8L203.2 285.7L203.1 286.6L202.8 287.5L202.5 288.2L201.8 290.9L201.1 292L200.2 294.4L200.1 296.3L200.6 297.6L200.8 298.8L201.8 300L202.6 300.4L203.2 301L204.2 302.2L204.7 303.5L206.5 304.1L207.2 305.5L207 306.5L206.1 307.3L205.4 308.6L204.7 310.3L204.7 312.9L205.2 312.5L206.1 313.1L206.2 315.1L205.2 317.3L205 318.4L204.9 319.3L205.6 322L206.7 323.3L206.6 323.8L206.3 324.1L208.1 326.6L208 328.7L208.7 330.3L209 331.7L209.4 332.8L209.5 333.6L208.9 334.4L210.3 334.6L211 335.3L211.4 336L212.4 336L212.9 336.4L213.7 336.8L215.3 337.9L215.8 338.4L215.9 338.8L216 339L216.6 340L217.5 340.9L216.9 341.4L216.3 341.9L217.3 342.5L216.6 343.5L216.4 344.2L216.7 344.4L216.8 344.9L216.3 346L215.6 346.8L215.4 347.5L216.1 348.6L215.8 350.6L216.3 352.5L216.5 353.4L216.7 354L216.4 355.2L216.5 357.1L216.6 357.9L216.3 358.8L216.9 359.2L217.2 360.3L217.1 361.5L216.9 362.1L215.9 362.9L215.8 363.2L215.8 363.7L217 363.7L217.1 364.4L217 365L217.1 366.1L216.9 366.8L217.2 367.5L216.8 368.4L217 369.1L217 370L217.3 372.2L217.3 375L217.4 375.4L217.8 375.7L218.5 375.9L218.5 376.6L217.7 377.6L217.7 378.2L217.8 379.1L218.6 377.9L219 377.9L219.5 378.4L219.4 379.1L219.5 379.4L219.5 380.1L219.7 380.9L219.6 381.6L219 382.1L218.3 383L218.2 383.8L218.2 384.3L217.8 384.5L217.5 384.8L217.9 385.6L217.8 386.3L217 388.4L214.6 391.3L213.6 392.3L212.6 393.4L212.6 393.9L212.5 394.3L211.4 395.9L210.3 396.2L209.6 396.6L210.1 398L209.3 398.3L208 399.5L204.3 401.6L203.7 402.1L202.8 403.4L201.6 403.7L200.9 404.1L199.6 404.2L199.2 404.1L198.8 404.2L198.4 404.5L196 405.4L193.7 406.1L193.2 406.5L192.8 406.9L190.8 407.6L187.7 409.4L185.1 411.1L183.2 412.8L182.7 413.1L182.1 413.7L182 414.6L181.8 415.1L180.4 416.9L178.3 419L177.9 419.6L177.1 420.8L177 421.6L176.3 421.8L175.6 421.1L175.4 422.5L174.9 422.6L174.3 422.3L172.9 423L171.7 423.8L169.8 425.6L167 428.9L163 432.2L162.5 432.3L162.1 432.3L160.8 431.1L160.1 431L160.8 431.7L161.2 432.3L161.1 433.4L161.1 435L160.6 438.2L160.7 439L161.2 439.9L162.3 441L163.4 442.4L164.6 446.4L164.7 448.4L166.1 451.1L166.1 452.2L166.7 455.1L166.6 457.4L166.5 458.8L167.2 459.4L167.4 458.9L167.4 458L167.5 456.5L167.9 455.9L168.3 456L168.4 456.7L168.6 457.3L168.7 457.8L168.7 458.6L168.2 461.5L168.4 462.7L169 464.7L168.3 467L167.1 472.5L167.1 473.5L167.3 473.9L168 474L168.2 473.3L168.5 473.3L168.7 473.7L168.2 476.3L167.7 477.4L166 480.1L165 481.3L163.4 482.4L159.8 484.2L152.3 486.9L149.4 488.2L147.6 488.9L143.9 491.4L142.3 493L141.6 494.9L141 495.8L140.3 496.9L140.9 497.8L141.4 498.5L142.1 499L142.4 499.4L142.8 499.7L143.3 498.2L143.5 497.7L143.9 497.7L143.7 499.5L143.2 505.7L143.2 505.9L142.8 508.4L141.4 512.3L141 514.1L139.8 520.6L138.3 523.8L137.4 525.2L134.9 527.6L134.2 528L133.6 528.4L132.6 528.6L128.3 533.5L126.7 535.8L125.3 539.3L123.9 541.2L121.8 545.2L120 548.3L118.2 551.2L115.2 555.1L113.8 556.3L112.9 556.8L110.5 559.1L107 562.8L104.4 566.1L100.5 569.9L98.3 571.6L94.9 574.8L93.9 575.3L90.1 578.3L87.4 580.2L82.9 582.3L81.1 582.9L76.9 582.4L75.1 582.7L73.6 584L73.5 585.9L72.9 586.1L71.9 586.1L69 585.3L67.4 585.4L66.5 586.4L65.7 587.7L63.5 587.8L59.5 586.4L54.9 585.6L53.8 585.6L51.5 586.5L50.7 586.7L47.4 586.5L45.6 585.8L43.8 585.8L42.5 586.4L40.9 586.5L36.5 590.1L34.2 590.1L32.3 590.5L31.3 590.5L29.5 590L28.8 590L27.8 590.2L26.7 590.8L24.4 591.1L23.5 591.7L19.5 594.9L18.6 594.8L17.9 594.5L15.8 594.5L13.5 592.8L12.6 592.9L12.8 592.4L12.9 591.5L12.4 590.8L12 590.5L11.1 590.6L10.7 589.8L9.2 589.7L8.8 589.9L8.1 590L8 589.2L8.1 588.7L8 587.9L7.9 587L7.3 586.7L6.9 586.6L5.9 586.6L5.2 586.7L4.9 587L4.5 587.7L4.5 589.8L4 589.2L3.5 587.9L3.3 586.6L3.5 585L4.6 584.4L4.5 583.4L4.3 582.5L3 580.1L2.6 579L1.6 578.3L0.8 576.6L0 575.9L-0.3 574.7L-1.1 573.8L-1.4 572.2L-0.9 571.3L-0.2 570.9L0.4 571.6L1.3 571.3L2.5 570.2L3.2 568.5L3.2 565.9L3.1 564.2L2.1 559.9L1.7 558.9L-0.5 555.8L-2 553.4L-2 -2ZM925.2 18.7L925 18.9L924.3 18.1L924.3 17.9L924.8 17.8L925.4 18.2L925.4 18.5ZM236.5 88.9L236.2 89.1L236.1 88.7L236.3 87.8L236.6 87.6L236.8 88.2L236.7 88.6ZM212.3 81.1L212.6 82.1L211.7 81.7L211.5 81.5L211.9 81.1L212.1 80.9ZM801.1 209.1L800.6 209.2L800.6 209L800.7 208.6L801 208.3L801.2 208.5ZM843.4 339.2L843.2 339.9L842.7 339.5L842.1 339.4L842.2 338.9L842.7 338.8L842.9 338.8L843.3 338.6ZM343.9 115.3L344.5 115.4L345.4 115.1L348 115L351.1 116.1L350.5 116.4L350.1 116.8L348.8 117.2L347.4 118L343.5 118.4L342.3 118.2L341.4 117.4L339.6 116.3L340.3 115.6L340.5 115.3L340.7 115L341.7 114.5L342.7 114.6ZM391.6 39.3L391 39.4L390.8 39.3L390.8 38L392.2 36.4L393.1 34.5L393.8 36.2L392.6 37.1L392.1 38.8ZM345.4 -2L345.5 -1.9L345.5 -1.5L344.5 -1.6L344.3 -1.4L343.4 -1.5L342.7 -1.8L342.9 -2L345.4 -2ZM230.7 74.8L231.4 74.8L231.1 74.5L231.1 74.3L231.4 73.9L232.4 74.8L232.4 76L232.3 76.2L232.1 76L231.8 75.7L231.8 75.5L231.5 75.2L230.5 75.4L229.8 75.1L228.9 74.1L228.7 73.4L229 73.3L229.5 73L229.7 72.4L229.5 71.9L230 72L230.3 72.5L230.4 73.8L230.5 74.1L230.3 74.4ZM213 85L213.3 85.5L213.6 85.4L213.9 85.3L214 84.9L215.5 85.6L215.4 86.1L214.5 86.1L213.5 85.9L212.5 86L211.4 85.8L211.1 85L211.8 85.4L212.2 85.3L212.3 85.2L211.7 84.6L211 84.5L211 84L211.4 83.9L211.6 83.7L211.2 83L212 83.2L212.5 83.5L212.8 84ZM238.1 104.8L237.5 105.1L237.9 104.3L238.3 104.1L238.5 104.2ZM238.4 102.1L238.3 102.3L238.1 102.3L237.5 101.8L238.1 101.2L238.5 101.7ZM991.9 179.3L992.4 180L993 179.8L994.1 180L994.3 180.4L994.2 180.6L993.1 181.3L992.4 180.6L991.1 181L990.5 180.8L989.6 181L989.1 180.5L989.3 179.9L990.7 179.1ZM927 306.6L926.8 306.9L926.3 306.8L925.9 306.2L926.1 306L926.4 306L926.7 306ZM921.5 306.3L921.3 306.4L919.7 306.3L918.7 307.1L917.9 307.4L915.3 307.4L915 307.3L914.7 307.3L914.6 307.4L913.8 307.3L911.1 306.6L910.8 306L911.2 305.3L912.1 304.3L914.1 304.1L922.8 304L923.7 304.9L923.8 305.1L921.9 305.7ZM936.9 442.2L936.3 443L935.7 442.8L935.6 442.4L936 441.8L936.8 440.9L937 441.4ZM915.2 497.4L914.9 497.8L913 494.5L912.5 492.2L912.9 491.8L913.2 491.7L914.3 494.8L914.7 495.6L914.7 496.3L914.8 496.5ZM955.3 158.5L954.6 158.8L954.5 158.2L954.5 157.6L955 157.6L955.2 157.8ZM952.6 161.8L952.1 162.5L951.6 161.7L951.6 160.5L951.8 160.1L952.6 160ZM979.9 136.4L978.7 136.7L978.4 135.8L979.3 134.9L980.2 135.3L980.8 135.6L980.5 135.9ZM979.4 126.2L979.6 126.8L979.3 127.5L979 127.7L978.8 127.4L978.1 127.1L978 126.7L978.4 126.7L979 126.3ZM981.6 119.9L982.2 120.1L982.5 119.9L982.9 119.4L983.2 120.2L984 120.8L983.7 121.5L983 121.5L982.4 121.4L981.6 121.6L980.8 121.5L980.3 120.9L979.7 119.8L979.4 119.6L979.4 119.2L979.6 118.9L979.5 118.8L979.6 118.6L979.7 118.5L979.9 118.4L980.3 118.9L981.4 119.6ZM981.1 124.5L980.3 124.8L980.2 124.6L980.1 124.1L980.1 123.8L979.4 122L979.9 121.8L980.3 122L980.7 122.2L981 122.4L981.4 122.9L981.3 123.3L981.4 123.7ZM983.1 187.2L982.9 187.8L982.5 188L982.1 187.9L981.8 187.6L981.6 188L980.8 188.2L980.3 188.9L979.5 189.1L979 189L979 188.4L980.5 187.5L981.5 187.1L982.3 186.5L982.7 186.4L982.9 186.9ZM1002 175.1L1001.9 175.3L1000.8 175.9L999.9 176L999.5 176L998.8 175L998.7 174.6L998.1 174.1L998.3 173.6L999.1 173.5L1000.5 172.8L1002 173.5L1002 175.1ZM983.3 104.3L983.3 105L981.7 104L981.6 103.6L981.7 103.4L981.9 103.3L982.7 103.6ZM999.1 106.4L999.7 106.4L999.9 106.3L1001 107.1L1001 107.6L1001.1 108.1L1000.4 109.1L1000.3 109.4L1000 109.7L998.7 109L998.3 108.5L998.2 107.5L998.6 106.1ZM1000.8 118.1L1000.1 120.5L999.5 119.7L999.7 119.2L999.3 118.7L999.2 118.3L999.4 117.8L999.8 117.3L999.9 115.7L1000.9 115.2L1001.3 115.2L1001.2 115.5L1001.2 116.3ZM1001.6 101.4L1001.6 101.8L999.5 100.3L999.4 100L999.4 99.8L999.5 99.6ZM1000.2 91.9L1000.4 92.2L1000.2 92.2L1000.1 92.3L999.6 93L1000.1 94.3L999.8 95.3L999.3 95.3L999.1 95.2L999.2 94.7L999.3 94.5L999.2 93.9L998.8 93.5L998.6 92.7L998.2 92.3L998.4 91.5L999.6 91.4ZM999.2 52.8L998.6 53.5L998.2 53.3L998.6 52.6L998.6 52.3L998.8 51.8L999.4 51.6L999.8 52.1ZM992.7 50.8L992.7 51.5L992.2 51.2L992.1 50.6L992.1 50.3L992.3 49.8L992.7 50.2ZM995.3 48L995.4 48.9L994.8 48.9L994 48.3L993.9 48.1L993.9 47.8L994.1 47.6ZM999.5 37.7L999.4 37.9L999.1 37.8L999.4 36.8L999.9 36.6L1000.2 36.7ZM998.7 33.5L998.3 34.3L997.9 34.3L998 33.8L998.5 32.9L998.6 32.9ZM1000.3 290.2L999.7 290.4L998.6 289.3L998.1 288.4L998.2 287.9L998.5 287.4L998.7 287.3L998.6 286.9L999.1 286.6L999.6 286.7L999.9 287.3L1000.3 287.5L1000.5 288.1ZM998.6 241.7L999 242.1L998.8 242.6L998.5 242.5L997.6 242.5L997.3 242.5L996.8 242.8L996.6 242.8L996.8 242.4L997.5 241.7L998 241.8ZM985.8 298.5L985.4 300.1L985.2 299.5L985.1 298L984.9 297.3L985 296.5L985 294.4L985.3 293.4L985.8 294.6L986 295.3ZM998.8 340.2L998.3 340.3L997.3 340L997.1 339.9L997.9 339.4L998.6 338.7L999.4 338.7L999.9 338.8L999.7 339.6ZM975.6 322.1L975.2 322.2L974.8 322.1L974.9 321.2L974.7 320.7L975.1 320.2L975.2 319.4L975.4 319.1L975.6 319.4L975.7 319.5L975.9 319.6L976.4 319.6L976.5 320L976.4 320.3L976.2 320.7L975.7 321.1L975.3 321.5ZM971.8 317.3L971.4 317.3L971.3 316.9L971.4 316.5L971.9 316.3L972 316.3L972.3 316.7L972.4 316.9L972.1 317.1ZM938.5 322.4L938.2 322.8L937.4 322.2L937.2 321.9L937.8 321.5L938 321.5L938.5 321.9ZM936.2 305L935.5 305.1L934.7 304.8L934.7 304.3L934.9 303.9L936 303.7L936.6 303.7L937.2 304L937.7 304.3L937.9 304.7L936.7 304.7ZM910.7 293.8L910.5 294.1L909.6 294.1L909.4 293.7L910 293L910.4 292.9L910.8 293.2ZM960.7 198.8L958.9 199.3L957.9 198.1L958.2 197.3L958.2 196.9L958.7 196.8L959.2 196.9L960.4 197.5L960.7 198.4ZM958.2 206.2L958.1 206.6L957.2 205.8L957 205.2L957.1 204.8L958 204.7L958.4 205ZM946.3 271.1L946 272.8L945.4 271.8L946 270.7L946.3 270.5ZM945.2 275L943.1 276.8L942.8 276.3L943 274.5L942.4 273.4L942.5 272.5L942.8 271.1L943.4 269.9L944.5 269.1L944.8 269.1L944.8 270.5L945 271L945.1 271.4L945 271.8L945.2 273.6L945.3 274L945 274.5ZM874.5 253.4L873.4 253.8L873 252.9L873.8 252.6L874.5 252.8ZM881.8 249.1L879.9 250.1L879.4 250.1L879.1 249.7L879.3 247.8L879.5 247.3L880.9 247.2L881.7 247.5L882.1 247.8L882.2 248.4L882.2 248.8ZM873.9 209.9L873.4 210.4L872.9 210L873.7 209L873.8 208.9ZM868.4 202.3L867.1 202.6L866.3 202.1L867.1 201.5L867.4 201.5L867.6 201.4L867.7 201.1L866.2 200.7L865.8 200.4L865.4 199.5L865.4 198.9L867.3 197.4L867.7 197.2L867.8 197.8L869.1 199.4L869.2 200.5L869.1 200.9ZM848.8 207.4L848.8 208.1L848.2 207.7L848 207L848.3 206.7L848.7 206.9ZM843.8 210.3L843.4 210.3L843.3 210L843.3 209.5L843.2 209.1L843.1 208.8L843.1 208.3L843.5 208.6L843.8 208.8L844.1 209L844.4 209.1L844.5 209.2L844.3 209.9ZM804.8 217.8L805.4 218.6L805.5 219.1L805.1 219.7L805 220.6L803.8 221.3L802.8 221.1L802.5 220.9L801.9 219.5L802 218.4L802.4 217.9L803.3 218L804.2 217.3ZM811.7 228.3L811.3 228.6L810.8 228.1L810.3 227.5L810.1 226.8L809.9 225.6L809.8 224.8L810.1 224.4L810.3 224.4L811.1 224.9L811.6 225.7L811.9 225.9L812 226.7L811.8 227.5ZM812.4 223.8L812.4 225L811.7 224.7L811.2 224.2L810.3 223.8L809.2 223.7L808.4 223.4L807.8 222.8L807.8 222.5L807.9 222.3L808 222.2L812.2 223.3ZM817.5 230.6L817.4 231L817 230.7L815.1 230.3L814.5 230.3L812.9 229.8L812.4 229.6L812 229.2L812.1 228.7L812.4 228.3L812.5 227.3L812.9 226.9L813.7 227.7L814.6 228.3L815.1 228.6L816.7 229.2L817.3 229.5ZM818.9 229.4L818.6 229.7L818.1 229.6L817.6 229.3L816.9 228.7L816.2 228.2L815.2 227.9L814.6 227.8L814.4 227.7L814.6 226.7L815.2 226.6L817.2 227.5L817.9 228ZM820 232.6L818.9 232.6L818.6 232.5L818.7 231.6L819 231.1L819.5 231.1L820.1 231.9ZM821.3 227.7L821.4 228.2L820.7 228.1L820.3 227.5L820.7 227.1L820.9 226.9L821.2 227.5ZM821.6 231.4L821.4 231.5L820.6 230.3L820.8 229.6L821 229.4L821.4 229.9L821.8 230.3L822.1 230.8ZM825.2 230.1L825.3 230.4L824.4 229.8L824.4 229.4L824.5 229.2L825 229.7ZM827.1 226.4L827.7 226.9L828.2 226.6L828.2 226.9L828.1 227.3L827.5 228.3L826.5 228.1L826.3 227.7L826.2 227.5L826.3 227.3L826.5 226.9L826.9 226.9ZM832.5 226.1L832.5 226.8L833.1 227.2L833.2 227.7L833.1 228.6L832.6 229.5L832.4 229.8L831.7 229.6L831.5 229.3L831.4 229L831.5 228.8L831 228.6L831.3 228.2L831.1 227.7L829.7 228L829.3 228L829.2 227.4L829.3 227.2L830.4 226.4L831 226.3L831.7 226.5ZM829.2 229.8L828.6 230.1L827.8 229.2L827.8 229L827.9 228.8L828 228.7L828.5 229.2L829 229.3ZM833.5 237.2L833.6 237.5L833.1 237.2L832.9 237L832.7 236.9L831.7 235.6L832.1 235.6L833.2 236.8ZM834.3 239.5L834.6 239.6L835 239.1L835.6 239.8L836 240.2L836.5 240.5L836 240.5L835.8 240.8L835.7 240.9L833.6 239.8L832.3 240.2L831.4 239.8L831.2 239.6L831.6 239L832.1 237.6L833 238L833.2 238.4L833.1 238.5L833.7 238.8ZM831.4 241L832.3 241.9L832.5 242.3L832.1 242.8L831.7 243.5L831.5 243.7L830.8 243.4L830.4 244.1L830.1 243L829.4 242.2L829.8 241.5L829.9 241.4L830.2 241.5L830.4 241.7ZM824.3 241.1L823.1 241.5L821.7 241.2L821.8 240.7L822.5 240L823.1 240L824.2 240.5L824.6 240.8ZM867.3 266.6L867.2 267.6L866.9 268L866.1 268.5L865.9 268.8L865.1 268.8L865 268.2L864.8 267.9L864 267.5L863.8 267.6L863.6 268.2L862.1 268.6L861.6 268.7L861.8 267.8L861.4 267.2L861.4 266.4L861.3 266.1L861.1 265.9L861.5 265.3L861.5 264.7L861.9 264.1L862.1 262.5L863.8 262.1L864.1 262.4L866 262.8L867.4 263.7L868.1 265ZM860.3 265.7L859.9 265.9L859.6 265.7L859.6 265.4L859.7 265.1L860.3 265.1L860.5 265.2ZM854.6 266.7L854.5 266.9L853.9 266.8L853.6 266.5L853.3 266.3L853.2 266L853.8 265.7L854.9 266ZM838.9 301.8L838.3 302L837.9 301.8L837.7 301.5L838.3 300.9L838.7 300.7L839 300.6L839.2 301ZM764.2 223.7L766.3 226.4L767.1 226.8L768.3 228L768.5 228.4L768.2 229.3L768 231.7L767.5 232.4L766.2 232.1L766.1 231.6L765.4 229.8L764 228.7L763.5 228.7L763.1 227.6L762.4 226.4L760.3 224.1L761.9 224.1L762.7 223.5L762.9 223.1L763 223ZM811.2 290.5L810.4 290.6L808.9 289.4L808.7 289L809.1 288.7L809.6 288.7L811.2 289.5L811.5 289.8ZM792.5 268.4L792.9 269.8L791.7 268.8L791.8 268.2L791.6 267.7L790.9 267.2L790.4 266.5L790.1 264.9L790.3 264.6L790.8 264.6L792.8 266.7L792.9 267L792.9 267.8L792.6 268ZM790.4 264.1L789.7 264.9L788.6 264.9L788.3 264.4L788.4 263.3L788.1 262.9L788.1 262.7L788.3 262.1L788.5 261.9L790.4 263.6ZM786.9 260.3L787 260.6L785.4 259.7L784.6 259.5L784 258.6L784.2 258.1L784.2 257.5L784.3 257.3L784.8 257.2L785.4 257.6L785.9 258.7L786.7 259.8ZM780.4 254.9L779.5 254.9L777.6 253.8L777.1 253.3L777 252.6L775.2 249.9L775 249.3L775.7 247.1L777.5 246.6L778.2 247L778.4 248L779.4 249.7L779.8 250.7L780 251.1L780.1 251.4L780.1 251.7L780.8 252.8L781.4 253.4L781.4 254.5ZM773.6 242.9L773 243.3L772.1 242.9L772.5 242.3L772.6 241.4L773.1 240.8L773.3 240L772.3 237.8L772.8 237.7L773.2 238L773.8 239.4L774.4 240.3L774.2 241.4ZM762.8 217.8L762.7 218.1L761.7 217L760.6 216.5L761.1 216.3L762 216.5L762.4 216.6L762.7 217.1ZM754.4 215.1L753.8 215.2L753.3 215L752.8 214.4L750.2 212.8L749.4 212.8L748.8 212.4L748.1 212.3L747.4 211.2L747.2 210.6L747.8 210.3L748.1 209.8L749 210L749.9 211L750.9 211.4L751.2 211.6L751.7 212.2L754 213.6L754.2 214.1L754.4 214.6ZM743.8 181.8L743.6 182.1L743.1 181.9L742.5 181.1L742.7 180.9L743.1 181L743.8 181.2L743.9 181.5ZM897.9 214.6L897.6 214.7L897.2 214.3L897.1 211.4L897.4 211.2L897.6 211.2L897.8 211.7L897.8 213L897.8 214.1ZM953.2 168.7L952.6 169.2L952.4 168.6L952.5 167.8L953.3 167.1L954.4 166.9L954.5 167.5L954.4 168.2L954.2 168.5ZM888.3 30.3L888.6 30.6L889.6 30.4L889.8 30.8L889.7 31L889.4 31.6L888.6 31.2L887.8 31.2L887.3 31.2L887.1 31L887.5 30.5ZM861.5 29L860.1 30.3L859.6 30.3L860.1 28.8L860.3 28.5L861.1 29ZM860.7 32L860.2 32.2L859.5 32.2L860.3 31.7L860.7 31.1L861 30.9L861 31.4ZM856 33.8L855.6 33.9L854.9 33L855.2 32.6L856.1 32.9L856.3 33.1L856.3 33.3L856.1 33.7ZM854.4 33.1L854.3 33.3L853.8 32.8L853.5 32.6L853.8 32L854.3 32.7ZM852 154L851.8 154L851.5 153.8L852.4 153.2L852.3 153.6L852.4 153.8ZM827.5 137.3L827.7 137.8L827.6 139L827.2 140.1L827.4 140.6L827 140.9L826.4 138.8L825.6 137.9L825.4 137.5L825.9 137.6L826.7 137L827.1 137ZM817.7 128.6L817.5 128.7L817.4 128.7L817.2 128.5L817.2 128L817.3 127.6L817.6 127.6ZM813.5 124.7L813.3 125.8L812.8 125.4L812.9 124.8L813.1 124.6ZM811.7 121.7L811.8 121.9L811.3 121.7L811.1 121.8L810.5 121.8L810.3 120.4L810.3 120.1L810.7 120.2L811.3 120.9L811.6 121.3ZM826.6 225L825.1 225.6L823.5 225.1L824 224.1L825.1 223.9L826 224.2L826.5 224.4L826.8 224.7ZM829 211.5L828.5 211.6L828.3 211.6L828.1 211.2L828.5 210.3L828.6 210.2L829 211.1ZM791.2 186.8L790.9 187.1L790.3 186.9L790.4 185.4L790.8 185.2L791.4 185.4L791.7 185.7ZM787 175.5L787.6 176.5L787.3 177L787.1 177.1L786.7 177L786.3 177.4L786 177.4L785.6 176.7L785.1 176.5L785 176L785.6 175.9L786 176L786.7 175.7ZM785.2 175L785 175L784.6 174.2L785.1 173.1L785.5 174.5ZM789.1 144.1L789 144.3L788.7 144L788.4 143.6L788.2 143.2L788.8 143.2L789.1 143.6ZM789.1 145.2L789.1 145.8L788.9 146.4L788.1 146.8L787.8 146.3L787.8 145.4L788 145.2L788.8 145.3ZM774.9 161.3L774.8 161.4L774.3 159.6L775 160.1ZM773.1 161.6L773 162.3L772.6 162.3L772.2 162.7L772 162.8L771.7 161.4L772.1 159.3L772.3 159L772.6 159.6L773.4 159.8L773 161ZM772.1 150.4L771.6 150.5L771.7 150L771.8 149.6L772.1 149.6L772.2 150.1ZM729.7 172L729.1 172.8L728 170.3L727.4 170.2L727.4 169L727.7 168.5L729 168L729.4 168.3L730.1 170.6ZM728.2 166.9L727.3 167.8L726.8 167.2L727 166.9L727.4 166.6L727.8 166.4ZM722.5 158.2L722.8 158.6L722.2 158.5L721.7 158L721.9 157.4L722.1 157.2ZM725.4 161.8L724.6 161.8L724.4 161.4L724.1 161L724.3 160.6L724.7 160.5L725.3 161.1L725.4 161.6ZM726.3 160.1L725.8 160.4L725.7 160.4L725.7 160.1L725.6 159.9L725.6 159.6L725.5 159L725.9 158.5L726.2 158.6L726 159.1ZM719.1 149.6L718.6 149.6L718.4 149.3L718.4 148.9L718.6 148.7L718.8 148.5L719.1 148.6L719.3 149.2ZM716.3 135.7L716 136.1L715 135.8L715.1 134.8L714.9 133.8L715.1 133.4L715.8 132.7L716.4 132.4L716.8 133.3L717 134.3ZM718.2 127.6L717.7 127.8L717.2 127.6L717.6 127.2L717.7 126.4L718.1 126.8L718.1 127.4ZM721.3 121.2L721.7 122.6L721 122L720.7 121.6L721.1 121.3ZM718.4 113.1L718.1 113.7L718.1 112.3L718.2 112.2L718.3 112.1L718.5 112.2ZM718.5 126.1L718.2 126.4L717.9 126.1L717 124.3L716.9 123.2L716.6 122.8L716.9 122.3L717.4 122.1L717.6 121.4L717.7 120.5L718 119.7L718.2 119.5L718.9 119.5L719.1 119.4L719 118.6L718.6 118.3L718.4 118.1L718.4 116.2L718.5 115.5L718.8 115L718.6 113.9L718.7 113.5L719.3 112.9L719.5 111.7L719.3 111.3L719.8 109.4L719.7 108.2L720.4 106.9L721.4 106.4L721.7 106.3L721.8 107.4L721.9 107.8L721.3 108.4L721.8 109.2L721.8 109.5L721.5 110.2L721.2 110.8L720.6 111.1L720.3 112L720 112.3L720.8 113.2L721 116.3L720.5 117.1L719.8 117.3L720 119.3L719.9 119.8L719.2 120.8L719.1 121.2L718.7 121.6L718.8 122.2L719.2 122.4L719.2 122.8L718.9 123.9L718.8 125.1ZM774.4 131.8L774.2 131.8L774 131.7L773.8 131.6L774.3 130.5ZM771.2 131.8L772 133.5L771.9 133.8L771.8 133.9L771.6 133.9L771.3 133L770.7 132.4L770 132.5L770.6 131.7L770.8 131.6ZM770.9 141.8L770.5 142.4L770.3 142.3L770.5 141.4L771.3 140.7L772 140.7L771.9 141.1L771.4 141.6ZM771.3 126.7L771.3 126.9L771.2 126.9L771 126.8L771.1 125.8L771.5 125.1L771.9 123.9L772.1 123.7L772.1 124.3L771.9 125.6L771.7 126.2ZM774.2 122.5L773.7 122.6L773.6 121L773.7 120.7L774.2 121.5L775.1 122L774.7 122.3ZM769.9 124.6L770 125.1L769.4 124.6L769.3 122.9L769.8 124L770 124.2ZM774.5 124.1L774.3 126.1L773.7 125.8L773.4 125.8L773 124.7L773 124.4L772.8 123.6L774.2 123.5ZM770.5 120.1L770.4 120.1L770.2 120.1L769.9 120L769.6 119.3L769.7 118.8L769.9 118.7L770.2 118.7L770.3 118.8L770.4 119L770.3 119.4L770.3 119.7ZM769.8 117.7L769.8 118.1L769.2 118.8L768.7 118.4L768.6 118.2L769.1 117.7L769.6 117.8L769.8 117.7ZM773.2 115.7L773.4 116L773.7 116L773.6 116.9L772.8 118.1L772.4 118.3L772.2 118.3L772.4 116.5L772.1 115.6L772.2 114.9L773 115.2ZM772.2 110.8L772.1 112.4L771.7 111.6L771.6 110.7L771.6 109.9L771.7 109.7L771.8 109.9L772 110.2ZM765.1 79.4L764.7 79.5L764.2 78.9L764.1 77.3L764.5 77L764.8 76.9L765.2 77.1L765.3 77.3L765.3 77.6L765.2 78ZM779.6 164.6L779.8 165.8L779.5 165.5L779.2 165L779.2 164.3L779.2 164.1ZM738.5 83.7L738.3 84L737.9 83.8L737.8 83.7L738.7 82.6L738.8 83ZM735.3 82.5L734.7 83.4L734.5 82L735.5 81.2L736 80.4L736.5 79.9L736.7 80.5L736.2 81.7ZM727.7 54.9L727.6 55L726.6 54.1L725.8 53L727.1 52.8L728.3 53.1L728.3 53.6L728 54.6ZM725.8 42.6L726 44L725.4 43.5L725.1 42.7L725.1 42ZM721.2 42.3L721.3 43.2L720.9 42.8L720.3 41.5L720.3 40.6L720.7 41ZM728 46L729.1 46.8L729.5 46.8L730.2 47.3L730.2 47.5L730.1 48L729.8 48.3L729 48.7L728.4 48.4L728.2 47.4L727.5 47L727.3 46.7L727.7 46.1ZM710.3 22.6L710 23.5L709.8 22.9L709.9 22.1L710.1 21.7L710.2 21.7L710.4 22.1ZM711 26L710.4 26L710.2 25.7L710.3 25.3L710.1 23.9L710.6 23.8L710.9 23.8L711 24.2L711.1 24.9ZM703.3 19.1L702.3 19.8L702.7 15.5L703.4 17.1L703.6 18ZM707.3 16.9L706.8 17.2L706.4 17L705.8 16L706.1 14.7L706.3 14.5L706.5 14.9L706.9 15.8L707.2 16.5ZM698.5 10.9L698.6 11.3L698.1 11.1L697.7 10.7L697.4 10.3L697.8 10.1ZM699.7 20L698.1 20.3L697.2 20.2L698.8 17.5L698.8 16.3L698.5 15.3L697.7 14.5L697.7 13.9L697.3 13.1L697.1 12.2L698 11.9L698.7 12.4L698.8 12.7L699 13.5L699.4 14.3L700.6 15.8L700.6 16.8L700.3 19.2ZM595.8 144.8L595.3 144.9L594.8 144.2L594.7 143.9L594.8 143.8L594.9 143.7L595.1 143.7L595.3 144.3ZM594.9 150.4L595.2 151.1L594.4 150.7L593.9 150.2L593.7 149.9L594.8 150.3ZM254.6 354.8L255.1 356.2L255.1 357.2L254.9 357.5L254.4 357.3L253.7 356.5L252.2 355.7L252.9 355.6L253.3 355.7L253.7 355.6L254 355.2L254 354.9L254.4 354.7ZM248 357L248.7 357.6L246.8 357.4L246.5 356.8L246.5 356.4L247.2 356.5ZM261.4 363.6L260.8 363.7L260.5 363.5L260.3 362.8L260.5 362.2L260.5 361.8L260.1 360.9L260.5 360.4L261 361L261.2 361L261.8 361.4L261.6 362.1L261.6 362.4L261.4 363.1ZM244.9 353L244.7 353.2L243.9 352.6L243.3 352.5L242.6 351.6L242.9 348.4L243.1 348L243.3 347.9L243.7 347.8L244.2 348.2L244.1 350.2L244.7 351.6L245.1 352.7ZM208.8 314.7L208.3 314.9L208.1 314.7L207.8 314.3L208.3 314L208.9 313.3L210.1 312.3L210.5 311.7L210.7 311.6L210.6 312.3L209.9 314L209.3 314.1ZM221.2 258.6L220.8 258.6L221 258.1L222 257.4L222.5 257.5L222.5 257.7L222.5 257.8L222.3 258ZM206.8 297.3L207.5 299.3L207.4 299.7L206.9 300L206.6 300L206.3 299.6L206 298.9L205.6 299.1L205 298.3L204.3 298.2L203.7 297.3L204 296.4L203.8 294.9L204.5 294.2L205 292.9L205.4 293.8L205.5 295.1L206.1 296.7L206.7 297.2ZM381.3 439.1L380 439.4L378.7 439.3L378.2 438.7L378.1 438.5L378.5 438.3L378.5 437.6L378.7 436.4L379 436L379.7 435.6L380 434.7L380.6 434.1L381.3 434L382.1 435.1L382.6 436.3L382.5 437.4L382 437.9L381.8 438.6ZM363.5 447.9L362.1 448.2L361.2 448.1L359.3 447.2L358.8 446.6L358 445L358.2 444.4L358.8 443.4L360.1 443L361.5 443.1L362.2 443.4L362.9 444.6L363.9 445.8L363.7 447.2ZM291.8 367.4L291.8 367.8L290.5 367.7L290.3 366.4L291 366.4L291.1 365.9L291.5 365.8L291.9 366.9ZM307.1 402.7L306 404.6L306.3 403L307.6 400.8L308 400.6ZM210.3 285L210.4 285.5L210.2 286L210.2 287.4L210.2 288.4L209.6 289.7L209.2 290.2L208.8 290.1L208.5 289.9L208.2 289.5L208.7 287L208.5 285.2L209.5 285.4ZM361 283L361 283.9L360.6 283.6L360.4 283L359.8 282.5L359.5 282.1L360.2 281.7ZM988.2 306.4L987.1 306.5L986.9 306.4L986.8 305.4L987.9 305.8L988.2 305.9ZM957.2 318.5L957 318.5L956.6 318.3L956.7 317.9L956.5 317.3L956.6 316.7L957.1 316.4L958.2 316.4L958.3 316.8ZM918.7 12.5L918.8 13L918.1 12.3L917.9 12.2L917.5 12L917.3 11.5L917.9 11.5L918.4 12ZM911.4 25L911.2 25.2L910.9 24.9L910.8 24.3L910.6 24L911.1 23.6L911.3 23.3L911.8 23.3L912.1 23.5L911.6 23.9L911.5 24ZM910 24.6L909 24.8L908.8 24.8L909.2 24.3L910 23.9ZM923 18.7L921.8 18.7L921.6 18.6L921.5 18.4L921.9 18L923.4 17.4L923.1 18ZM857.3 137.3L856.5 137.9L856.5 137.4L857.2 137.1L857.4 136.8L857.6 136.8ZM820.3 134.1L819.9 134.5L819.4 133.7L819.4 133.5ZM524 308.9L523.8 309.3L523.3 309.5L523.2 308.5L522.6 307.8L522.8 307.8L523.3 308.2L523.5 309.1L523.7 308.8L523.7 308.5L523.8 308.3L523.7 308L523.4 307.5L523.5 307.4L524 307.8L524 308.1ZM526.7 129.4L526.7 129.5L526.7 129.3L526.7 129L526.8 128.8L526.9 128.8L526.9 129L526.8 129.3ZM529.5 158L529.4 158.1L529.2 158.2L529.1 158.2L529.1 158L529.1 157.9L529.2 158.1L529.4 158L529.6 157.7L529.6 157.6L529.6 157.8ZM532.9 206.7L532.6 206.7L532.5 206.6L532.5 206.3L532.7 206.2L533 206.1L533.1 206.3L533 206.5ZM533.8 197.7L533.6 197.8L533.4 197.8L533.4 197.7L533.5 197.5L533.6 197.3L533.7 197L533.8 196.9L533.9 197L533.9 197.1L533.9 197.3L533.8 197.5Z","borders":""}};
+/*MAPDATA:END*/
+</script>
+<script>
+(function () {
+  "use strict";
+  var NS = "http://www.w3.org/2000/svg";
+  var RAD = Math.PI / 180;
+  var D = window.MAPDATA;
+
+  /* ---------- helpers ---------- */
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    if (attrs) for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function r1(n) { return Math.round(n * 10) / 10; }
+  // Mercator matching tools/build-maps.mjs: x = s·λ + tx, y = ty − s·ln tan(π/4 + φ/2)
+  function projector(m) {
+    return function (lon, lat) {
+      return [m.s * lon * RAD + m.tx, m.ty - m.s * Math.log(Math.tan(Math.PI / 4 + lat * RAD / 2))];
+    };
+  }
+  function pathFrom(P, pts) {
+    var d = "";
+    for (var i = 0; i < pts.length; i++) {
+      var xy = P(pts[i][0], pts[i][1]);
+      d += (i ? "L" : "M") + r1(xy[0]) + " " + r1(xy[1]);
+    }
+    return d;
+  }
+  function baseMap(svg, m) {
+    svg.setAttribute("viewBox", "0 0 " + m.w + " " + m.h);
+    el("rect", { "class": "water", width: m.w, height: m.h }, svg);
+    el("path", { "class": "land", d: m.land }, svg);
+    if (m.borders) el("path", { "class": "borders", d: m.borders }, svg);
+  }
+  // A label pinned to a lon/lat. Its inner group is counter-scaled (see --k)
+  // so text and markers keep a constant on-screen size at any map width.
+  function pin(parent, P, lonlat, lines, o) {
+    o = o || {};
+    var xy = P(lonlat[0], lonlat[1]);
+    var g = el("g", { transform: "translate(" + r1(xy[0]) + " " + r1(xy[1]) + ")", "class": "lbl " + (o.cls || "") }, parent);
+    var s = el("g", { "class": "sc" }, g);
+    if (o.mark === "dot") el("circle", { r: 3.5, "class": "mk" }, s);
+    if (o.mark === "ring") el("circle", { r: 4.5, "class": "mk ring" }, s);
+    if (o.mark === "tri") el("path", { d: "M0 -6L5.5 3.5H-5.5Z", "class": "mk wp" }, s);
+    if (o.mark === "sat") el("path", { d: "M0 -6.5L6.5 0L0 6.5L-6.5 0Z", "class": "mk sat" }, s);
+    if (o.title) el("title", null, s).textContent = o.title;
+    if (!lines) return g;
+    var anchor = o.anchor || "start";
+    var dx = o.dx != null ? o.dx : (anchor === "end" ? -9 : anchor === "middle" ? 0 : 9);
+    var dy = o.dy != null ? o.dy : 4;
+    var t = el("text", { x: dx, y: dy, "text-anchor": anchor }, s);
+    [].concat(lines).forEach(function (ln, i) {
+      var ts = el("tspan", { x: dx, dy: i ? "1.25em" : "0" }, t);
+      if (i && o.sub) ts.setAttribute("class", "sub");
+      ts.textContent = ln;
+    });
+    return g;
+  }
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function hms(sec, withSec) {
+    sec = Math.round(sec);
+    var h = Math.floor(sec / 3600) % 24, m = Math.floor(sec / 60) % 60, s = sec % 60;
+    return pad(h) + ":" + pad(m) + (withSec ? ":" + pad(s) : "");
+  }
+  function utcLabel(secMYT) {
+    var u = secMYT - 8 * 3600, day = "8 Mar";
+    if (u < 0) { u += 86400; day = "7 Mar"; }
+    return hms(u, true) + " UTC, " + day;
+  }
+
+  // Keep pinned labels a constant size: --k = viewBox units per CSS pixel.
+  var ro = "ResizeObserver" in window ? new ResizeObserver(function (entries) {
+    entries.forEach(function (e) {
+      var svg = e.target, vb = svg.viewBox.baseVal, w = e.contentRect.width;
+      if (!w || !vb || !vb.width) return;
+      svg.style.setProperty("--k", (vb.width / w).toFixed(3));
+      svg.classList.toggle("is-small", w < 560);
+    });
+  }) : null;
+
+  /* ---------- Prologue: one dot per person ---------- */
+  var SOULS = [
+    ["China", 153], ["Malaysia", 38, 12], ["Indonesia", 7], ["Australia", 6], ["India", 5], ["France", 4],
+    ["United States", 3], ["Canada", 2], ["Iran", 2], ["New Zealand", 2], ["Ukraine", 2],
+    ["Netherlands", 1], ["Russia", 1], ["Taiwan", 1]
+  ];
+  var souls = document.getElementById("souls");
+  if (souls) {
+    SOULS.forEach(function (row, i) {
+      var pax = row[1], crew = row[2] || 0, total = pax + crew;
+      var g = document.createElement("div");
+      g.className = "grp" + (i === 0 ? " big" : "");
+      g.title = row[0] + ": " + (crew ? pax + " passengers and " + crew + " crew" : total + (total === 1 ? " passenger" : " passengers"));
+      var h = document.createElement("h3");
+      h.innerHTML = "<em style='font-style:normal'></em><span></span>";
+      h.firstChild.textContent = row[0];
+      h.lastChild.textContent = total;
+      var dots = document.createElement("div");
+      dots.className = "dots";
+      dots.setAttribute("aria-hidden", "true");
+      for (var j = 0; j < total; j++) {
+        var d = document.createElement("i");
+        if (j >= pax) d.className = "crew";
+        dots.appendChild(d);
+      }
+      g.appendChild(h); g.appendChild(dots);
+      souls.appendChild(g);
+    });
+  }
+
+  if (!D) return;
+
+  /* ---------- Fig. 1: the last radar track ---------- */
+  (function () {
+    var svg = document.getElementById("map-night");
+    if (!svg) return;
+    var M = D.zoom, P = projector(M);
+    baseMap(svg, M);
+
+    // [seconds after midnight MYT, lon, lat]: published fixes, approximate between them.
+    var TRACK = [
+      [2520, 101.710, 2.745],  // 00:42 takeoff, KLIA
+      [4831, 103.585, 6.936],  // 01:20:31 IGARI
+      [4873, 103.650, 7.010],  // 01:21:13 transponder lost
+      [4960, 103.470, 6.880],  // the turn back
+      [5580, 102.290, 6.170],  // over Kota Bharu
+      [6751, 100.280, 5.220],  // 01:52 south of Penang Island
+      [7380, 98.940, 5.680],   // 02:03 Pulau Perak
+      [8532, 96.720, 6.810]    // 02:22:12 last military radar return
+    ];
+    var XPDR_OFF = 4873;
+    var EVENTS = [
+      { t: 2520, title: "Takeoff", text: "MH370 departs Kuala Lumpur International Airport for Beijing with 239 people on board." },
+      { t: 3674, title: "Cruise", text: "The aircraft levels off at 35,000 feet, heading northeast over the South China Sea." },
+      { t: 4020, title: "Last ACARS report", text: "The last automatic maintenance report is sent. The next, due at 01:37, never arrives." },
+      { t: 4770, title: "Last words", text: "“Good night. Malaysian three seven zero.” The last radio call from the aircraft." },
+      { t: 4873, title: "Transponder signal lost", text: "Near waypoint IGARI the transponder stops transmitting. MH370 vanishes from civilian radar." },
+      { t: 4930, title: "The turn back", approx: true, text: "Military radar sees an unidentified aircraft turn back to the southwest, most likely under manual control." },
+      { t: 5880, title: "Missing", text: "Ho Chi Minh City controllers call Kuala Lumpur. MH370 has not checked in." },
+      { t: 6751, title: "Penang", text: "The aircraft passes just south of Penang Island and heads over the Strait of Malacca." },
+      { t: 7380, title: "Pulau Perak", text: "It passes the islet of Pulau Perak and turns northwest along a line toward the Andaman Sea." },
+      { t: 8532, title: "Last radar contact", text: "About 200 nautical miles northwest of Penang the military radar loses it. MH370 is never seen on radar again." }
+    ];
+
+    var places = el("g", null, svg);
+    [
+      [[101.9, 4.3], "MALAYSIA"], [[99.5, 8.7], "THAILAND"], [[98.6, 2.5], "SUMATRA"],
+      [[107.6, 11.15], "VIETNAM", "minor"], [[104.4, 11.25], "CAMBODIA", "minor"]
+    ].forEach(function (p) { pin(places, P, p[0], p[1], { anchor: "middle", dx: 0, cls: "place " + (p[2] || "") }); });
+    [
+      [[102.4, 9.6], "Gulf of Thailand"], [[106.2, 5.6], "South China Sea"], [[97.6, 9.5], "Andaman Sea"],
+      [[99.75, 3.85], ["Strait of", "Malacca"], "minor"]
+    ].forEach(function (p) { pin(places, P, p[0], p[1], { anchor: "middle", dx: 0, cls: "sea " + (p[2] || "") }); });
+
+    // Planned route (schematic) beyond IGARI.
+    el("path", { "class": "route-planned", d: pathFrom(P, [[101.71, 2.745], [103.585, 6.936], [105.0, 8.55], [106.0, 9.55]]) }, svg);
+    var civil = el("path", { "class": "route-civil" }, svg);
+    var mil = el("path", { "class": "route-mil" }, svg);
+
+    var pins = el("g", null, svg);
+    pin(pins, P, [101.71, 2.745], "Kuala Lumpur (KLIA)", { mark: "dot" });
+    pin(pins, P, [103.82, 1.35], "Singapore", { mark: "dot", cls: "minor" });
+    pin(pins, P, [100.33, 5.41], "Penang", { mark: "dot", anchor: "start" });
+    pin(pins, P, [102.24, 6.13], "Kota Bharu", { mark: "dot", anchor: "end", dy: 13, cls: "minor" });
+    pin(pins, P, [98.94, 5.68], "Pulau Perak", { mark: "dot", anchor: "middle", dy: 17 });
+    pin(pins, P, [106.63, 10.82], "Ho Chi Minh City", { mark: "dot", anchor: "end" });
+    pin(pins, P, [103.585, 6.936], "IGARI", { mark: "tri", dx: 9, dy: -6, title: "Waypoint IGARI, handover point to Vietnamese air traffic control" });
+    pin(pins, P, [105.0, 8.55], "Planned route", { anchor: "start", dx: 6, dy: 14, cls: "minor" });
+    var lastPin = pin(pins, P, [96.72, 6.81], ["Last radar contact", "02:22:12"], { mark: "ring", anchor: "start", dx: 10, dy: -16, sub: true });
+    var lastLabel = lastPin.querySelector("text");
+
+    // The aircraft and its radar data tag.
+    var plane = el("g", { "class": "plane" }, svg);
+    var ps = el("g", { "class": "sc" }, plane);
+    var glyph = el("g", null, ps);
+    el("path", { d: "M0 -11L1.8 -4L10 1V3.4L1.8 1.2L1.3 7.5L4.2 9.6V11L0 10L-4.2 11V9.6L-1.3 7.5L-1.8 1.2L-10 3.4V1L-1.8 -4Z" }, glyph);
+    var tag = el("text", { x: 13, y: -6 }, ps);
+    var tag1 = el("tspan", { x: 13, dy: 0 }, tag);
+    var tag2 = el("tspan", { x: 13, dy: "1.25em", "class": "tag-2" }, tag);
+
+    function posAt(t) {
+      for (var i = 1; i < TRACK.length; i++) {
+        if (t <= TRACK[i][0]) {
+          var a = TRACK[i - 1], b = TRACK[i], f = (t - a[0]) / (b[0] - a[0]);
+          return { lon: a[1] + (b[1] - a[1]) * f, lat: a[2] + (b[2] - a[2]) * f, seg: i };
+        }
+      }
+      var last = TRACK[TRACK.length - 1];
+      return { lon: last[1], lat: last[2], seg: TRACK.length - 1 };
+    }
+    function pointsBetween(t0, t1) {
+      var pts = [], p0 = posAt(t0);
+      pts.push([p0.lon, p0.lat]);
+      TRACK.forEach(function (k) { if (k[0] > t0 && k[0] < t1) pts.push([k[1], k[2]]); });
+      var p1 = posAt(t1);
+      pts.push([p1.lon, p1.lat]);
+      return pts;
+    }
+
+    var clock = document.getElementById("clock"), clockSub = document.getElementById("clock-sub");
+    var sig = {
+      xpdr: document.getElementById("sig-xpdr"), radar: document.getElementById("sig-radar"),
+      radio: document.getElementById("sig-radio"), acars: document.getElementById("sig-acars")
+    };
+    var now = document.getElementById("event-now");
+    var scrub = document.getElementById("scrub");
+    var list = document.getElementById("events");
+    var items = EVENTS.map(function (ev) {
+      var li = document.createElement("li");
+      var b = document.createElement("button");
+      b.type = "button";
+      b.innerHTML = "<time></time><span></span>";
+      b.firstChild.textContent = (ev.approx ? "c. " : "") + hms(ev.t, false);
+      b.lastChild.textContent = ev.text;
+      b.addEventListener("click", function () { stop(); render(ev.t); });
+      li.appendChild(b);
+      list.appendChild(li);
+      return li;
+    });
+    function setSig(node, text, lost) { node.textContent = text; node.classList.toggle("lost", !!lost); }
+
+    function render(t) {
+      t = Math.max(2520, Math.min(8532, t));
+      scrub.value = Math.round(t);
+      var civilEnd = Math.min(t, XPDR_OFF);
+      civil.setAttribute("d", pathFrom(P, pointsBetween(2520, civilEnd)));
+      mil.setAttribute("d", t > XPDR_OFF ? pathFrom(P, pointsBetween(XPDR_OFF, t)) : "");
+
+      var p = posAt(t), xy = P(p.lon, p.lat);
+      var a = TRACK[p.seg - 1], b = TRACK[p.seg];
+      var pa = P(a[1], a[2]), pb = P(b[1], b[2]);
+      var heading = Math.atan2(pb[0] - pa[0], -(pb[1] - pa[1])) / RAD;
+      plane.setAttribute("transform", "translate(" + r1(xy[0]) + " " + r1(xy[1]) + ")");
+      glyph.setAttribute("transform", "rotate(" + r1(heading) + ")");
+      var off = t >= XPDR_OFF;
+      plane.classList.toggle("dark", off);
+      tag1.textContent = off ? "NO ID" : "MAS370";
+      tag2.textContent = off ? "primary return" : (t < 3674 ? "climbing" : "FL350");
+      // At the final return the radar tag gives way to the last-contact label.
+      var lost = t >= 8532;
+      tag.style.display = lost ? "none" : "";
+      lastLabel.style.display = lost ? "" : "none";
+
+      clock.textContent = hms(t, true);
+      clockSub.textContent = "MYT · " + utcLabel(t);
+      setSig(sig.xpdr, off ? "Signal lost 01:21" : "On", off);
+      setSig(sig.radar, off ? (t >= 8532 ? "None after 02:22" : "Military radar only") : "Civil radar", off);
+      setSig(sig.radio, t >= 4770 ? "Silent since 01:19" : "In contact", t >= 4770);
+      setSig(sig.acars, t > 4020 ? "Silent since 01:07" : "Reporting", t > 4020);
+
+      var cur = -1;
+      EVENTS.forEach(function (ev, i) { if (t >= ev.t) cur = i; });
+      items.forEach(function (li, i) {
+        li.classList.toggle("is-past", i <= cur);
+        li.classList.toggle("is-now", i === cur);
+      });
+      if (cur >= 0) {
+        now.innerHTML = "<b></b><span></span>";
+        now.firstChild.textContent = (EVENTS[cur].approx ? "c. " : "") + hms(EVENTS[cur].t, false) + " · " + EVENTS[cur].title;
+        now.lastChild.textContent = EVENTS[cur].text;
+      }
+    }
+
+    var playBtn = document.getElementById("play"), raf = 0, last = 0;
+    var SPEED = 260; // flight seconds per real second
+    function tick(ts) {
+      if (!last) last = ts;
+      var t = +scrub.value + (ts - last) / 1000 * SPEED;
+      last = ts;
+      render(t);
+      if (t >= 8532) { stop(); return; }
+      raf = requestAnimationFrame(tick);
+    }
+    function stop() { cancelAnimationFrame(raf); raf = 0; last = 0; playBtn.textContent = "Play"; }
+    playBtn.addEventListener("click", function () {
+      if (raf) { stop(); return; }
+      if (+scrub.value >= 8532) render(2520);
+      playBtn.textContent = "Pause";
+      raf = requestAnimationFrame(tick);
+    });
+    scrub.addEventListener("input", function () { stop(); render(+scrub.value); });
+
+    render(8532);
+    if (ro) ro.observe(svg);
+  })();
+
+  /* ---------- Fig. 2: rings, search areas, debris ---------- */
+  (function () {
+    var svg = document.getElementById("map-arcs");
+    if (!svg) return;
+    var M = D.wide, P = projector(M);
+    baseMap(svg, M);
+    var SAT_LON = 64.5; // Inmarsat-3F1 sub-satellite point, on the equator
+
+    // Ring radii (degrees of arc on the ground) from the published BTO values.
+    var ARCS = [
+      { n: 1, myt: "02:25", utc: "18:25", d: 32.9, note: "Terminal logs back on" },
+      { n: 2, myt: "03:41", utc: "19:41", d: 30.6, note: "Hourly handshake" },
+      { n: 3, myt: "04:41", utc: "20:41", d: 31.2, note: "Hourly handshake" },
+      { n: 4, myt: "05:41", utc: "21:41", d: 33.5, note: "Hourly handshake" },
+      { n: 5, myt: "06:41", utc: "22:41", d: 37.1, note: "Hourly handshake" },
+      { n: 6, myt: "08:11", utc: "00:11", d: 43.6, note: "Last complete handshake" },
+      { n: 7, myt: "08:19", utc: "00:19", d: 44.2, note: "Partial handshake, the final signal" }
+    ];
+    function ringPoint(dist, theta) {
+      var d = dist * RAD, th = theta * RAD;
+      var lat = Math.asin(Math.sin(d) * Math.cos(th)) / RAD;
+      var lon = SAT_LON + Math.atan2(Math.sin(th) * Math.sin(d), Math.cos(d)) / RAD;
+      return [lon, lat];
+    }
+    // Points on a ring between two latitudes (east side of the satellite).
+    function ringByLat(dist, latFrom, latTo, step) {
+      var pts = [], dir = latTo > latFrom ? 1 : -1;
+      for (var lat = latFrom; dir > 0 ? lat <= latTo + 1e-9 : lat >= latTo - 1e-9; lat += step * dir) {
+        var th = Math.acos(Math.sin(lat * RAD) / Math.sin(dist * RAD)) / RAD;
+        pts.push(ringPoint(dist, th));
+      }
+      return pts;
+    }
+    function band(dist, half, latS, latN) {
+      return pathFrom(P, ringByLat(dist + half, latS, latN, 0.25).concat(ringByLat(dist - half, latN, latS, 0.25))) + "Z";
+    }
+
+    var places = el("g", null, svg);
+    [[[28, 2], "AFRICA"], [[78.5, 20.5], "INDIA"], [[121.4, -27.5], "AUSTRALIA", "end"]]
+      .forEach(function (p) { pin(places, P, p[0], p[1], { anchor: p[2] || "middle", dx: 0, cls: "place " + (p[3] || "") }); });
+    [[[74, -14], "Indian Ocean"], [[88.5, 14.5], "Bay of Bengal", "minor"], [[63, 14.5], "Arabian Sea", "minor"]]
+      .forEach(function (p) { pin(places, P, p[0], p[1], { anchor: "middle", dx: 0, cls: "sea " + (p[2] || "") }); });
+
+    // Search areas along the 7th arc (approximate).
+    var search = el("g", { "class": "layer-search" }, svg);
+    el("path", { "class": "band s2", d: band(44.2, 0.35, -35.5, -25) }, search);
+    el("path", { "class": "band s1", d: band(44.2, 0.5, -39.5, -33) }, search);
+    pin(search, P, ringPoint(44.2, Math.acos(Math.sin(-38.6 * RAD) / Math.sin(44.2 * RAD)) / RAD), ["Searched", "2014–17"], { anchor: "end", dx: -16 });
+    pin(search, P, ringPoint(44.2, Math.acos(Math.sin(-27.5 * RAD) / Math.sin(44.2 * RAD)) / RAD), ["Searched", "2018"], { anchor: "start", dx: 14 });
+
+    // Rings.
+    // The rings' western tails curve back toward the satellite's longitude,
+    // far from any possible flight path, so they fade out west of ~86°E.
+    var defs = el("defs", null, svg);
+    var fade = el("linearGradient", { id: "arc-fade", gradientUnits: "userSpaceOnUse",
+      x1: r1(P(72, 0)[0]), y1: 0, x2: r1(P(86, 0)[0]), y2: 0 }, defs);
+    el("stop", { offset: 0, "stop-color": "#fff", "stop-opacity": 0 }, fade);
+    el("stop", { offset: 1, "stop-color": "#fff", "stop-opacity": 1 }, fade);
+    var mask = el("mask", { id: "arc-mask", maskUnits: "userSpaceOnUse", x: 0, y: 0, width: M.w, height: M.h }, defs);
+    el("rect", { x: 0, y: 0, width: M.w, height: M.h, fill: "url(#arc-fade)" }, mask);
+    var arcsG = el("g", { "class": "layer-arcs" }, svg);
+    var ringsG = el("g", { mask: "url(#arc-mask)" }, arcsG);
+    var arcPaths = ARCS.map(function (a) {
+      var pts = [];
+      for (var th = 0; th <= 180; th += 1) pts.push(ringPoint(a.d, th));
+      return el("path", { "class": "arc" + (a.n === 7 ? " a7" : ""), d: pathFrom(P, pts) }, ringsG);
+    });
+    pin(arcsG, P, ringPoint(44.2, Math.acos(Math.sin(-15 * RAD) / Math.sin(44.2 * RAD)) / RAD), ["7th arc", "08:19 MYT"], { anchor: "start", dx: 12 });
+    pin(arcsG, P, [SAT_LON, 0], ["Inmarsat-3F1", "35,800 km overhead"], { mark: "sat", anchor: "middle", dy: 20, sub: true });
+
+    var pins = el("g", null, svg);
+    pin(pins, P, [101.69, 3.14], "Kuala Lumpur", { mark: "dot" });
+    pin(pins, P, [115.86, -31.95], "Perth", { mark: "dot" });
+    pin(pins, P, [96.72, 6.81], "Last radar 02:22", { mark: "ring", anchor: "end", cls: "minor" });
+
+    var debris = el("g", { "class": "layer-debris" }, svg);
+    [
+      { ll: [55.6, -21.0], l: ["Flaperon", "Réunion · Jul 2015"], c: "confirmed", a: "end" },
+      { ll: [57.6, -20.25], l: ["Flap section", "Mauritius · May 2016"], c: "confirmed", a: "start" },
+      { ll: [39.8, -5.15], l: ["Outboard flap", "Pemba, Tanzania · Jun 2016"], c: "confirmed", a: "start" },
+      { ll: [35.35, -22.0], l: ["“NO STEP” panel", "Mozambique · Feb 2016"], c: "other", a: "end" },
+      { ll: [22.15, -34.15], l: ["Engine cowling", "South Africa · Dec 2015"], c: "other", a: "start", dy: 16 },
+      { ll: [49.8, -17.0], l: ["Several pieces", "Madagascar · 2016–17"], c: "other", a: "start" }
+    ].forEach(function (x) {
+      var g = pin(debris, P, x.ll, x.l, { mark: x.c === "confirmed" ? "dot" : "ring", anchor: x.a, dy: x.dy, sub: true,
+        title: x.l.join(", ") + (x.c === "confirmed" ? " (confirmed)" : " (almost certain or highly likely)") });
+      g.classList.add("debris", x.c);
+    });
+
+    // Handshake list: highlight a ring on hover, focus or tap.
+    var list = document.getElementById("arc-list");
+    var hot = -1;
+    function setHot(i) {
+      hot = i;
+      svg.classList.toggle("has-hot", i >= 0);
+      arcPaths.forEach(function (p, j) { p.classList.toggle("is-hot", j === i); });
+      Array.prototype.forEach.call(list.querySelectorAll("button"), function (b, j) {
+        b.classList.toggle("is-hot", j === i);
+        b.setAttribute("aria-pressed", j === i ? "true" : "false");
+      });
+    }
+    ARCS.forEach(function (a, i) {
+      var li = document.createElement("li");
+      var b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-pressed", "false");
+      b.innerHTML = "<b></b><span></span>";
+      b.firstChild.textContent = a.myt;
+      b.lastChild.textContent = "Ring " + a.n + " · " + a.note + " (" + a.utc + " UTC)";
+      b.addEventListener("mouseenter", function () { setHot(i); });
+      b.addEventListener("mouseleave", function () { setHot(-1); });
+      b.addEventListener("focus", function () { setHot(i); });
+      b.addEventListener("blur", function () { setHot(-1); });
+      b.addEventListener("click", function () { setHot(hot === i ? -1 : i); });
+      li.appendChild(b);
+      list.appendChild(li);
+    });
+
+    // Layer toggles.
+    Array.prototype.forEach.call(document.querySelectorAll("#fig-arcs [data-layer]"), function (btn) {
+      btn.addEventListener("click", function () {
+        var on = btn.getAttribute("aria-pressed") !== "true";
+        btn.setAttribute("aria-pressed", on ? "true" : "false");
+        svg.classList.toggle("hide-" + btn.getAttribute("data-layer"), !on);
+      });
+    });
+
+    if (ro) ro.observe(svg);
+  })();
+})();
+</script>
+</body>
+</html>

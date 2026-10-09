@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>rA · The night of 8 March</title>
+<link rel="stylesheet" href="../../scenes/style.css">
+<style>
+  /* Matched to the upload's intro: red route line, amber LED clock. */
+  :root { --route: #ff3b3b; --led: #ffab1f; }
+  .kick { left: 120px; top: 84px; }
+  .clockbox { left: 120px; top: 124px; }
+  .led { font-family: var(--data); font-weight: 700; font-size: 88px; line-height: 1; letter-spacing: .03em; color: var(--led);
+         text-shadow: 0 0 18px rgba(255, 140, 0, .55), 0 0 3px rgba(255, 190, 80, .9); font-variant-numeric: tabular-nums; }
+  .led .col { display: inline-block; transform: translateX(.11em); }
+  .ledsub { font-family: var(--data); font-size: 22px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); margin-top: 12px; }
+  .topshade { left: 0; top: 0; width: 1100px; height: 380px; background: radial-gradient(ellipse at 0 0, rgba(6, 14, 19, .9) 0%, rgba(6, 14, 19, .7) 45%, rgba(6, 14, 19, 0) 75%); }
+  .botshade { left: 0; right: 0; bottom: 0; height: 360px; background: linear-gradient(to top, rgba(6, 14, 19, .9), rgba(6, 14, 19, 0)); }
+  .lower { left: 120px; bottom: 96px; max-width: 1300px; }
+  .lower .t { font-family: var(--display); font-weight: 700; font-size: 64px; line-height: 1.02; text-shadow: 0 2px 18px rgba(0,0,0,.8); }
+  .lower .s { font-family: var(--data); font-size: 24px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); margin-top: 12px; text-shadow: 0 2px 10px rgba(0,0,0,.9); }
+
+  .strip { left: 120px; bottom: 96px; display: grid; grid-template-columns: repeat(5, auto); gap: 1px; background: var(--line); border: 2px solid var(--ink); font-family: var(--data); }
+  .strip div { background: rgba(7, 17, 22, .94); padding: 14px 24px 16px; }
+  .strip dt { font-size: 18px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+  .strip dd { margin: 6px 0 0; font-size: 32px; }
+
+  .panel { right: 120px; width: 700px; background: rgba(7, 17, 22, .92); border: 1px solid var(--line); padding: 28px 34px 32px; font-family: var(--data); }
+  .panel .hd { display: flex; justify-content: space-between; font-size: 22px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 20px; }
+  .panel .hd b { color: var(--led); font-weight: 700; }
+  .acars { top: 250px; }
+  .acars .full { font-size: 20px; letter-spacing: .08em; color: var(--ink-3); margin: -6px 0 18px; text-transform: uppercase; }
+  .acars .row { display: flex; justify-content: space-between; font-size: 34px; padding: 10px 0; border-bottom: 1px dashed var(--line); }
+  .acars .row b { color: #7fe0a8; font-weight: 700; }
+  .acars .all { font-size: 26px; letter-spacing: .06em; text-transform: uppercase; color: #7fe0a8; margin-top: 20px; }
+  .acars .next { font-size: 22px; letter-spacing: .06em; color: var(--ink-3); margin-top: 18px; }
+  .radio { top: 240px; width: 900px; }
+  .radio2 { top: 612px; width: 900px; }
+  .radio .words, .radio2 .words { font-size: 44px; line-height: 1.28; letter-spacing: .02em; min-height: 2.56em; }
+  .radio2 .words { color: #fff; font-weight: 700; }
+  .cursor { display: inline-block; width: .55em; height: .9em; background: var(--ink); vertical-align: -.08em; margin-left: .08em; }
+  .stamp { position: absolute; right: 30px; bottom: -26px; transform: rotate(-4deg); color: var(--route); background: rgba(7,17,22,.95); }
+  .status { top: 250px; width: 640px; }
+  .status .row { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; font-size: 26px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .status .row span { color: var(--ink-3); letter-spacing: .1em; text-transform: uppercase; font-size: 22px; }
+  .status .row b { font-weight: 700; }
+  .status .lost { color: var(--route); }
+  .status .ok { color: #7fe0a8; }
+  .status .amber { color: var(--led); }
+  .sched { left: 120px; top: 262px; font-family: var(--data); font-size: 26px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); text-align: left; }
+  .sched b { display: block; font-size: 40px; color: var(--ink); letter-spacing: .04em; margin-top: 6px; }
+
+  /* 239 on board */
+  .people { inset: 0; background: rgba(5, 12, 16, .94); }
+  .people .title { position: absolute; left: 120px; top: 84px; }
+  .people .title .h2 { font-size: 104px; }
+  .people .title .sub { font-family: var(--data); font-size: 24px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); margin-top: 16px; }
+  .grid { position: absolute; left: 120px; right: 120px; top: 330px; display: flex; flex-wrap: wrap; gap: 34px 46px; align-content: flex-start; }
+  .grp { min-width: 0; }
+  .grp .lab { display: flex; justify-content: space-between; gap: 18px; font-family: var(--data); font-size: 22px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 12px; }
+  .grp .lab b { color: var(--ink); }
+  .dots { display: grid; gap: 7px; }
+  .dots i { width: 15px; height: 15px; border-radius: 50%; background: var(--ink); display: block; }
+  .dots i.crew { background: transparent; box-shadow: inset 0 0 0 2.5px var(--ink); }
+  .people .note { position: absolute; left: 120px; bottom: 96px; font-family: var(--body); font-style: italic; font-size: 34px; color: var(--ink-2); }
+  .people .legend { position: absolute; right: 120px; top: 120px; font-family: var(--data); font-size: 22px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); display: flex; gap: 34px; align-items: center; }
+  .people .legend i { display: inline-block; width: 15px; height: 15px; border-radius: 50%; background: var(--ink); margin-right: 10px; vertical-align: -1px; }
+  .people .legend i.crew { background: transparent; box-shadow: inset 0 0 0 2.5px var(--ink); }
+
+  .map .route-planned { stroke: rgba(230, 238, 240, .55); }
+  .map .infer { fill: none; stroke: var(--route); stroke-width: 3; stroke-dasharray: 14 10; stroke-linecap: butt; vector-effect: non-scaling-stroke; opacity: .55; }
+  .map .plane path { fill: var(--route); stroke: var(--bg); stroke-width: 2.5px; }
+  .map .plane.hollow path { fill: var(--bg); stroke: var(--route); stroke-width: 3.5px; }
+  .map .plane text { font-size: 24px; font-weight: 700; }
+  .map .plane .t2 { font-weight: 400; fill: var(--ink-2); }
+  .map .hand text { font-size: 22px; fill: var(--ink-2); letter-spacing: .06em; }
+  .map .wave { fill: none; stroke: #7fe0a8; stroke-width: 3; vector-effect: non-scaling-stroke; }
+</style>
+</head>
+<body data-scene="rA">
+<div id="stage"></div>
+<script src="../../scenes/mapdata.js"></script>
+<script src="timing.js"></script>
+<script src="../../scenes/lib.js"></script>
+<script>
+(function () {
+  var C = S.cue, H = S.hms;
+  // The first fraction p of a polyline, as an SVG path (keeps dashed strokes dashed).
+  function partial(P, pts, p) {
+    var xy = pts.map(function (q) { return P(q[0], q[1]); }), L = [0];
+    for (var i = 1; i < xy.length; i++) L.push(L[i - 1] + Math.hypot(xy[i][0] - xy[i - 1][0], xy[i][1] - xy[i - 1][1]));
+    var goal = L[L.length - 1] * S.clamp(p), d = "M" + xy[0][0].toFixed(1) + " " + xy[0][1].toFixed(1);
+    for (i = 1; i < xy.length; i++) {
+      if (L[i] <= goal) { d += "L" + xy[i][0].toFixed(1) + " " + xy[i][1].toFixed(1); continue; }
+      var f = (goal - L[i - 1]) / (L[i] - L[i - 1]);
+      d += "L" + S.lerp(xy[i - 1][0], xy[i][0], f).toFixed(1) + " " + S.lerp(xy[i - 1][1], xy[i][1], f).toFixed(1);
+      break;
+    }
+    return p > 0 ? d : "";
+  }
+  var PLANNED = [], INFER = [];
+  var m, mapWrap, planned, civil, mil, infer, plane, glyph, tag1, tag2, waves = [], pins = {}, seaLabels = {};
+  var labelsLayer, labelNodes = [], botshade, kicks = [], clockEl, clockSub, clockBox, strip, people, dotEls = [], grpEls = [], chinaGrp, peopleNote, sched,
+      acars, acRows, acAll, acNext, acFull, radio1, r1w, r1c, radio2, r2w, r2c, stamp, status, stRows, lowers = [];
+
+  // Story clock (seconds after midnight, MYT) keyed to the narration.
+  function clockAt(t) {
+    var K = [
+      [0, H(0, 41, 0)], [C("beijing"), H(0, 42, 0)], [C("onboard"), H(0, 46, 0)], [C("cabin"), H(0, 50, 0)],
+      [C("fl350"), H(1, 1, 0)], [C("acars107"), H(1, 7, 0)], [C("twelvemin") - 0.6, H(1, 7, 40)], [C("igari"), H(1, 19, 0)],
+      [C("atc"), H(1, 19, 24)], [C("reply"), H(1, 19, 30)], [C("moments"), H(1, 20, 20)], [C("t121"), H(1, 21, 0)],
+      [C("xpdr"), H(1, 21, 13)], [C("military"), H(1, 21, 40)], [C("leftbank"), H(1, 22, 0)], [C("leftbank") + 3.5, H(1, 23, 0)],
+      [C("turnback"), H(1, 33, 0)], [C("sumatra") + 0.5, H(2, 22, 12)], [S.duration, H(2, 22, 12)]
+    ];
+    for (var i = 1; i < K.length; i++) if (t <= K[i][0]) {
+      var a = K[i - 1], b = K[i];
+      return S.lerp(a[1], b[1], S.ease(S.prog(t, a[0], b[0])));
+    }
+    return K[K.length - 1][1];
+  }
+  // Camera keyframes: [t, lon, lat, zoom]
+  function cam(t) {
+    var K = [
+      [0, 101.4, 4.1, 1.3], [C("onboard"), 101.6, 4.4, 1.36], [C("cabin"), 102.4, 4.9, 1.18], [C("acars107") - 1, 105.6, 5.5, 1.2],
+      [C("twelvemin"), 105.6, 5.6, 1.22], [C("boundary"), 105.1, 6.9, 2.05], [C("moments"), 105.1, 6.9, 2.05],
+      [C("xpdr"), 104.7, 6.9, 2.35], [C("leftbank"), 104.5, 6.85, 2.2], [C("turnback") + 1.0, 101.2, 6.0, 1.2],
+      [C("sumatra"), 99.6, 5.9, 1.08], [S.duration, 98.6, 5.2, 0.98]
+    ];
+    for (var i = 1; i < K.length; i++) if (t <= K[i][0]) {
+      var a = K[i - 1], b = K[i], p = S.ease(S.prog(t, a[0], b[0]));
+      return [S.lerp(a[1], b[1], p), S.lerp(a[2], b[2], p), S.lerp(a[3], b[3], p)];
+    }
+    var z = K[K.length - 1];
+    return [z[1], z[2], z[3]];
+  }
+
+  var PEOPLE = [["China", 153, 0, 51], ["Malaysia", 38, 12, 25], ["Indonesia", 7, 0, 7], ["Australia", 6, 0, 6], ["India", 5, 0, 5],
+    ["France", 4, 0, 4], ["United States", 3, 0, 3], ["Canada", 2, 0, 2], ["Iran", 2, 0, 2], ["New Zealand", 2, 0, 2],
+    ["Ukraine", 2, 0, 2], ["Netherlands", 1, 0, 1], ["Russia", 1, 0, 1], ["Taiwan", 1, 0, 1]];
+
+  function lower(title, sub, a, b) {
+    var d = S.div("abs lower", S.stage, '<div class="t"></div>' + (sub ? '<div class="s"></div>' : ""));
+    d.querySelector(".t").textContent = title;
+    if (sub) d.querySelector(".s").textContent = sub;
+    lowers.push({ el: d, a: a, b: b });
+  }
+
+  S.scene({
+    fadeIn: 1.0,
+    fadeOut: 1.2,
+    setup: function () {
+      mapWrap = S.div("abs", S.stage); mapWrap.style.inset = "0";
+      m = S.map("night", mapWrap);
+      var P = m.P;
+
+      var labels = m.layer();
+      labelsLayer = labels;
+      [[[101.9, 4.2], "MALAYSIA"], [[99.6, 8.6], "THAILAND"], [[97.9, 2.7], "SUMATRA"], [[107.7, 11.0], "VIETNAM"], [[104.5, 11.25], "CAMBODIA"]]
+        .forEach(function (p) { S.pin(labels, P, p[0], p[1], { anchor: "middle", dx: 0, cls: "place" }); });
+      [[[102.6, 9.3], "Gulf of Thailand"], [[106.4, 5.4], "South China Sea"], [[96.6, 8.3], "Andaman Sea"], [[99.6, 3.9], ["Strait of", "Malacca"]]]
+        .forEach(function (p) { seaLabels[p[1]] = S.pin(labels, P, p[0], p[1], { anchor: "middle", dx: 0, cls: "sea" }); });
+
+      PLANNED = [S.PLACES.KLIA, S.PLACES.IGARI, [105.1, 8.6], [106.7, 10.4]];
+      INFER = [S.PLACES.LAST_RADAR, [95.9, 6.75], [95.0, 6.3], [94.4, 5.3], [94.15, 3.8], [94.0, 2.2], [93.95, 0.6]];
+      planned = S.el("path", { "class": "route-planned" }, m.svg);
+      // Place and sea names, plus the label groups of pins that may drift under overlays.
+      Array.prototype.forEach.call(labelsLayer.children, function (g) {
+        var tr = /translate\(([-\d.]+) ([-\d.]+)\)/.exec(g.getAttribute("transform"));
+        labelNodes.push({ el: g.querySelector(".sc"), xy: [+tr[1], +tr[2]] });
+      });
+      civil = S.el("path", { "class": "route-civil" }, m.svg);
+      mil = S.el("path", { "class": "route-mil" }, m.svg);
+      infer = S.el("path", { "class": "infer" }, m.svg);
+
+      var pg = m.layer();
+      pins.klia = S.pin(pg, P, S.PLACES.KLIA, ["Kuala Lumpur", "International Airport"], { mark: "dot", anchor: "end", dx: -34, sub: true });
+      pins.igari = S.pin(pg, P, S.PLACES.IGARI, ["IGARI", "handover point"], { mark: "tri", anchor: "end", dx: -22, dy: 30, sub: true });
+      pins.planned = S.pin(pg, P, [105.1, 8.6], ["Planned route", "to Beijing"], { anchor: "start", dx: 16, dy: 24, sub: true });
+      pins.penang = S.pin(pg, P, S.PLACES.PENANG, "Penang", { mark: "dot", anchor: "start" });
+      pins.perak = S.pin(pg, P, S.PLACES.PULAU_PERAK, "Pulau Perak", { mark: "dot", anchor: "middle", dy: 36 });
+      pins.hcm = S.pin(pg, P, S.PLACES.HCMC, "Ho Chi Minh City", { mark: "dot", anchor: "end" });
+      pins.last = S.pin(pg, P, S.PLACES.LAST_RADAR, ["Last radar contact", "02:22"], { mark: "ring", anchor: "start", dx: 20, dy: -30, sub: true });
+      pins.inferLab = S.pin(pg, P, [94.2, 3.6], ["After 02:22: path inferred", "from satellite data"], { anchor: "start", dx: 22, sub: true });
+      pins.south = S.pin(pg, P, [94.0, 1.9], "↓ southern Indian Ocean", { anchor: "start", dx: 22 });
+      pins.handKL = S.pin(pg, P, [102.6, 6.15], "← Kuala Lumpur control", { anchor: "end", cls: "hand" });
+      pins.handHCM = S.pin(pg, P, [103.15, 7.75], "Ho Chi Minh control →", { anchor: "start", cls: "hand" });
+
+      // Radio waves for the ACARS burst, drawn around the aircraft.
+      var wg = S.el("g", null, m.svg);
+      for (var i = 0; i < 3; i++) waves.push(S.el("circle", { "class": "wave", r: 10 }, wg));
+      plane = S.el("g", { "class": "plane" }, m.svg);
+      var ps = S.el("g", { "class": "sc" }, plane);
+      glyph = S.el("g", null, ps);
+      S.el("path", { d: S.PLANE_D }, glyph);
+      var tag = S.el("text", { x: 30, y: -14 }, ps);
+      tag1 = S.el("tspan", { x: 30, dy: 0 }, tag);
+      tag2 = S.el("tspan", { x: 30, dy: "1.25em", "class": "t2" }, tag);
+      plane.__wg = wg;
+
+      // ---- overlays ----
+      S.div("abs topshade", S.stage);
+      botshade = S.div("abs botshade", S.stage);
+      [["Kuala Lumpur · 8 March 2014", 0, C("twelvemin")], ["IGARI · the handover", C("twelvemin"), C("t121")],
+       ["01:21 · the transponder", C("t121"), C("military")], ["Military radar", C("military"), C("sumatra") + 0.5],
+       ["After 02:22 · satellite data", C("sumatra") + 0.5, S.duration + 1]]
+        .forEach(function (k) { var d = S.div("abs kicker kick", S.stage); d.textContent = k[0]; kicks.push({ el: d, a: k[1], b: k[2] }); });
+      clockBox = S.div("abs clockbox", S.stage, '<div class="led">00:41:00</div><div class="ledsub">MYT · Malaysia time</div>');
+      clockEl = clockBox.querySelector(".led");
+
+      strip = S.div("abs strip", S.stage,
+        '<div><dt>Flight</dt><dd>MH370</dd></div><div><dt>Aircraft</dt><dd>Boeing 777-200ER</dd></div>' +
+        '<div><dt>Registration</dt><dd>9M-MRO</dd></div><div><dt>Route</dt><dd>KUL → PEK</dd></div><div><dt>On board</dt><dd>239</dd></div>');
+
+      sched = S.div("abs sched", S.stage, "Scheduled arrival, Beijing<b>06:30 MYT</b>");
+
+      people = S.div("abs people", S.stage,
+        '<div class="title"><div class="h2">239 on board</div><div class="sub">227 passengers · 12 crew</div></div>' +
+        '<div class="legend"><span><i></i>Passenger</span><span><i class="crew"></i>Crew</span></div><div class="grid"></div>' +
+        '<div class="note">Among them, a group of Chinese calligraphers and artists returning from an exhibition.</div>');
+      peopleNote = people.querySelector(".note");
+      var grid = people.querySelector(".grid"), idx = 0;
+      PEOPLE.forEach(function (g, gi) {
+        var el = document.createElement("div"); el.className = "grp";
+        var total = g[1] + g[2];
+        el.innerHTML = '<div class="lab"><span></span><b></b></div><div class="dots"></div>';
+        el.querySelector(".lab span").textContent = g[0];
+        el.querySelector(".lab b").textContent = total;
+        var dots = el.querySelector(".dots");
+        dots.style.gridTemplateColumns = "repeat(" + g[3] + ", 15px)";
+        for (var j = 0; j < total; j++) {
+          var d = document.createElement("i");
+          if (j >= g[1]) d.className = "crew";
+          dots.appendChild(d);
+          dotEls.push({ el: d, crew: j >= g[1], i: idx++ });
+        }
+        if (gi === 0) { el.style.flexBasis = "100%"; chinaGrp = el; }
+        grid.appendChild(el);
+        grpEls.push({ el: el, lab: el.querySelector(".lab") });
+      });
+
+      acars = S.div("abs panel acars", S.stage,
+        '<div class="hd"><span>ACARS report</span><b>01:07 MYT</b></div>' +
+        '<div class="full">Aircraft Communications Addressing and Reporting System</div>' +
+        '<div class="row"><span>Engine performance</span><b>✓</b></div>' +
+        '<div class="row"><span>Altitude</span><b>✓</b></div>' +
+        '<div class="row"><span>Heading</span><b>✓</b></div>' +
+        '<div class="all">All within expected tolerances</div>' +
+        '<div class="next">Next report due 01:37 · never received</div>');
+      acRows = acars.querySelectorAll(".row"); acAll = acars.querySelector(".all"); acNext = acars.querySelector(".next"); acFull = acars.querySelector(".full");
+
+      radio1 = S.div("abs panel radio", S.stage, '<div class="hd"><span>Kuala Lumpur Radar → MH370</span><b>01:19</b></div><div class="words"><span class="w"></span><span class="cursor"></span></div>');
+      r1w = radio1.querySelector(".w"); r1c = radio1.querySelector(".cursor");
+      radio2 = S.div("abs panel radio2", S.stage, '<div class="hd"><span>MH370 → Kuala Lumpur Radar</span><b>01:19:30</b></div><div class="words"><span class="w"></span><span class="cursor"></span></div><div class="chip stamp">Last words</div>');
+      r2w = radio2.querySelector(".w"); r2c = radio2.querySelector(".cursor"); stamp = radio2.querySelector(".stamp");
+
+      status = S.div("abs panel status", S.stage,
+        '<div class="hd"><span>Status</span><b class="when"></b></div>' +
+        '<div class="row r0"><span>Transponder</span><b class="lost">Signal lost 01:21:13</b></div>' +
+        '<div class="row r1"><span>Civil radar</span><b class="lost">No contact</b></div>' +
+        '<div class="row r2"><span>Military radar</span><b class="amber">Tracking · primary</b></div>');
+      stRows = status.querySelectorAll(".row");
+
+      lower("Flight 370 vanishes from civilian radar", "01:21 MYT · near waypoint IGARI", C("vanish"), C("military") - 0.2);
+      lower("It turns back across the Malay Peninsula", "Tracked only as an unidentified primary radar return", C("turnback") - 0.4, C("sumatra") - 0.6);
+    },
+
+    draw: function (t) {
+      var P = m.P;
+      var clk = clockAt(t);
+      clockEl.innerHTML = S.clock(clk).replace(/:/g, '<span class="col">:</span>');
+      var c = cam(t);
+      m.cameraLL(c[0], c[1], c[2]);
+      var cxy = P(c[0], c[1]);
+      var lowerOn = 0;
+      var panelOn = Math.max(S.fadeWin(t, C("acars107") + 0.6, C("twelvemin") + 1.2, 0.6), S.fadeWin(t, C("atc") - 0.8, C("moments"), 0.6),
+                             S.fadeWin(t, C("xpdr") + 0.4, C("leftbank") + 0.6, 0.6));
+      lowers.forEach(function (l) { lowerOn = Math.max(lowerOn, S.fadeWin(t, l.a, l.b, 0.6)); });
+      labelNodes.forEach(function (n) {
+        var x = (n.xy[0] - cxy[0]) * c[2] + 960, y = (n.xy[1] - cxy[1]) * c[2] + 540;
+        var hide = (x < 900 && y < 340) ? 1 : 0;
+        if (x < 1500 && y > 820) hide = Math.max(hide, lowerOn);
+        if (x > 950 && y > 200 && y < 900) hide = Math.max(hide, panelOn);
+        n.el.style.opacity = (1 - hide).toFixed(2);
+      });
+
+      // Map dims behind the full-screen "239 on board" panel.
+      var pplO = S.fadeWin(t, C("onboard") - 0.6, C("cabin") - 0.2, 0.7);
+      S.show(people, pplO);
+      S.show(mapWrap, 1 - pplO);
+      S.show(clockBox, (1 - pplO) * S.fadeWin(t, 0.8, S.duration + 5, 0.8));
+      kicks.forEach(function (k) { S.show(k.el, (1 - pplO) * S.fadeWin(t, Math.max(0.6, k.a + 0.2), k.b, 0.6)); });
+
+      // Aircraft position: parked at KLIA until 00:42, then the track. After the transponder
+      // loss it holds its outbound course until the narration's "left bank", then banks left.
+      var sec = Math.max(clk, S.TRACK[0][0]);
+      var XP = H(1, 21, 13), LB = C("leftbank"), LB2 = LB + 1.6;
+      var psec = sec <= XP ? sec : (t < LB ? XP : S.lerp(XP, sec, S.ease(S.prog(t, LB, LB2))));
+      var p = S.trackAt(psec), xy = P(p.lon, p.lat);
+      var head;
+      if (clk < S.TRACK[0][0]) head = S.headingAt(P, S.TRACK[0][0] + 1);
+      else if (sec <= XP || t < LB) head = S.headingAt(P, Math.min(psec, XP - 1));
+      else if (t < LB2) {
+        var h0 = S.headingAt(P, XP - 1), h1 = S.headingAt(P, 4961);
+        var dh = ((h1 - h0) % 360 + 360) % 360; if (dh > 0) dh -= 360; // counter-clockwise: a left bank
+        head = h0 + dh * S.ease(S.prog(t, LB, LB2));
+      } else head = S.headingAt(P, psec);
+      plane.setAttribute("transform", "translate(" + xy[0].toFixed(1) + " " + xy[1].toFixed(1) + ")");
+      glyph.setAttribute("transform", "rotate(" + head.toFixed(1) + ")");
+      plane.__wg.setAttribute("transform", "translate(" + xy[0].toFixed(1) + " " + xy[1].toFixed(1) + ")");
+      var off = clk >= XP;
+      civil.setAttribute("d", sec > S.TRACK[0][0] ? S.pathFrom(P, S.trackPts(S.TRACK[0][0], Math.min(sec, XP))) : "");
+      mil.setAttribute("d", psec > XP ? S.pathFrom(P, S.trackPts(XP, psec)) : "");
+
+      // Transponder story: tag flickers out, the aircraft vanishes for civil radar, then returns as a primary echo.
+      var vanishO = 1 - S.easeOut(S.prog(t, C("vanish"), C("vanish") + 2.2));
+      var milO = S.easeOut(S.prog(t, C("military") + 0.6, C("military") + 2.0));
+      var planeO = off ? Math.max(vanishO, milO) : 1;
+      if (t > C("xpdr") - 0.1 && t < C("xpdr") + 0.9 && Math.floor(t * 14) % 2) planeO *= 0.2;
+      S.show(plane, planeO * (1 - pplO) * S.fadeWin(t, 0.4, C("sumatra") + 0.8, 0.6));
+      plane.classList.toggle("hollow", off);
+      var tagO = 1;
+      if (!off) {
+        tag1.textContent = "MH370";
+        tag2.textContent = clk < H(0, 42, 0) ? "departing" : clk < H(1, 1, 0) ? "climbing" : "FL350";
+      } else if (t < C("military")) {
+        tag1.textContent = t < C("wipes") ? "MH370" : "ID ----";
+        tag2.textContent = t < C("wipes") ? "FL350" : "ALT ----";
+        tagO = 1 - S.prog(t, C("vanish") - 0.6, C("vanish"));
+      } else {
+        tag1.textContent = "No ID";
+        tag2.textContent = "primary return";
+        tagO = 1 - S.prog(t, C("sumatra"), C("sumatra") + 0.4);
+      }
+      tag1.parentNode.style.opacity = tagO;
+      mil.style.opacity = t < C("vanish") ? 1 : Math.max(1 - S.prog(t, C("vanish"), C("vanish") + 1.5), milO);
+
+      S.show(planned, S.fadeWin(t, C("beijing"), S.duration + 5, 1.2) * (1 - 0.7 * S.prog(t, C("abandon"), C("abandon") + 1.5)));
+      planned.setAttribute("d", partial(P, PLANNED, S.ease(S.prog(t, C("beijing"), C("beijing") + 2.6))));
+      S.show(pins.klia, S.fadeWin(t, C("klia") - 0.3, S.duration + 5, 0.6) * (1 - lowerOn));
+      S.show(pins.planned, S.fadeWin(t, C("beijing") + 1.8, C("twelvemin"), 0.6));
+      S.show(pins.igari, S.fadeWin(t, C("igari") - 0.3, S.duration + 5, 0.6));
+      // The return track runs through the IGARI label's corner: keep the marker, drop the words.
+      pins.igari.querySelector("text").style.opacity = (1 - S.prog(t, C("leftbank") + 0.4, C("leftbank") + 1.2)).toFixed(2);
+      S.show(pins.hcm, S.fadeWin(t, C("handoff") - 0.5, C("leftbank"), 0.6));
+      S.show(pins.handKL, S.fadeWin(t, C("boundary") + 0.2, C("xpdr"), 0.6));
+      S.show(pins.handHCM, S.fadeWin(t, C("boundary") + 0.6, C("xpdr"), 0.6));
+      S.show(pins.penang, S.fadeWin(t, C("turnback") + 1.6, S.duration + 5, 0.5));
+      S.show(pins.perak, S.fadeWin(t, C("turnback") + 3.4, S.duration + 5, 0.5));
+      S.show(pins.last, S.fadeWin(t, C("sumatra") + 0.9, S.duration + 5, 0.6));
+      infer.setAttribute("d", partial(P, INFER, S.ease(S.prog(t, C("sumatra") + 1.2, C("ocean") + 1.5))));
+      S.show(infer, t > C("sumatra") + 1.2 ? 1 : 0);
+      S.show(pins.inferLab, S.fadeWin(t, C("south"), S.duration + 5, 0.7));
+      S.show(pins.south, S.fadeWin(t, C("ocean"), S.duration + 5, 0.7));
+      var scsHot = S.fadeWin(t, C("scs") - 0.3, C("sleep") + 2, 0.5);
+      seaLabels["South China Sea"].style.opacity = 0.8 + 0.2 * scsHot;
+      seaLabels["South China Sea"].querySelector("text").style.fontSize = (22 + 8 * scsHot).toFixed(1) + "px";
+
+      // ACARS burst: rings expand from the aircraft at 01:07.
+      waves.forEach(function (w, i) {
+        var s0 = C("acars107") + 0.2 + i * 0.5, q = S.prog(t, s0, s0 + 1.6);
+        w.setAttribute("r", (12 + 90 * q * c[2] / 1.2).toFixed(1));
+        w.style.opacity = q > 0 && q < 1 ? (1 - q).toFixed(2) : 0;
+      });
+
+      // Flight strip and schedule.
+      S.show(strip, S.fadeWin(t, C("boeing") - 0.2, C("onboard") - 0.6, 0.6), "translateY(" + (20 * (1 - S.easeOut(S.prog(t, C("boeing") - 0.2, C("boeing") + 0.6)))).toFixed(1) + "px)");
+      S.show(sched, S.fadeWin(t, C("redeye"), C("acars107") - 0.5, 0.6));
+
+      // 239 dots.
+      dotEls.forEach(function (d) {
+        var a = d.crew ? C("crew") + (d.i - 227) * 0.05 : C("pax") + d.i * 0.0075;
+        var o = S.easeOut(S.prog(t, a, a + 0.35));
+        d.el.style.opacity = o.toFixed(2);
+      });
+      var labO = S.easeOut(S.prog(t, C("nationalities") - 0.2, C("nationalities") + 0.8));
+      var chinaHot = S.easeOut(S.prog(t, C("calligraphy") - 0.2, C("calligraphy") + 0.8));
+      grpEls.forEach(function (g, i) {
+        g.lab.style.opacity = labO;
+        g.el.style.opacity = i === 0 ? 1 : (1 - 0.55 * chinaHot).toFixed(2);
+      });
+      S.show(peopleNote, chinaHot);
+
+      // ACARS card.
+      var acarsO = S.fadeWin(t, C("acars107") + 0.6, C("twelvemin") + 1.2, 0.6);
+      S.show(acars, acarsO);
+      S.show(acFull, S.fadeWin(t, C("acars") - 0.3, S.duration, 0.5));
+      [C("standard") + 0.8, C("altitude"), C("altitude") + 0.8].forEach(function (a, i) {
+        var b = acRows[i].querySelector("b"), ok = t >= a;
+        b.textContent = ok ? "✓" : "…";
+        b.style.color = ok ? "#7fe0a8" : "var(--ink-3)";
+      });
+      S.show(acAll, S.easeOut(S.prog(t, C("tolerances"), C("tolerances") + 0.5)));
+      S.show(acNext, S.easeOut(S.prog(t, C("tolerances") + 0.4, C("tolerances") + 0.9)));
+
+      // Radio exchange.
+      var RADIO1 = "MALAYSIAN THREE SEVEN ZERO, CONTACT HO CHI MINH ONE TWO ZERO DECIMAL NINE. GOOD NIGHT.";
+      var RADIO2 = "GOOD NIGHT. MALAYSIAN THREE SEVEN ZERO.";
+      S.show(radio1, S.fadeWin(t, C("atc") - 0.8, C("moments"), 0.6));
+      r1w.textContent = S.typed(RADIO1, S.prog(t, C("atc"), C("atcEnd")));
+      r1c.style.opacity = t > C("atcEnd") || t < C("atc") ? 0 : 1;
+      S.show(radio2, S.fadeWin(t, C("cockpit"), C("moments"), 0.6));
+      r2w.textContent = S.typed(RADIO2, S.prog(t, C("reply"), C("replyEnd")));
+      r2c.style.opacity = t > C("replyEnd") ? ((Math.floor(t * 2.5) % 2) ? 0 : 1) : 1;
+      var st = S.easeOut(S.prog(t, C("lastcomm"), C("lastcomm") + 0.4));
+      S.show(stamp, st, "rotate(-4deg) scale(" + (1.35 - 0.35 * st).toFixed(3) + ")");
+
+      // Status panel.
+      S.show(status, S.fadeWin(t, C("xpdr") + 0.4, C("leftbank") + 0.6, 0.6));
+      status.querySelector(".when").textContent = S.clock(clk, false) + " MYT";
+      S.show(stRows[0], S.easeOut(S.prog(t, C("xpdr") + 0.4, C("xpdr") + 1.0)));
+      S.show(stRows[1], S.easeOut(S.prog(t, C("civilian"), C("civilian") + 0.6)));
+      S.show(stRows[2], S.easeOut(S.prog(t, C("military") + 0.3, C("military") + 0.9)));
+
+      var shade = 0;
+      lowers.forEach(function (l) { shade = Math.max(shade, S.fadeWin(t, l.a, l.b, 0.6)); });
+      shade = Math.max(shade, S.fadeWin(t, C("boeing") - 0.2, C("onboard") - 0.6, 0.6));
+      S.show(botshade, shade);
+      lowers.forEach(function (l) {
+        var o = S.fadeWin(t, l.a, l.b, 0.6);
+        S.show(l.el, o, "translateY(" + (16 * (1 - o)).toFixed(1) + "px)");
+      });
+    },
+    sfx: function () {
+      return [["blip", C("acars107") + 0.2], ["blip", C("xpdr")], ["blip", C("military") + 0.6], ["hit", C("lastcomm")]];
+    },
+  });
+})();
+</script>
+</body>
+</html>

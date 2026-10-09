@@ -1,0 +1,417 @@
+{
+  "title": "The Vanishing of MH370",
+  "voice": {
+    "narrator": "af_heart",
+    "radio": "bm_george",
+    "speed": 0.94
+  },
+  "notes": "Each segment has `say` (text sent to the speech engine, spelled for pronunciation) and `sub` (caption text shown on screen). `gap` is the silence after the segment in seconds. `lead`/`tail` are silences at the start/end of a scene.",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "Cold open",
+      "lead": 1.6,
+      "tail": 2.4,
+      "visual": "Black night. A faint radar sweep. The seven satellite rings draw slowly in thin blue lines, the last one in magenta. On the radio line, a radio-style transcript card types out. After the last segment, the title card 'THE VANISHING OF MH370' fades up, with '8 March 2014 · 239 on board' beneath.",
+      "segments": [
+        {
+          "id": "s01a",
+          "say": "At nineteen minutes past one, in the early hours of the eighth of March, twenty fourteen, a voice from the cockpit of Malaysia Airlines flight three seventy spoke to air traffic control for the last time.",
+          "sub": "At 01:19 on 8 March 2014, a voice from the cockpit of Malaysia Airlines flight 370 spoke to air traffic control for the last time.",
+          "gap": 0.7
+        },
+        {
+          "id": "s01b",
+          "voice": "radio",
+          "say": "Good night. Malaysian three seven zero.",
+          "sub": "“Good night. Malaysian three seven zero.”",
+          "gap": 1.0
+        },
+        {
+          "id": "s01c",
+          "say": "Minutes later, the plane vanished from air traffic control radar. Twelve years and three searches of the deep ocean floor later, it has never been found.",
+          "sub": "Minutes later, it vanished from air traffic control radar. Twelve years and three seabed searches later, it has never been found.",
+          "gap": 0.6
+        },
+        {
+          "id": "s01d",
+          "say": "This is the story of what we know, and what we still don't.",
+          "sub": "This is the story of what we know, and what we still don't.",
+          "gap": 0
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "239 on board",
+      "lead": 0.8,
+      "tail": 1.2,
+      "visual": "One dot per person: 239 dots appear and settle into groups by nationality (China 153, Malaysia 50 of which 12 crew shown as rings, Indonesia 7, Australia 6, India 5, France 4, United States 3, Canada 2, Iran 2, New Zealand 2, Ukraine 2, Netherlands 1, Russia 1, Taiwan 1). Group labels and counts in mono. Headline '239 on board'.",
+      "segments": [
+        {
+          "id": "s02a",
+          "say": "Flight three seventy was the overnight service from Kuala Lumpur to Beijing. On board were two hundred and twenty-seven passengers, and twelve crew.",
+          "sub": "Flight 370 was the overnight service from Kuala Lumpur to Beijing. On board were 227 passengers and 12 crew.",
+          "gap": 0.5
+        },
+        {
+          "id": "s02b",
+          "say": "Most were Chinese citizens. Others came from Malaysia, Indonesia, Australia, India, France, the United States, and beyond.",
+          "sub": "Most were Chinese citizens. Others came from Malaysia, Indonesia, Australia, India, France, the United States and beyond.",
+          "gap": 0.5
+        },
+        {
+          "id": "s02c",
+          "say": "Among them were a group of Chinese artists returning from an exhibition, twenty employees of a computer chip company, and two infants.",
+          "sub": "Among them were a group of Chinese artists returning from an exhibition, 20 employees of a chip company, and two infants.",
+          "gap": 0
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "Departure",
+      "lead": 0.6,
+      "tail": 1.0,
+      "visual": "Map 'night' (Malay Peninsula). A big MYT clock top-left starts at 00:42. A flight-strip panel: MAS370 · 9M-MRO · B777-200ER · KUL→PEK · 239 SOB. The aircraft departs KLIA and climbs northeast toward IGARI along the route; the planned route continues dashed toward Vietnam. Captain and first officer named as lower-third text (no photos). At s03c an 'ACARS 01:07 · last report' tag pops at the aircraft.",
+      "segments": [
+        {
+          "id": "s03a",
+          "say": "The aircraft took off at forty-two minutes past midnight. It was a Boeing seven seven seven, flown by Captain Zahari Ahmad Shah, a veteran with more than eighteen thousand flying hours, and First Officer Fahrik Abdul Hamid, aged twenty-seven.",
+          "sub": "It took off at 00:42. The Boeing 777 was flown by Captain Zaharie Ahmad Shah, who had more than 18,000 flying hours, and First Officer Fariq Abdul Hamid, 27.",
+          "gap": 0.5
+        },
+        {
+          "id": "s03b",
+          "say": "The plan was routine. Climb northeast across the peninsula and out over the South China Sea, hand over to Vietnamese controllers at a waypoint called Igari, and land in Beijing at six thirty.",
+          "sub": "The plan was routine: climb northeast over the South China Sea, hand over to Vietnamese controllers at waypoint IGARI, land in Beijing at 06:30.",
+          "gap": 0.5
+        },
+        {
+          "id": "s03c",
+          "say": "At one oh seven, the aircraft sent an automatic maintenance report. It was the last one it would ever send.",
+          "sub": "At 01:07 the aircraft sent an automatic maintenance report. It was the last one it would ever send.",
+          "gap": 0
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "title": "Good night",
+      "lead": 0.6,
+      "tail": 1.0,
+      "visual": "Same 'night' map, closer on IGARI. Clock runs 01:19 to 01:22. Radio transcript card at s04a. At s04b the aircraft's radar data tag 'MAS370 FL350' flickers and goes out; the solid magenta track stops; a status panel shows 'TRANSPONDER SIGNAL LOST 01:21'. At s04c the blip becomes a hollow 'primary return' marker and turns sharply back southwest, drawn as a dotted magenta track; label 'Military radar only'.",
+      "segments": [
+        {
+          "id": "s04a",
+          "say": "At one nineteen, Kuala Lumpur told the crew to contact Ho Chi Minh City. The reply was calm, and ordinary.",
+          "sub": "At 01:19, Kuala Lumpur told the crew to contact Ho Chi Minh City. The reply was calm and ordinary.",
+          "gap": 0.5
+        },
+        {
+          "id": "s04b",
+          "say": "The crew never made that call. Less than two minutes later, as the plane passed Igari, its transponder stopped transmitting, and flight three seventy disappeared from civilian radar screens.",
+          "sub": "The crew never made that call. Less than two minutes later, near IGARI, its transponder stopped transmitting. Flight 370 disappeared from civilian radar.",
+          "gap": 0.6
+        },
+        {
+          "id": "s04c",
+          "say": "But Malaysian military radar, which does not need a transponder, was still watching. Moments later, it saw an unidentified aircraft turn sharply back to the southwest. Investigators later concluded the turn was most likely flown by hand.",
+          "sub": "But military radar, which needs no transponder, was still watching. It saw an unidentified aircraft turn sharply back to the southwest, most likely flown by hand.",
+          "gap": 0
+        }
+      ]
+    },
+    {
+      "id": "s05",
+      "title": "A ghost on military radar",
+      "lead": 0.5,
+      "tail": 1.2,
+      "visual": "Same 'night' map, wider. The dotted track crosses the peninsula, passes south of Penang (label), out over the Strait of Malacca past Pulau Perak, then northwest toward the Andaman Sea. Clock runs to 02:22:12. At s05b a small card: 'Rescue centre activated 05:30'. At s05c a ring marker 'Last radar contact 02:22' and the marker fades to nothing.",
+      "segments": [
+        {
+          "id": "s05a",
+          "say": "The aircraft crossed back over the Malay Peninsula, passed just south of Penang Island, and flew out over the Strait of Malacca.",
+          "sub": "The aircraft crossed back over the Malay Peninsula, passed just south of Penang Island and flew out over the Strait of Malacca.",
+          "gap": 0.5
+        },
+        {
+          "id": "s05b",
+          "say": "No fighter jets were sent to intercept it. Controllers in two countries traded calls for hours, and the rescue centre was not activated until five thirty.",
+          "sub": "No jets were sent to intercept it. Controllers in two countries traded calls for hours. The rescue centre was not activated until 05:30.",
+          "gap": 0.6
+        },
+        {
+          "id": "s05c",
+          "say": "At two twenty-two, about two hundred nautical miles northwest of Penang, the military radar lost it. No radar would ever see flight three seventy again.",
+          "sub": "At 02:22, about 200 nautical miles northwest of Penang, military radar lost it. No radar ever saw Flight 370 again.",
+          "gap": 0
+        }
+      ]
+    },
+    {
+      "id": "s06",
+      "title": "Seven handshakes",
+      "lead": 0.6,
+      "tail": 1.0,
+      "visual": "Map 'ocean' (Indian Ocean). The Inmarsat-3F1 satellite icon sits over the equator at 64.5°E with a label '35,800 km up'; a Perth ground-station marker. At s06b, a pulse travels satellite→plane→satellite→Perth (schematic). At s06c the handshake rings appear one by one with their MYT times (02:25, 03:41, 04:41, 05:41, 06:41); each ring draws as an arc. At s06d an arrow/label 'Frequency data: heading south' with the northern half of the rings dimmed. At s06e two phone-call tags '02:39 call · no answer' and '07:13 call · no answer'.",
+      "segments": [
+        {
+          "id": "s06a",
+          "say": "But the aircraft left one more trace. Three minutes later, its satellite terminal logged back on to an Inmarsat satellite, high above the Indian Ocean.",
+          "sub": "But the aircraft left one more trace. Three minutes later, its satellite terminal logged back on to an Inmarsat satellite high above the Indian Ocean.",
+          "gap": 0.5
+        },
+        {
+          "id": "s06b",
+          "say": "Every hour after that, a ground station in Perth exchanged a brief automatic signal with the plane. A handshake. The handshakes carried no position, and no message.",
+          "sub": "Every hour after that, a ground station in Perth exchanged a brief automatic signal with the plane: a handshake. It carried no position and no message.",
+          "gap": 0.5
+        },
+        {
+          "id": "s06c",
+          "say": "But the time each signal took to travel told investigators how far the aircraft was from the satellite. Each handshake placed the plane somewhere on a ring.",
+          "sub": "But the time each signal took told investigators how far the aircraft was from the satellite. Each handshake placed the plane somewhere on a ring.",
+          "gap": 0.5
+        },
+        {
+          "id": "s06d",
+          "say": "And tiny shifts in the signal's frequency showed it was heading south, into the southern Indian Ocean.",
+          "sub": "Tiny shifts in the signal's frequency showed it was heading south, into the southern Indian Ocean.",
+          "gap": 0.5
+        },
+        {
+          "id": "s06e",
+          "say": "Twice, the airline called the aircraft by satellite phone. No one answered.",
+          "sub": "Twice, the airline called the aircraft by satellite phone. No one answered.",
+          "gap": 0
+        }
+      ]
+    },
+    {
+      "id": "s07",
+      "title": "The 7th arc",
+      "lead": 0.5,
+      "tail": 1.0,
+      "visual": "Map 'ocean' continuing from s06 (rings 1-5 visible). Clock 06:30 'Scheduled arrival in Beijing' at s07a. At s07b ring 6 (08:11) and ring 7 (08:19) draw; ring 7 in magenta labelled '7th arc · 08:19'. A fuel gauge or text 'Fuel exhausted' small. At s07c, slow camera move toward the southern part of the 7th arc. At s07d a quote card: “…according to this new data, flight MH370 ended in the southern Indian Ocean.” — Najib Razak, 24 March 2014.",
+      "segments": [
+        {
+          "id": "s07a",
+          "say": "At six thirty, when it should have been landing in Beijing, the plane was still flying.",
+          "sub": "At 06:30, when it should have been landing in Beijing, the plane was still flying.",
+          "gap": 0.5
+        },
+        {
+          "id": "s07b",
+          "say": "At eight nineteen, it sent one last, partial handshake. Investigators believe this was the moment the engines ran out of fuel, and a backup power unit briefly brought the satellite terminal back to life. An hour later, the plane did not answer.",
+          "sub": "At 08:19 it sent one last, partial handshake: most likely the engines running out of fuel and a backup power unit briefly reviving the terminal. An hour later, it did not answer.",
+          "gap": 0.6
+        },
+        {
+          "id": "s07c",
+          "say": "That final ring became known as the seventh arc. Somewhere close to it, the aircraft came down into the sea.",
+          "sub": "That final ring became known as the 7th arc. Somewhere close to it, the aircraft came down into the sea.",
+          "gap": 0.6
+        },
+        {
+          "id": "s07d",
+          "say": "On the twenty-fourth of March, Prime Minister Najeeb Razak announced that, according to the new data, flight three seventy had ended in the southern Indian Ocean.",
+          "sub": "On 24 March, Prime Minister Najib Razak announced that, according to the new data, Flight 370 had ended in the southern Indian Ocean.",
+          "gap": 0
+        }
+      ]
+    },
+    {
+      "id": "s08",
+      "title": "The search",
+      "lead": 0.6,
+      "tail": 1.2,
+      "visual": "Map 'south' (southern Indian Ocean, 7th arc). At s08b, a scatter of 'surface search' dots off Perth and a ping icon 'April 2014 · pings · not from MH370'. At s08c the 2014–17 search band fills along the arc with a running counter to '120,000 km²' and label 'Water up to 6 km deep'. At s08d a quote card: “It is almost inconceivable and certainly societally unacceptable in the modern aviation era … for a large commercial aircraft to be missing and for the world not to know with certainty what became of the aircraft and those on board.” — Australian Transport Safety Bureau, 2017. At s08e the 2018 Ocean Infinity band fills (green) with counter '112,000 km²' and 'No find'.",
+      "segments": [
+        {
+          "id": "s08a",
+          "say": "What followed became the most expensive search in aviation history.",
+          "sub": "What followed became the most expensive search in aviation history.",
+          "gap": 0.5
+        },
+        {
+          "id": "s08b",
+          "say": "Ships and aircraft from many nations combed the surface of the ocean. In April, an Australian ship picked up pings that seemed to come from the flight recorders. They led nowhere.",
+          "sub": "Ships and aircraft from many nations combed the ocean surface. In April, an Australian ship picked up pings that seemed to come from the flight recorders. They led nowhere.",
+          "gap": 0.5
+        },
+        {
+          "id": "s08c",
+          "say": "Then the hunt moved to the seabed, over undersea mountains that had never been mapped, in water up to six kilometers deep. Ships towing sonar searched more than a hundred and twenty thousand square kilometers.",
+          "sub": "Then the hunt moved to the seabed: unmapped undersea mountains, water up to 6 km deep. Ships towing sonar searched more than 120,000 km².",
+          "gap": 0.5
+        },
+        {
+          "id": "s08d",
+          "say": "In January twenty seventeen, Malaysia, Australia and China suspended the search. Australia's investigators called it almost inconceivable that a large airliner could be missing, and the world not know what became of it.",
+          "sub": "In January 2017 Malaysia, Australia and China suspended the search. Australia's investigators called it “almost inconceivable” that a large airliner could still be missing.",
+          "gap": 0.6
+        },
+        {
+          "id": "s08e",
+          "say": "In twenty eighteen, the company Ocean Infinity tried again, with a fleet of robot submarines, on a no find, no fee basis. In four months it covered another hundred and twelve thousand square kilometers. It found nothing.",
+          "sub": "In 2018 Ocean Infinity tried again with robot submarines, on a “no find, no fee” basis. In four months it covered another 112,000 km². It found nothing.",
+          "gap": 0
+        }
+      ]
+    },
+    {
+      "id": "s09",
+      "title": "What the sea gave back",
+      "lead": 0.6,
+      "tail": 1.2,
+      "visual": "Map 'debris' (western Indian Ocean, Africa to Réunion). At s09b a marker pops on Réunion with a card 'Flaperon · Réunion · 29 July 2015 · Confirmed'. At s09c markers appear in order: South Africa (Dec 2015, almost certain), Mozambique (Feb 2016, almost certain), Mauritius (May 2016, confirmed), Pemba, Tanzania (Jun 2016, confirmed), Madagascar (2016–17). Filled dot = confirmed, ring = almost certain / highly likely. At s09d, curved drift arrows from the east (off-map, labelled '7th arc →') sweep west toward the coasts.",
+      "segments": [
+        {
+          "id": "s09a",
+          "say": "The ocean, though, had begun to give something back.",
+          "sub": "The ocean, though, had begun to give something back.",
+          "gap": 0.5
+        },
+        {
+          "id": "s09b",
+          "say": "In July twenty fifteen, on Reunion Island, beach cleaners found a piece of wing covered in barnacles. It was a flaperon from flight three seventy, the first proof that the plane had ended in the sea.",
+          "sub": "In July 2015, on Réunion Island, beach cleaners found a piece of wing covered in barnacles. It was a flaperon from Flight 370: the first proof it had ended in the sea.",
+          "gap": 0.5
+        },
+        {
+          "id": "s09c",
+          "say": "More pieces followed, washing up in South Africa, Mozambique, Mauritius, Tanzania and Madagascar. Three have been confirmed as coming from the aircraft. Many more are judged almost certain, or highly likely.",
+          "sub": "More pieces washed up in South Africa, Mozambique, Mauritius, Tanzania and Madagascar. Three are confirmed; many more are judged almost certain or highly likely.",
+          "gap": 0.5
+        },
+        {
+          "id": "s09d",
+          "say": "Drift models, run backwards from where the pieces landed, pointed to the seventh arc. And the wing flaps appear to have been retracted, which argues against a controlled landing on the water.",
+          "sub": "Drift models run backwards from the finds pointed to the 7th arc. And the flaps appear to have been retracted, which argues against a controlled landing on water.",
+          "gap": 0
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "title": "The official answer",
+      "lead": 0.6,
+      "tail": 1.0,
+      "visual": "Document-style plate: 'Safety Investigation Report · MH370/01/2018 · 30 July 2018'. Findings appear as a checklist one by one: 'Cause: undetermined' (at s10a), 'Turns likely under manual control', 'Nothing unusual found in pilots' backgrounds', 'Third-party interference not ruled out' (s10b), 'Air traffic control failed to follow procedures' (s10c).",
+      "segments": [
+        {
+          "id": "s10a",
+          "say": "In July twenty eighteen, Malaysian investigators published their final report. They could not say why the plane disappeared.",
+          "sub": "In July 2018, Malaysian investigators published their final report. They could not say why the plane disappeared.",
+          "gap": 0.5
+        },
+        {
+          "id": "s10b",
+          "say": "They found that the turns were most likely made under manual control. They found nothing unusual in the backgrounds of the pilots. And they could not rule out interference by a third party.",
+          "sub": "The turns were most likely made under manual control. Nothing unusual was found in the pilots' backgrounds. Third-party interference could not be ruled out.",
+          "gap": 0.5
+        },
+        {
+          "id": "s10c",
+          "say": "They also found that air traffic control had failed to follow procedures that night.",
+          "sub": "They also found that air traffic control had failed to follow procedures that night.",
+          "gap": 0
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "title": "Claims and evidence",
+      "lead": 0.6,
+      "tail": 1.2,
+      "visual": "Fact-check cards, one per segment, each with a claim in display type and a stamped verdict: s11b 'Crashed in the South China Sea' → CONTRADICTED (red); s11c 'Landed intact somewhere' → CONTRADICTED (red); s11d 'Deliberate act from the cockpit' → UNPROVEN (amber); s11e 'Hijack · Ghost flight after a fire · WSPR radio tracking' → UNPROVEN (amber), UNLIKELY (orange), UNPROVEN (amber).",
+      "segments": [
+        {
+          "id": "s11a",
+          "say": "Without the wreckage, theories filled the silence. The evidence rules some of them out.",
+          "sub": "Without the wreckage, theories filled the silence. The evidence rules some of them out.",
+          "gap": 0.5
+        },
+        {
+          "id": "s11b",
+          "say": "It did not crash in the South China Sea. Radar, satellite data and the debris all show it flew for hours, to the south.",
+          "sub": "It did not crash in the South China Sea. Radar, satellite data and the debris show it flew for hours to the south.",
+          "gap": 0.5
+        },
+        {
+          "id": "s11c",
+          "say": "It did not land intact somewhere. The final signals point to a fast descent into the ocean.",
+          "sub": "It did not land intact somewhere. The final signals point to a fast descent into the ocean.",
+          "gap": 0.5
+        },
+        {
+          "id": "s11d",
+          "say": "A deliberate act by someone in the cockpit remains possible. A flight into the southern Indian Ocean, found on the captain's home flight simulator, fuelled suspicion. But investigators found no proof, and named no one.",
+          "sub": "A deliberate act from the cockpit remains possible. A flight into the southern Indian Ocean on the captain's home simulator fuelled suspicion, but investigators found no proof and named no one.",
+          "gap": 0.5
+        },
+        {
+          "id": "s11e",
+          "say": "A hijacking, a ghost flight after a fire, or new methods that claim to pinpoint the wreck. None of them has been proven.",
+          "sub": "A hijacking, a ghost flight after a fire, new methods that claim to pinpoint the wreck: none has been proven.",
+          "gap": 0
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "title": "Still searching",
+      "lead": 0.6,
+      "tail": 1.2,
+      "visual": "Ledger of searches as horizontal bars with area labels: 2014–17 ATSB 120,000 km² (orange), 2018 Ocean Infinity 112,000 km² (green), 2025–26 Ocean Infinity 7,571 km² (green), extension to 30 Jun 2027 7,428.54 km² remaining (dashed green). At s12a a tag 'US$70 million · only if found'. At s12d a status stamp 'NOT FOUND · as of October 2026' and a line 'Dec 2025 · Beijing court orders compensation for 8 families'.",
+      "segments": [
+        {
+          "id": "s12a",
+          "say": "In twenty twenty-five, Ocean Infinity returned, on the same terms. Seventy million dollars if it finds the plane. Nothing if it doesn't.",
+          "sub": "In 2025 Ocean Infinity returned on the same terms: US$70 million if it finds the plane, nothing if it doesn't.",
+          "gap": 0.5
+        },
+        {
+          "id": "s12b",
+          "say": "Across two short seasons, its robots surveyed about seven and a half thousand square kilometers. Again, nothing.",
+          "sub": "Across two short seasons, its robots surveyed about 7,500 km². Again, nothing.",
+          "gap": 0.5
+        },
+        {
+          "id": "s12c",
+          "say": "Malaysia has now extended the contract to June twenty twenty-seven, to search the last seven thousand four hundred square kilometers of the target area.",
+          "sub": "Malaysia has extended the contract to June 2027, to search the last 7,400 km² of the target area.",
+          "gap": 0.5
+        },
+        {
+          "id": "s12d",
+          "say": "The families are still waiting. Some have taken the airline to court. Many have spent twelve years asking governments to keep looking.",
+          "sub": "The families are still waiting. Some have taken the airline to court. Many have spent twelve years asking governments to keep looking.",
+          "gap": 0
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "title": "Epilogue",
+      "lead": 0.8,
+      "tail": 6.0,
+      "visual": "Return to darkness: the 7th arc alone, a thin magenta line across a black-blue ocean, slowly drifting. At s13b the number '239' fades up large and quiet. During the tail: end card 'In memory of the 239 people on board MH370', then a credits card: 'Sources: Malaysian ICAO Annex 13 Safety Investigation Team · Australian Transport Safety Bureau · Inmarsat / UK AAIB · Malaysian Ministry of Transport · CSIRO · news reports. Maps: Natural Earth. Narration: synthetic voice (Kokoro TTS). No AI-generated footage. Track, rings and search areas are approximate.'",
+      "segments": [
+        {
+          "id": "s13a",
+          "say": "Somewhere along a curved line in the southern Indian Ocean, several kilometers down, lies a Boeing seven seven seven, and the answer to what happened on board.",
+          "sub": "Somewhere along a curved line in the southern Indian Ocean, several kilometres down, lies a Boeing 777 and the answer to what happened on board.",
+          "gap": 0.8
+        },
+        {
+          "id": "s13b",
+          "say": "Until it is found, two hundred and thirty-nine people remain missing.",
+          "sub": "Until it is found, 239 people remain missing.",
+          "gap": 0
+        }
+      ]
+    }
+  ]
+}
