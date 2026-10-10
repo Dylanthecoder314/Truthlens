@@ -52,6 +52,7 @@ The SQLite database (`data/truthlens.db`) and its table are created automaticall
 | `GROQ_MODEL` | no | `openai/gpt-oss-120b` | Groq model (must support `browser_search`). |
 | `DATABASE_URL` | no | `file:./data/truthlens.db` | libSQL/SQLite URL. Use a `libsql://…` Turso URL in production. |
 | `DATABASE_AUTH_TOKEN` | no | | Auth token for a remote libSQL/Turso database. |
+| `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN` | no | | Used when `DATABASE_URL` / `DATABASE_AUTH_TOKEN` aren't set. Vercel's Turso integration sets these. |
 | `RATE_LIMIT_PER_HOUR` | no | `10` | Checks allowed per IP per hour. |
 
 Web search must be enabled for your organization in the Claude Console (an admin setting). Web search is billed per search on top of tokens. Each claim uses at most 5 searches, and each check covers at most 12 claims.
@@ -131,9 +132,14 @@ tests/               Vitest suites
    turso db tokens create truthlens   # → DATABASE_AUTH_TOKEN
    ```
    The table is created automatically on first use. To manage it with Drizzle instead, run `npx drizzle-kit push`.
+   Alternatively, add Turso from the Vercel project's **Storage** tab. It sets `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN`, which the app reads when `DATABASE_URL` isn't set. Leave per-deployment database branching off so every deploy shares one database.
 2. Push the repo to GitHub and import it in Vercel. The framework preset is detected automatically.
 3. Add the environment variables `GROQ_API_KEY` or `ANTHROPIC_API_KEY`, plus `DATABASE_URL` and `DATABASE_AUTH_TOKEN`. On Vercel these live in the project's encrypted environment settings; the Keychain vault is for your own machine.
 4. Deploy. `/api/check` sets `maxDuration = 300` because researching a dozen claims can take a few minutes. Hobby plans cap function duration lower, so lower `MAX_CLAIMS` in `lib/schemas.ts` or use a Pro plan.
+
+**Keep jsdom on 26.x.** jsdom 27 and later load ES-only dependencies with `require()`, which fails on Vercel's runtime with `ERR_REQUIRE_ESM` and breaks every `/api/check` request.
+
+`vercel deploy` from your machine skips the files in `.vercelignore` (the local database, `.env*` files).
 
 **Rate limiting on Vercel:** the limiter is in memory, so each serverless instance keeps its own count. For a strict global limit, back `RateLimiter` with Redis (for example Upstash) or the database.
 

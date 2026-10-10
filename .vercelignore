@@ -1,0 +1,5 @@
+# Keep local-only files out of `vercel deploy` uploads.
+/data
+/.claude
+.env*
+*.tsbuildinfo

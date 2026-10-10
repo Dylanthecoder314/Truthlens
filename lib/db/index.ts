@@ -13,7 +13,10 @@ import {
 } from "../schemas";
 import { checks } from "./schema";
 
-const DATABASE_URL = process.env.DATABASE_URL ?? "file:./data/truthlens.db";
+// TURSO_* are the names Vercel's Turso integration sets.
+const DATABASE_URL =
+  process.env.DATABASE_URL ?? process.env.TURSO_DATABASE_URL ?? "file:./data/truthlens.db";
+const DATABASE_AUTH_TOKEN = process.env.DATABASE_AUTH_TOKEN ?? process.env.TURSO_AUTH_TOKEN;
 
 // Short, URL-safe, unambiguous IDs (no 0/O/1/l/I).
 export const newCheckId = customAlphabet("23456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ", 10);
@@ -28,7 +31,7 @@ function getDb(): { db: LibSQLDatabase; ready: Promise<void> } {
     }
     const client: Client = createClient({
       url: DATABASE_URL,
-      authToken: process.env.DATABASE_AUTH_TOKEN,
+      authToken: DATABASE_AUTH_TOKEN,
     });
     db = drizzle(client);
     // Create the table on first use so `npm run dev` works with zero setup.
