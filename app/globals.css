@@ -126,11 +126,13 @@ body {
   animation-delay: calc(var(--i, 0) * 90ms);
 }
 
-/* Gentle float, e.g. for the logo. */
-@keyframes float {
-  50% { transform: translateY(-3px) rotate(-4deg); }
+/* Logo lens: a slow look-around, pivoting on the handle. Pauses on hover so the check reads. */
+@keyframes scan {
+  30% { transform: rotate(-8deg); }
+  60% { transform: rotate(5deg); }
 }
-.float { animation: float 4s ease-in-out infinite; }
+.scan { animation: scan 7s ease-in-out infinite; transform-origin: 85% 85%; }
+.group:hover .scan, .group:focus-visible .scan { animation-play-state: paused; }
 
 /* Pulsing status dot. */
 @keyframes ping-soft {
